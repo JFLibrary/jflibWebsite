@@ -8,7 +8,7 @@ The JFLib checkout should be at the commit in jflib.lock, with these builds in i
 
     python build_rs.py all --target win
     python build_rs.py app gallery --target win --style winui,classic,macos,kde,jfoffice,backupcraft
-    python build_rs.py app datagallery --target win --style classic --out build/dg-classic
+    python build_rs.py app Kritzel --target win --style classic --out build/kritzel-classic
     python build_rs.py new hello --title "Hello"      # with the click counter from JFLib's README as
     python build_rs.py app hello --target win         # its src/main.rs, for the start page's example
 
@@ -36,9 +36,10 @@ LAB = "apps/JFNetworker/assets/labs/01-campus-vlan.jfnet"
 class Shot:
     """One picture: the app, how it starts, and script lines to bring it into the right state."""
 
-    def __init__(self, name, exe, size, lines=(), args=(), theme="light", scale=100, crop=None, env=None, window=None):
+    def __init__(self, name, exe, size, lines=(), args=(), theme="light", scale=100, crop=None, env=None, window=None, script=None):
         self.name, self.exe, self.size, self.lines, self.args = name, exe, size, list(lines), list(args)
         self.theme, self.scale, self.crop, self.env, self.window = theme, scale, crop, env or {}, window
+        self.script = script        # a script from the JFLib checkout to run first, without its own shots
 
 
 class Reel:
@@ -92,7 +93,8 @@ SHOTS = [
     Shot("gallery-rtl", gallery("winui"), "1000x700", args=["--lang", "ar"], env={"jfgui_FONT_FALLBACK": "1"}),
     Shot("pocket", "win/androidGallery", "390x844", scale=200),
     Shot("paintcraft", "win/PaintCraft", "1280x800", args=[str(SAMPLE)], theme="dark"),
-    Shot("datagallery-classic", "dg-classic/win/datagallery", "1440x960"),
+    Shot("kritzel-winui", "win/Kritzel", "1280x800", script="apps/Kritzel/tests/readme.uis"),
+    Shot("kritzel-classic", "kritzel-classic/win/Kritzel", "1280x800", script="apps/Kritzel/tests/readme.uis"),
     Shot("backupcraft-dark", "win/BackupCraft", "1280x800", args=["--fixture", "--page", "jobs"], theme="dark", lines=["wait 50"]),
     Shot("jfnetworker", "win/JFNetworker", "1400x880", args=["--open", LAB], theme="dark", lines=["wait 300"]),
     Shot("feature-charts", "win/datagallery", "1440x960"),
@@ -182,7 +184,11 @@ def take_shot(s, build, work):
     out.unlink(missing_ok=True)
     where = " window %d" % s.window if s.window else ""
     crop = " %d %d %d %d" % s.crop if s.crop else ""
-    (work / "shot.uis").write_text("\n".join(s.lines + [f"shot shot.png{where}{crop}", "quit", ""]), encoding="utf-8")
+    first = []
+    if s.script:
+        text = (build.parent / s.script).read_text(encoding="utf-8")
+        first = [line for line in text.splitlines() if not line.startswith(("shot ", "quit"))]
+    (work / "shot.uis").write_text("\n".join(first + s.lines + [f"shot shot.png{where}{crop}", "quit", ""]), encoding="utf-8")
     run_app(exe, common_args(s.size, s.theme, s.scale, s.args) + s.args + ["--script", "shot.uis"], work, s.env)
     shutil.copyfile(out, IMG / f"{s.name}.png")
     print(f"{s.name}: {out.stat().st_size // 1024} KB")
