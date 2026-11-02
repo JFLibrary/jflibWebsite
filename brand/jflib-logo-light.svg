@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="JFLib">
+  <rect width="512" height="512" fill="#FFFFFF"/>
+  <rect x="76" y="75" width="168" height="168" rx="33.6" fill="#00A2E8"/>
+  <circle cx="352" cy="159" r="84" fill="#22B14C"/>
+  <polygon points="256,251 281.5,317.6 354,321.5 297.2,364.6 316.8,437.1 256,394 195.2,437.1 214.8,364.6 158,321.5 230.5,317.6" fill="#FF7F27"/>
+</svg>

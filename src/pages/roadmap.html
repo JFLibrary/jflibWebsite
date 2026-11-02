@@ -1,0 +1,94 @@
+title: JFLib Roadmap
+nav: roadmap
+description: What is coming next for the JFLib GUI library: GPU support, native macOS, a 3D engine and Cargo support.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1>What's <em>coming next.</em></h1>
+    <p class="lede">JFLib is under active development. These are the big steps ahead. There are no dates, and the order can still change.</p>
+    <div class="rm-key" aria-label="Legend">
+      <span><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg>Done</span>
+      <span><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg>Next</span>
+      <span><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg>Planned</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" id="gpu" aria-labelledby="gpu-title">
+  <div class="wrap">
+    <span class="state">In progress</span>
+    <h2 id="gpu-title">GPU support</h2>
+    <p class="prose" style="margin-top:16px">A GPU layer inside the library, for interfaces, 2D CAD and 3D games, with one API on every platform. The widgets keep being drawn on the CPU, so they stay pixel-identical. The GPU takes over output, layers, images and canvases.</p>
+    <ol class="road">
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU layer</b><span>Compute shaders, depth-tested rendering and swapchains, with Vulkan on Windows.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Shader compiler</b><span>WGSL to SPIR-V, inside the library.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface on the GPU</b><span>Output with vsync, layers and canvases that pan and zoom, on Windows.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>More platforms</b><span>Vulkan on Linux and Android, WebGPU in the browser.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>3D engine and CAD</b><span>A 3D engine core and a 2D renderer for CAD.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>For a native port to Apple's systems.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec band b-blue" id="macos" aria-labelledby="macos-title">
+  <div class="wrap rm">
+    <div>
+      <span class="state">Planned</span>
+      <h2 id="macos-title">Native macOS</h2>
+      <p class="prose">Today, JFLib apps reach macOS through the browser. The goal is a real native app with Cocoa windows and desktop integration, and Metal for the GPU layer. A native iOS version is on the list as well.</p>
+    </div>
+    <figure>
+      <img class="shot" src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="The widget gallery in JFLib's macOS style.">
+      <figcaption class="soft">The macOS style already exists. Here it runs on Windows.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
+  <div class="wrap rm">
+    <div>
+      <span class="state">Planned</span>
+      <h2 id="engine-title">3D engine</h2>
+      <p class="prose">An engine core on top of the GPU layer, grown from the test scene that already runs today.</p>
+      <ul class="rm-list soft">
+        <li>Scenes, meshes and materials</li>
+        <li>Light and shadows</li>
+        <li>Visibility on the GPU, and instancing</li>
+        <li>glTF import</li>
+        <li>Later: animation, large worlds, physics and tools</li>
+      </ul>
+    </div>
+    <div class="bignums">
+      <div class="bignum"><b>1.71 ms</b><span>per frame for one million moving cubes at 1080p, with the GPU deciding what is visible and writing its own draw calls.</span></div>
+      <div class="bignum small"><b>90 ms</b><span>for the same scene with one draw call per object.</span></div>
+      <p class="rm-note soft">JFLib's GPU test scene on a GeForce RTX 2070 SUPER and a Ryzen 5 3600.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-green" id="cargo" aria-labelledby="cargo-title">
+  <div class="wrap rm">
+    <div>
+      <span class="state">Planned</span>
+      <h2 id="cargo-title">Crates and Cargo</h2>
+      <p class="prose">Today a Python script calls <code>rustc</code> directly, which makes outside crates hard to use. The goal is to use JFLib from a normal Cargo project and to publish it as crates. The details are still open.</p>
+    </div>
+<pre class="panel"><span class="d"># today</span>
+python build_rs.py run hello --target win
+
+<span class="d"># the goal</span>
+cargo run</pre>
+  </div>
+</section>
+
+<section class="sec" id="more" aria-labelledby="more-title">
+  <div class="wrap">
+    <div class="head"><h2 id="more-title">Also on the list.</h2></div>
+    <div class="caps">
+      <div class="cap"><h3>Native iOS</h3><p>Today iOS is reached through the browser, as macOS is.</p></div>
+      <div class="cap"><h3>Safari in the test plan</h3><p>The browser tests cover Chromium and Firefox so far.</p></div>
+      <div class="cap"><h3>Game building blocks</h3><p>Animation, large worlds, physics and tools, on top of the 3D engine.</p></div>
+    </div>
+    <div class="cta rm-more"><a class="btn" href="docs/docs/ROADMAP.html">The complete list, in German</a></div>
+  </div>
+</section>

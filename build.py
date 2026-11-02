@@ -111,7 +111,7 @@ def build(out, docs, gallery, preview):
                     .replace("{{apps-list}}", apps_list(apps))
                     .replace("{{contact}}", contact_line(config, preview)))
         text = layout
-        for nav in ("features", "apps"):
+        for nav in ("features", "apps", "roadmap"):
             text = text.replace("{{current-%s}}" % nav, ' aria-current="page"' if fields.get("nav") == nav else "")
         text = (text.replace("{{title}}", html.escape(fields["title"]))
                     .replace("{{description}}", html.escape(fields["description"], quote=True))
