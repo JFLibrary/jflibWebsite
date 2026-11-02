@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{robots}}<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="square" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="currentColor"/></symbol>
+  <symbol id="circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="currentColor"/></symbol>
+  <symbol id="star" viewBox="0 0 100 100"><polygon points="50,2 63,36 100,38 71,60 81,97 50,75 19,97 29,60 0,38 37,36" fill="currentColor"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="JFLib home">
+      <span class="mark" aria-hidden="true">
+        <svg style="color:var(--square)"><use href="#square"/></svg><svg style="color:var(--circle)"><use href="#circle"/></svg><svg style="color:var(--star)"><use href="#star"/></svg>
+      </span>JFLib
+    </a>
+    <nav class="menu" aria-label="Main">
+      <a href="features.html"{{current-features}}>Features</a>
+      <a href="apps.html"{{current-apps}}>Apps</a>
+      <a href="docs/index.html">Docs</a>
+      <a href="https://github.com/JFLibrary/JFLib">GitHub</a>
+    </nav>
+    <button class="btn primary top-try" type="button" data-demo>Try it</button>
+    <button class="icon-btn" id="theme" type="button" aria-label="Switch between light and dark">◐</button>
+  </div>
+</header>
+
+<main id="top">
+{{main}}
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>JFLib is dual-licensed under the <a href="https://github.com/JFLibrary/JFLib/blob/main/LICENSE-MIT">MIT License</a> or the <a href="https://github.com/JFLibrary/JFLib/blob/main/LICENSE-APACHE">Apache License 2.0</a>. <a href="docs/THIRD_PARTY_NOTICES.html">Third-party notices</a> · <a href="legal.html">Legal notice</a> · <a href="privacy.html">Privacy</a></span>
+    {{preview-note}}</div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>

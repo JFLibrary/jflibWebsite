@@ -1,0 +1,51 @@
+[
+  {
+    "name": "JFNetworker",
+    "text": "A network simulator and lab with a topology editor, device consoles and a step-by-step simulation mode.",
+    "image": "jfnetworker.png", "width": 1400, "height": 880,
+    "alt": "JFNetworker with a campus network of a switch, a router, a server and four PCs on a grid.",
+    "platforms": ["Windows", "Linux"],
+    "link": null
+  },
+  {
+    "name": "BackupCraft",
+    "text": "A backup suite with deduplicated, encrypted, signed backups, schedules and roles, and its own server and agents.",
+    "image": "backupcraft-dark.png", "width": 1280, "height": 800,
+    "alt": "BackupCraft's list of backup jobs with status badges and a navigation pane, with demo data.",
+    "platforms": ["Windows", "Linux"],
+    "link": null
+  },
+  {
+    "name": "jfWord",
+    "text": "A word processor with a ribbon, page view, text styles, tables, references and DOCX support.",
+    "note": "Under active development.",
+    "image": "jfword-dark.png", "width": 1424, "height": 884,
+    "alt": "jfWord with its ribbon, a navigation pane and a document.",
+    "platforms": ["Windows", "Linux", "Web"],
+    "link": null
+  },
+  {
+    "name": "PaintCraft",
+    "text": "An image editor with layers, history, effects, many image formats and native plugins.",
+    "image": "paintcraft.png", "width": 1280, "height": 800,
+    "alt": "PaintCraft with the JFLib sample drawing open.",
+    "platforms": ["Windows", "Linux", "Web"],
+    "link": null
+  },
+  {
+    "name": "Kritzel",
+    "text": "A drawing app with brushes, shapes, text, selections and layers.",
+    "image": "kritzel-winui.png", "width": 1280, "height": 800,
+    "alt": "Kritzel with the JFLib sample drawing.",
+    "platforms": ["Windows", "Linux", "Web"],
+    "link": null
+  },
+  {
+    "name": "Build Manager",
+    "text": "A graphical build app for applications, styles, profiles, tests and release packages.",
+    "image": "build-manager.png", "width": 1320, "height": 782,
+    "alt": "The Build Manager with an app list and build settings.",
+    "platforms": ["Windows", "Linux"],
+    "link": null
+  }
+]

@@ -1,0 +1,382 @@
+title: JFLib Features
+nav: features
+description: Everything the JFLib GUI library can do, explained without code and shown with screenshots.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Everything JFLib <em>can do.</em></h1>
+    <p class="lede">Every feature in one place, explained without code. For functions and types, go to the <a href="docs/index.html">docs</a>.</p>
+    <div class="cta"><button class="btn primary big" type="button" data-demo>Test Feature Gallery Now in your Browser</button></div>
+    <ul class="toc" aria-label="Chapters">
+      <li><a href="#widgets"><svg style="color:var(--band-indigo)"><use href="#square"/></svg>Widgets and layout</a></li>
+      <li><a href="#data"><svg style="color:var(--band-indigo)"><use href="#square"/></svg>Data views</a></li>
+      <li><a href="#editors"><svg style="color:var(--band-indigo)"><use href="#square"/></svg>Editors</a></li>
+      <li><a href="#rendering"><svg style="color:var(--band-blue)"><use href="#circle"/></svg>Rendering</a></li>
+      <li><a href="#styles"><svg style="color:var(--band-blue)"><use href="#circle"/></svg>Styles and themes</a></li>
+      <li><a href="#text"><svg style="color:var(--band-blue)"><use href="#circle"/></svg>Text and fonts</a></li>
+      <li><a href="#languages"><svg style="color:var(--band-blue)"><use href="#circle"/></svg>Languages</a></li>
+      <li><a href="#a11y"><svg style="color:var(--band-blue)"><use href="#circle"/></svg>Accessibility</a></li>
+      <li><a href="#desktop"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Desktop integration</a></li>
+      <li><a href="#sound"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Sound</a></li>
+      <li><a href="#files"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Files and permissions</a></li>
+      <li><a href="#updates"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Updates and packages</a></li>
+      <li><a href="#images"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Images and documents</a></li>
+      <li><a href="#network"><svg style="color:var(--band-orange)"><use href="#star"/></svg>Network and security</a></li>
+      <li><a href="#framework"><svg style="color:var(--band-orange)"><use href="#star"/></svg>App framework</a></li>
+      <li><a href="#tools"><svg style="color:var(--band-green)"><use href="#circle"/></svg>Developer tools</a></li>
+      <li><a href="#agents"><svg style="color:var(--band-green)"><use href="#circle"/></svg>AI agents</a></li>
+      <li><a href="#platforms"><svg style="color:var(--ink)"><use href="#square"/></svg>Platforms</a></li>
+      <li><a href="#gpu"><svg style="color:var(--ink)"><use href="#square"/></svg>GPU</a></li>
+      <li><a href="#nostd"><svg style="color:var(--ink)"><use href="#square"/></svg>Foundation</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="part band b-indigo"><div class="wrap"><h2>Interface</h2><p class="soft">What people see and touch in your app.</p></div></section>
+<div class="wrap">
+  <article class="ch" id="widgets">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-indigo)" aria-hidden="true"><use href="#square"/></svg><div><h3>Widgets and layout</h3><p>An app describes its interface in one function. JFLib handles layout, input, focus and drawing.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <figure><img src="img/gallery-winui.png" width="1000" height="700" loading="lazy" alt="The widget gallery with buttons, check boxes, sliders, text fields and a card."></figure>
+        <figure><span class="gif">GIF planned</span><img src="img/feature-docking.png" width="960" height="640" loading="lazy" alt="Docked panels in tab groups with drop markers while a panel is dragged."></figure>
+      </div>
+      <dl class="fl">
+        <div><dt>Buttons</dt><dd>Standard, accent, icon and split buttons.</dd></div>
+        <div><dt>Choices</dt><dd>Check boxes, radio buttons and switches.</dd></div>
+        <div><dt>Values</dt><dd>Sliders and progress bars.</dd></div>
+        <div><dt>Text input</dt><dd>Text fields, password fields and number boxes.</dd></div>
+        <div><dt>Lists and tabs</dt><dd>Lists, tabs and scroll areas.</dd></div>
+        <div><dt>Menus and dialogs</dt><dd>Menus, context menus and dialogs.</dd></div>
+        <div><dt>Toolbars and ribbons</dt><dd>Plain toolbars and full Office ribbons.</dd></div>
+        <div><dt>Grid box</dt><dd>Lay widgets out in rows and columns.</dd></div>
+        <div><dt>Docking</dt><dd>Panels in tab groups and floating tool windows, with drop markers while dragging. The layout is kept.</dd></div>
+        <div><dt>Popups and tooltips</dt><dd>They may leave the window, like native ones.</dd></div>
+        <div><dt>Scaling</dt><dd>Sizes are device-independent, so an interface stays sharp on every display.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="data">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-indigo)" aria-hidden="true"><use href="#square"/></svg><div><h3>Data views and app shells</h3><p>The parts a real business app is made of, drawn by every style.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <figure><img src="img/feature-charts.png" width="1440" height="960" loading="lazy" alt="A data view with KPI cards, charts, a sortable grid, a wizard and a tree."></figure>
+        <figure><span class="gif">GIF planned</span><img src="img/feature-diagram.png" width="1100" height="760" loading="lazy" alt="A diagram with nodes, ports, edges and a minimap."></figure>
+        <figure><img src="img/terminal.png" width="1000" height="300" loading="lazy" alt="The terminal widget with a router prompt."></figure>
+      </div>
+      <dl class="fl">
+        <div><dt>Virtual grids</dt><dd>Large tables with sorting and multiple selection.</dd></div>
+        <div><dt>Trees</dt><dd>Nested data, also with check boxes.</dd></div>
+        <div><dt>Navigation panes</dt><dd>The side menu of a modern app, with groups and badges.</dd></div>
+        <div><dt>Command bars and splitters</dt><dd>The frame around your content.</dd></div>
+        <div><dt>Wizards</dt><dd>Step-by-step flows with a visible position.</dd></div>
+        <div><dt>Charts</dt><dd>KPI cards with sparklines, line charts, stacked bars and donuts.</dd></div>
+        <div><dt>Toasts</dt><dd>Short messages that do not interrupt.</dd></div>
+        <div><dt>Date and time inputs</dt><dd>Ready-made fields for dates and times.</dd></div>
+        <div><dt>Diagram canvas</dt><dd>Nodes, ports, straight, curved and right-angled edges, grid snapping and a minimap.</dd></div>
+        <div><dt>Terminal</dt><dd>A terminal widget for consoles and logs.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="editors">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-indigo)" aria-hidden="true"><use href="#square"/></svg><div><h3>Editors</h3><p>Finished editors you can place in your app like any other widget.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <figure><img src="img/feature-richtext.png" width="1000" height="548" loading="lazy" alt="The rich-text editor with headings, formats and lists."></figure>
+        <figure><img src="img/feature-code-editor.png" width="1000" height="680" loading="lazy" alt="The code editor with Rust and syntax highlighting."></figure>
+        <figure><img src="img/mdview.png" width="1100" height="760" loading="lazy" alt="The Markdown viewer with headings, lists, a quotation and code."></figure>
+      </div>
+      <dl class="fl">
+        <div><dt>Rich-text editor</dt><dd>A formatting toolbar, headings, character formats, colours, fonts, lists and quotations, with HTML in and out.</dd></div>
+        <div><dt>Code editor</dt><dd>Highlighting for Rust, JSON, INI, TOML and Markdown, line numbers, find and replace. Stays fast with 100,000 lines.</dd></div>
+        <div><dt>Markdown and HTML viewer</dt><dd>Shows documents with selection, links, images, tables and code blocks.</dd></div>
+        <div><dt>Undo history</dt><dd>Undo and redo for your app's own documents.</dd></div>
+      </dl>
+    </div>
+  </article>
+</div>
+
+<section class="part band b-blue"><div class="wrap"><h2>Look and text</h2><p class="soft">How your app appears, reads and adapts to the person using it.</p></div></section>
+<div class="wrap">
+  <article class="ch" id="rendering">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-blue)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Rendering</h3><p>JFLib draws everything itself, so an app looks the same on every system.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><img src="img/feature-svg.png" width="1040" height="820" loading="lazy" alt="SVG test pictures with shapes, paths, strokes, gradients and clip paths."></figure></div>
+      <dl class="fl">
+        <div><dt>Own software renderer</dt><dd>Text, paths, shapes, gradients, image compositing and effects.</dd></div>
+        <div><dt>Scalable interfaces</dt><dd>Any scale, on any display.</dd></div>
+        <div><dt>Light and dark</dt><dd>Both themes, following the system or your choice.</dd></div>
+        <div><dt>SVG images and icons</dt><dd>Drawn by JFLib's own rasterizer, sharp at every size.</dd></div>
+        <div><dt>Image viewer</dt><dd>A widget with zoom and pan.</dd></div>
+        <div><dt>Animation</dt><dd>Easing curves for smooth movement, and reduced motion when the system asks for it.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch wide" id="styles">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-blue)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Styles and themes</h3><p>The style draws the widgets, so one interface can take on a different look without changing your logic.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <div class="thumbs">
+          <figure><img src="img/gallery-winui.png" width="1000" height="700" loading="lazy" alt="The gallery in WinUI."><figcaption>WinUI</figcaption></figure>
+          <figure><img src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="The gallery in macOS."><figcaption>macOS</figcaption></figure>
+          <figure><img src="img/gallery-kde.png" width="1000" height="700" loading="lazy" alt="The gallery in KDE."><figcaption>KDE</figcaption></figure>
+          <figure><img src="img/gallery-classic.png" width="1000" height="700" loading="lazy" alt="The gallery in Classic."><figcaption>Classic</figcaption></figure>
+          <figure><img src="img/gallery-jfoffice.png" width="1000" height="700" loading="lazy" alt="The gallery in jfOffice."><figcaption>jfOffice</figcaption></figure>
+          <figure><img src="img/gallery-backupcraft.png" width="1000" height="700" loading="lazy" alt="The gallery in BackupCraft."><figcaption>BackupCraft</figcaption></figure>
+        </div>
+      </div>
+      <dl class="fl">
+        <div><dt>Ready-made styles</dt><dd>WinUI, macOS, KDE, Classic, jfOffice, BackupCraft and netlab.</dd></div>
+        <div><dt>Independent of the system</dt><dd>The macOS style can run in a Windows app.</dd></div>
+        <div><dt>Change while running</dt><dd>Light and dark, accent colours and scaling switch at run time. An app that links several styles can switch between them too.</dd></div>
+        <div><dt>Your own theme</dt><dd>A small INI file sets colours, corner radii, spacing, control heights and type, over any style.</dd></div>
+        <div><dt>Your own style</dt><dd>A documented contract for writing a new style.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="text">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-blue)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Text and fonts</h3><p>Text that works for real documents and real languages.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="pair">
+        <figure><img src="img/feature-spellcheck.png" width="640" height="560" loading="lazy" alt="A misspelled word with suggestions in a context menu."></figure>
+        <figure><img src="img/feature-font-dialog.png" width="602" height="606" loading="lazy" alt="The font dialog with search, styles, sizes and a preview."></figure>
+      </div></div>
+      <dl class="fl">
+        <div><dt>OpenType shaping</dt><dd>Complex scripts, ligatures and bidirectional text.</dd></div>
+        <div><dt>Font fallback</dt><dd>Missing glyphs come from other fonts, with font aliases and fonts per language.</dd></div>
+        <div><dt>Font picker and dialog</dt><dd>Search the installed fonts and preview the choice.</dd></div>
+        <div><dt>Line breaking</dt><dd>Unicode grapheme, word and line segmentation, and hyphenation.</dd></div>
+        <div><dt>Subpixel smoothing</dt><dd>Sharp text on ordinary displays.</dd></div>
+        <div><dt>Spell checking</dt><dd>Hunspell dictionaries or the Windows spell checker, with suggestions and a personal dictionary.</dd></div>
+        <div><dt>Input methods</dt><dd>On Windows, Wayland and X11.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="languages">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-blue)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Languages and regions</h3><p>Dialogs and messages from the library are already translated.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="ph">Screenshot planned:<br>a mirrored interface in Arabic</div></div>
+      <dl class="fl">
+        <div><dt>Nine languages</dt><dd class="langs"><span lang="de">Deutsch</span><span>English</span><span lang="fr">Français</span><span lang="es">Español</span><span lang="it">Italiano</span><span lang="nl">Nederlands</span><span lang="pl">Polski</span><span lang="ar" dir="rtl">العربية</span><span lang="he" dir="rtl">עברית</span></dd></div>
+        <div><dt>Right to left</dt><dd>Layouts mirror for right-to-left languages.</dd></div>
+        <div><dt>Plural rules</dt><dd>Correct forms for every supported language.</dd></div>
+        <div><dt>Regional formats</dt><dd>Numbers and dates the way each region writes them.</dd></div>
+        <div><dt>Sorting</dt><dd>Lists sort by the rules of the language.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="a11y">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-blue)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Accessibility</h3><p>Follows the system's settings by default.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <figure><img src="img/feature-high-contrast.png" width="1440" height="960" loading="lazy" alt="A data view in the high contrast theme."></figure>
+        <figure><img src="img/feature-text-scale.png" width="1000" height="535" loading="lazy" alt="The gallery with text at 150 percent while icons keep their size."></figure>
+      </div>
+      <dl class="fl">
+        <div><dt>Screen readers</dt><dd>UI Automation on Windows, AT-SPI2 on Linux, an ARIA tree in the browser and accessibility nodes on Android.</dd></div>
+        <div><dt>High contrast</dt><dd>A high contrast theme that follows the system.</dd></div>
+        <div><dt>Text size</dt><dd>A text scale separate from the UI scale. Icons keep their size.</dd></div>
+        <div><dt>Accent colour and reduced motion</dt><dd>Taken from the system.</dd></div>
+        <div><dt>Full keyboard operation</dt><dd>Focus groups, F6 through panes and the menu key everywhere.</dd></div>
+        <div><dt>Screen magnifiers</dt><dd>The caret position is reported so a magnifier can follow it.</dd></div>
+      </dl>
+    </div>
+  </article>
+</div>
+
+<section class="part band b-orange"><div class="wrap"><h2>System</h2><p class="soft">Everything an app needs beyond its window.</p></div></section>
+<div class="wrap">
+  <article class="ch" id="desktop">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Desktop integration</h3><p>Your app behaves like it belongs on the desktop.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><span class="gif">GIF planned</span><img src="img/feature-dragdrop.png" width="720" height="440" loading="lazy" alt="An item dragged into a highlighted basket."></figure></div>
+      <dl class="fl">
+        <div><dt>Drag and drop</dt><dd>Text, HTML, URLs, images and files, between widgets and to and from other programs.</dd></div>
+        <div><dt>Notifications and tray icon</dt><dd>System notifications and a notification-area icon.</dd></div>
+        <div><dt>Taskbar</dt><dd>Progress, badges and jump lists.</dd></div>
+        <div><dt>File types and URL schemes</dt><dd>Your app opens its own files and links.</dd></div>
+        <div><dt>One instance per app</dt><dd>A second start reaches the running app.</dd></div>
+        <div><dt>Start at login, stay awake</dt><dd>Start with the session and keep the system awake when needed.</dd></div>
+        <div><dt>Monitors</dt><dd>The monitor list with work areas, DPI and refresh rates.</dd></div>
+        <div><dt>Global shortcuts</dt><dd>Keys that work while your app is in the background.</dd></div>
+        <div><dt>Screen tools</dt><dd>Pick a colour anywhere on the screen and take pictures of the screen.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="sound">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Sound</h3><p>Output on every platform through one interface.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><img src="img/audio.png" width="900" height="640" loading="lazy" alt="The audio test app with a tone generator, sounds to play and system sounds."></figure></div>
+      <dl class="fl">
+        <div><dt>Output streams</dt><dd>With a target latency, over WASAPI, the PulseAudio protocol that PipeWire serves, WebAudio and AAudio.</dd></div>
+        <div><dt>Short sounds</dt><dd>WAV and Ogg Vorbis files, mixed together.</dd></div>
+        <div><dt>System sounds</dt><dd>The system's own sounds for events and message dialogs.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="files">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Files and permissions</h3><p>An app states what it may do, and the library enforces it.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="ph">Screenshot planned:<br>a permission question at run time</div></div>
+      <dl class="fl">
+        <div><dt>One file namespace</dt><dd><code>app://</code>, <code>config://</code>, <code>data://</code>, <code>cache://</code> and <code>mem://</code>, ZIP archives and overlays.</dd></div>
+        <div><dt>Assets inside the program</dt><dd>Your files travel with the app.</dd></div>
+        <div><dt>Permission manifest</dt><dd>Each app lists its files, programs, URLs and more. It is enforced at run time, with questions to the user.</dd></div>
+        <div><dt>Secret store</dt><dd>Passwords and keys go into the system's secret store.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="updates">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Updates and packages</h3><p>From the finished build to the installed app.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="bigchips" aria-label="Package formats"><span>Windows setup</span><span>.deb</span><span>RPM</span><span>AppImage</span><span>Flatpak</span><span>MSIX</span><span>APK</span></div></div>
+      <dl class="fl">
+        <div><dt>Signed updates</dt><dd>Updates are signed, with rollback if something goes wrong.</dd></div>
+        <div><dt>Code signing</dt><dd>Part of the release path.</dd></div>
+        <div><dt>Packages</dt><dd>Built from one description of your app.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="images">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Images and documents</h3><p>Open and save common formats without an extra library.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><img src="img/jfword-dark.png" width="1424" height="884" loading="lazy" alt="jfWord with a document, a ribbon and a navigation pane."></figure></div>
+      <dl class="fl">
+        <div><dt>Built-in image codecs</dt><dd>Including PNG, JPEG, WebP, TIFF, AVIF and JPEG XL.</dd></div>
+        <div><dt>Document components</dt><dd>Shared document, layout and DOCX parts, as used by jfWord.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="network">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>Network and security</h3><p>Written for BackupCraft and usable by any program.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="bigchips" aria-label="Protocols and algorithms"><span>HTTP/1.1</span><span>TLS 1.3</span><span>TLS 1.2 client</span><span>X.509</span><span>SMTP</span><span>SSH-2 client</span><span>DNS</span><span>BLAKE3</span><span>Argon2id</span><span>ChaCha20-Poly1305</span><span>AES-GCM</span><span>X25519</span><span>Ed25519</span><span>RSA</span><span>ECDSA</span><span>LZ4</span><span>zstd</span><span>pcapng</span></div></div>
+      <dl class="fl">
+        <div><dt>Server and client</dt><dd>An HTTP server and client, TLS with private CAs and the system's trust store, mail, SSH and DNS.</dd></div>
+        <div><dt>Cryptography and compression</dt><dd>Modern algorithms and fast compression, in the library itself.</dd></div>
+        <div><dt>Storage</dt><dd>An embedded journal database and deduplicating, encrypted repositories.</dd></div>
+        <div><dt>Packets</dt><dd>Codecs from Ethernet to TCP, a dissector and pcapng files, for simulators and tools.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="framework">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-orange)" aria-hidden="true"><use href="#star"/></svg><div><h3>App framework</h3><p>The small things every app needs.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><img src="img/settings.png" width="1000" height="385" loading="lazy" alt="A settings page generated from typed settings."></figure></div>
+      <dl class="fl">
+        <div><dt>Typed settings</dt><dd>Describe your settings, and the settings page is generated.</dd></div>
+        <div><dt>Saved window state</dt><dd>Windows come back where they were.</dd></div>
+        <div><dt>Lifecycle hooks and logging</dt><dd>Start, suspend, session end, and a log.</dd></div>
+        <div><dt>Async tasks</dt><dd>Background work inside the event loop.</dd></div>
+        <div><dt>Widget ids from names</dt><dd>No numbering by hand.</dd></div>
+      </dl>
+    </div>
+  </article>
+</div>
+
+<section class="part band b-green"><div class="wrap"><h2>Development</h2><p class="soft">Fast to change and easy to check, for people and for agents.</p></div></section>
+<div class="wrap">
+  <article class="ch" id="tools">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-green)" aria-hidden="true"><use href="#circle"/></svg><div><h3>Developer tools</h3><p>See what your app does while it runs, and keep checking it.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+        <figure><span class="gif">GIF planned</span><img src="img/feature-inspector.png" width="900" height="470" loading="lazy" alt="The live inspector naming a button under the pointer."></figure>
+        <figure><img src="img/build-manager.png" width="1320" height="782" loading="lazy" alt="The Build Manager with an app list and build settings."></figure>
+      </div>
+      <dl class="fl">
+        <div><dt>Hot reload</dt><dd>Save a file, and the app rebuilds and comes back where it was with your change in it.</dd></div>
+        <div><dt>Live inspector</dt><dd>Point at a widget to see its id, label, size and state, with a widget tree, properties and frame statistics.</dd></div>
+        <div><dt><code>.uis</code> test scripts</dt><dd>Readable scripts that click, type, check and take screenshots in the real app.</dd></div>
+        <div><dt>Screenshots without a window</dt><dd>Any app renders straight to a PNG.</dd></div>
+        <div><dt>Widget dumps</dt><dd>The state of the interface as text.</dd></div>
+        <div><dt>New app in one command</dt><dd>Sources, permissions, package data, a passing test and a README.</dd></div>
+        <div><dt>Build Manager</dt><dd>A graphical app for builds, profiles, tests and release packages.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="agents">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--band-green)" aria-hidden="true"><use href="#circle"/></svg><div><h3>AI agents</h3><p>JFLib is designed to be used by AI agents, so an agent can build an app, run it and check the result by itself.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+<pre class="panel"><span class="d"># see</span>
+--shot build/app.png --size 1000x800
+<span class="d"># act</span>
+--script tests/smoke.uis
+--agent-json
+--agent-mcp
+<span class="d"># check</span>
+python build_rs.py test hello</pre>
+      </div>
+      <dl class="fl">
+        <div><dt>See</dt><dd>Screenshots and widget dumps show an agent what is on screen.</dd></div>
+        <div><dt>Act</dt><dd>Scripts, or JSON-RPC and MCP over standard input and output.</dd></div>
+        <div><dt>Check</dt><dd>Expectations in scripts and a test command for every app.</dd></div>
+        <div><dt>Off by default</dt><dd>No language model runs inside your app, and the endpoint stays closed until you switch it on at startup.</dd></div>
+      </dl>
+    </div>
+  </article>
+</div>
+
+<section class="part band b-ink"><div class="wrap"><h2>Foundation</h2><p class="soft">What the library runs on, and how it is built.</p></div></section>
+<div class="wrap">
+  <article class="ch" id="platforms">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Platforms</h3><p>Native windows, the browser host and the Android adapter use the same widgets and renderer.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><figure><img src="img/browser-gallery.jpg" width="800" height="388" loading="lazy" alt="The gallery running in a browser tab."><figcaption>The gallery in a browser tab, as WebAssembly.</figcaption></figure></div>
+      <dl class="fl">
+        <div><dt>Windows</dt><dd>Native x86-64 app with desktop integration.</dd></div>
+        <div><dt>Linux</dt><dd>Native x86-64 app, on Wayland or X11, picked at startup.</dd></div>
+        <div><dt>Android</dt><dd>Native APK for Android 8 and later. So far through the Pocket Gallery, with fewer desktop services.</dd></div>
+        <div><dt>Browser</dt><dd>WebAssembly with scalar, SIMD and threaded builds, tested on Chromium and Firefox. Native plugins and system services are more limited here.</dd></div>
+        <div><dt>macOS and iOS</dt><dd>Through the browser for now. There is no native build yet.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch flip" id="gpu">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>GPU</h3><p>Direct access to the graphics card, for programs that need more than an interface.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media"><div class="ph">Screenshot planned:<br>a 3D scene from the GPU tests</div></div>
+      <dl class="fl">
+        <div><dt>Explicit API</dt><dd>Compute shaders, rendering with a depth test, indirect draws, timestamps and swapchains, in the style of Vulkan and WebGPU.</dd></div>
+        <div><dt>WGSL shaders</dt><dd>Checked and compiled to SPIR-V by the library itself.</dd></div>
+        <div><dt>Available today</dt><dd>Vulkan on Windows. The interface still rasterizes on the CPU, and on Windows the GPU presents the result.</dd></div>
+        <div><dt>Planned</dt><dd>Vulkan on Linux and Android, WebGPU in the browser and later Metal.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ch" id="nostd">
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Foundation</h3><p>How the library itself is put together.</p></div></div>
+    <div class="ch-grid">
+      <div class="ch-media">
+<pre class="panel"><span class="t">#![no_std]</span>
+<span class="t">#![no_main]</span>
+<span class="t">#![deny(unsafe_code)]</span>
+
+<span class="k">extern crate</span> alloc;
+<span class="k">use</span> ui::*;</pre>
+      </div>
+      <dl class="fl">
+        <div><dt><code>no_std</code></dt><dd>The Rust code uses <code>core</code> and <code>alloc</code>, with no GUI framework underneath.</dd></div>
+        <div><dt>Direct builds</dt><dd>A Python script calls <code>rustc</code> directly. Complex text shaping adds a small pinned Cargo project with HarfRust, linked statically.</dd></div>
+        <div><dt>Modular</dt><dd>50 crates with safe APIs for your app.</dd></div>
+        <div><dt>Contained <code>unsafe</code></dt><dd>It stays inside the runtime, platform, SIMD and plugin layers.</dd></div>
+        <div><dt>Open licences</dt><dd>MIT or Apache 2.0, at your option.</dd></div>
+      </dl>
+    </div>
+  </article>
+</div>

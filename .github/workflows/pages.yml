@@ -1,0 +1,81 @@
+name: Pages
+
+# Every push builds and checks the site; only main is published.
+# Docs and gallery come from the JFLib commit in jflib.lock and are cached under that commit, so a
+# change to the pages alone does not build them again.
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the JFLib commit
+        id: lock
+        run: echo "sha=$(tr -d '[:space:]' < jflib.lock)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore docs and gallery
+        id: parts
+        uses: actions/cache@v4
+        with:
+          path: _parts
+          key: parts-v1-${{ steps.lock.outputs.sha }}
+
+      - name: Check out JFLib
+        if: steps.parts.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: JFLibrary/JFLib
+          ref: ${{ steps.lock.outputs.sha }}
+          path: jflib
+
+      - name: Install Rust and the linker
+        if: steps.parts.outputs.cache-hit != 'true'
+        run: |
+          rustup toolchain install 1.98 --profile minimal --target wasm32-unknown-unknown
+          rustup default 1.98
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lld
+
+      - name: Build docs and gallery
+        if: steps.parts.outputs.cache-hit != 'true'
+        working-directory: jflib
+        run: |
+          python3 build_rs.py site --out "$GITHUB_WORKSPACE/_parts/docs"
+          python3 build_rs.py app gallery --target web --web-mode scalar
+          python3 build_rs.py app gallery --target web --web-mode simd
+          cp -r build/web/gallery "$GITHUB_WORKSPACE/_parts/gallery"
+
+      - name: Build and check the site
+        run: python3 build.py --docs _parts/docs --gallery _parts/gallery --preview --check
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publish
+        id: deploy
+        uses: actions/deploy-pages@v4
