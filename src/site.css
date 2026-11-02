@@ -405,6 +405,10 @@ code,pre,.flag,.status span,.gif,.tag,.tiles span,.bars b,.bars .t,.foot .draft,
 .legal address{font-style:normal;margin-top:10px}
 .legal p+p{margin-top:12px}
 .legal .stand{margin-top:28px;color:var(--muted);font-size:.9375rem}
+.gpu-shot{margin-bottom:20px}
+.gpu-shot figcaption{margin-top:8px;font-size:.875rem}
+.manifest-note{color:var(--muted);font-size:.9375rem}
+picture{display:contents}
 
 /* roadmap */
 .rm-key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:24px;font-size:.9688rem}

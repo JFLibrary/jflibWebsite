@@ -86,10 +86,10 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <p class="prose">Widgets are drawn by the selected style, so one interface can look like Windows, macOS, KDE or Office without touching your logic. Light and dark, accent colours and scaling change while the app runs. A small INI file lays your own colours, corners and spacing over any style.</p>
     </div>
     <div class="compare" id="cmp-style" style="--x:50%">
-      <img src="img/kritzel-winui.png" width="1280" height="800" loading="lazy" alt="Kritzel, a drawing app, in the WinUI style.">
-      <img class="over" src="img/kritzel-classic.png" width="1280" height="800" loading="lazy" alt="The same Kritzel window in the Classic style.">
+      <img src="img/feature-charts.png" width="1440" height="960" loading="lazy" alt="A data view with charts, a grid and a wizard in the WinUI style.">
+      <img class="over" src="img/datagallery-classic.png" width="1440" height="960" loading="lazy" alt="The same data view in the Classic style.">
       <span class="tag l">Classic</span><span class="tag r">WinUI</span>
-      <input type="range" id="cmp-style-range" min="0" max="100" value="50" aria-label="Compare Kritzel in the Classic and WinUI styles">
+      <input type="range" id="cmp-style-range" min="0" max="100" value="50" aria-label="Compare the data view in the Classic and WinUI styles">
       <span class="bar" aria-hidden="true"><span class="knob">↔</span></span>
     </div>
   </div>
@@ -128,7 +128,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
     <div class="media">
       <figure class="browser">
         <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>Feature Gallery</span></div>
-        <img src="img/browser-gallery.jpg" width="800" height="388" loading="lazy" alt="The Feature Gallery running in a browser tab, with buttons, check boxes and sliders.">
+        <img src="img/browser-gallery.png" width="1000" height="560" loading="lazy" alt="The Feature Gallery running in a browser tab, with buttons, check boxes and sliders.">
       </figure>
     </div>
   </div>
@@ -146,13 +146,13 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <div>
         <p class="bars-head">One app, one file</p>
         <ul class="bars">
-          <li><b>template</b><span class="t" style="--w:30.3%">3.26 MB</span></li>
-          <li><b>gallery</b><span class="t" style="--w:37.1%">4.00 MB</span></li>
-          <li><b>Kritzel</b><span class="t" style="--w:38.3%">4.12 MB</span></li>
-          <li><b>PaintCraft</b><span class="t" style="--w:74.1%">7.98 MB</span></li>
-          <li><b>jfWord</b><span class="t" style="--w:100%">10.77 MB</span></li>
+          <li><b>template</b><span class="t" style="--w:32.6%">3.81 MB</span></li>
+          <li><b>gallery</b><span class="t" style="--w:36.2%">4.23 MB</span></li>
+          <li><b>Kritzel</b><span class="t" style="--w:37.4%">4.37 MB</span></li>
+          <li><b>PaintCraft</b><span class="t" style="--w:74.9%">8.75 MB</span></li>
+          <li><b>jfWord</b><span class="t" style="--w:100%">11.68 MB</span></li>
         </ul>
-        <p class="bars-note soft">Windows x86-64 development builds, measured on 1 November 2026. Release builds still have to be measured.</p>
+        <p class="bars-note soft">Windows x86-64 release builds, measured on 2 November 2026.</p>
       </div>
     </div>
   </div>
@@ -169,8 +169,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <p>Hot reload rebuilds the app and brings it back where it was, with your change in it. Your session's input replays through the new code, so the widgets stay compiled Rust and your app needs no special state structure.</p>
       </div>
       <div class="media">
-        <span class="gif">GIF planned</span>
-<pre class="panel"><span class="d">apps/hello/src/main.rs</span>
+        <pre class="panel"><span class="d">apps/hello/src/main.rs</span>
 <span class="r">- if ui.accent_button(100, "Click me") &amp; EV_ACT != 0 {</span>
 <span class="a">+ if ui.accent_button(100, "Add one") &amp; EV_ACT != 0 {</span></pre>
         <div class="flow" aria-label="What happens after saving"><span>Save</span><span>Build</span><span>Replay input</span><span>Same place, new code</span></div>
@@ -184,8 +183,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <p>The overlay names the widget under the pointer with its id, label, size and state. A tool window adds the widget tree, properties, a script selector and frame statistics. Turned off, it costs nothing.</p>
       </div>
       <div class="media">
-        <span class="gif">GIF planned</span>
-        <img class="shot" src="img/feature-inspector.png" width="900" height="470" loading="lazy" alt="The live inspector's overlay naming a button under the pointer with its id, label, size and hover state.">
+        <picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="The live inspector naming each widget under the pointer with its id, label, size and state."></picture>
       </div>
     </div>
 
@@ -196,15 +194,14 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <p>A <code>.uis</code> script clicks, types, switches themes, checks the result and saves a screenshot, against the real app on Windows and Linux. The repository holds 595 of them.</p>
       </div>
       <div class="media script-scene">
-        <span class="gif">GIF planned</span>
-<pre class="panel"><span class="d"># template smoke test</span>
-<span class="k">click</span> <span class="s">"Klick mich"</span>
-<span class="k">click</span> <span class="s">"Klick mich"</span>
-<span class="k">expect</span> text:<span class="s">"Klicks: 2"</span> exists
-<span class="k">click</span> <span class="s">"Zurücksetzen"</span>
-<span class="k">expect</span> text:<span class="s">"Klicks: 0"</span> exists
+        <pre class="panel"><span class="d"># a smoke test</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 2"</span> exists
+<span class="k">click</span> <span class="s">"Reset"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 0"</span> exists
 <span class="k">shot</span> build/template.png</pre>
-        <img class="result" src="img/example-counter.png" width="480" height="124" loading="lazy" alt="The app under test showing two clicks and its two buttons.">
+        <picture><source srcset="img/uis-test-still.png" media="(prefers-reduced-motion: reduce)"><img class="result" src="img/uis-test.gif" width="480" height="300" loading="lazy" alt="The script clicking the real app: the counter goes to two, then back to zero."></picture>
       </div>
     </div>
   </div>
@@ -233,7 +230,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
           <li><b>Magnifiers</b><span class="soft">The caret position is reported so a screen magnifier can follow it.</span></li>
         </ul>
         <figure>
-          <img class="shot" src="img/feature-text-scale.png" width="1000" height="535" loading="lazy" alt="The widget gallery with text at 150 percent while the icons keep their size.">
+          <img class="shot" src="img/feature-text-scale.png" width="1000" height="700" loading="lazy" alt="The widget gallery with text at 150 percent while the icons keep their size.">
           <figcaption class="soft">Text at 150 %. Icons keep their size.</figcaption>
         </figure>
       </div>
@@ -256,6 +253,10 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       </ul>
     </div>
     <div>
+      <figure class="gpu-shot">
+        <img class="shot" src="img/gpu-scene.jpg" width="1280" height="800" loading="lazy" alt="Thousands of coloured cubes in motion, rendered by the GPU layer.">
+        <figcaption class="soft">JFLib's GPU test scene with 200,000 moving cubes.</figcaption>
+      </figure>
       <ol class="pipe">
         <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><div><b>WGSL shader</b><span>Your shader source</span></div></li>
         <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><div><b><code>wgsl</code></b><span>Checks it and compiles it to SPIR-V, inside the library</span></div></li>
@@ -305,16 +306,16 @@ python build_rs.py test hello</pre>
 
     <div class="mosaic">
       <figure class="tile w7 r-tall"><div class="pic"><img src="img/feature-charts.png" width="1440" height="960" loading="lazy" alt="KPI cards with sparklines, a stacked bar chart, a donut chart, a sortable grid, a wizard and a toast."></div><figcaption><b>Charts and data views</b>KPI cards, sparklines, stacked bars, donuts, a sortable grid, wizards and toasts.</figcaption></figure>
-      <figure class="tile w5 r-tall"><div class="pic"><span class="gif">GIF planned</span><img src="img/feature-diagram.png" width="1100" height="760" loading="lazy" alt="A diagram with nodes, ports, straight and curved edges, a selection, a grid and a minimap."></div><figcaption><b>Diagram canvas</b>Nodes, ports, three kinds of edges, grid snapping and a minimap.</figcaption></figure>
+      <figure class="tile w5 r-tall"><div class="pic"><picture><source srcset="img/feature-diagram-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-diagram.gif" width="1100" height="760" loading="lazy" alt="A node dragged across a diagram, with its edges following and the minimap updating."></picture></div><figcaption><b>Diagram canvas</b>Nodes, ports, three kinds of edges, grid snapping and a minimap.</figcaption></figure>
       <figure class="tile w5 r-tall"><div class="pic"><img src="img/feature-code-editor.png" width="1000" height="680" loading="lazy" alt="The code editor showing Rust with syntax highlighting in the dark theme."></div><figcaption><b>Code editor</b>Rust, JSON, INI, TOML and Markdown. Stays fast with 100,000 lines.</figcaption></figure>
-      <figure class="tile w7 r-tall"><div class="pic"><img src="img/feature-richtext.png" width="1000" height="548" loading="lazy" alt="The rich-text editor with headings, character formats, lists, a quotation and alignments."></div><figcaption><b>Rich-text editor</b>Headings, character formats, lists, quotations and alignments, with HTML in and out.</figcaption></figure>
+      <figure class="tile w7 r-tall"><div class="pic"><img src="img/feature-richtext.png" width="1000" height="565" loading="lazy" alt="The rich-text editor with headings, character formats, lists, a quotation and alignments."></div><figcaption><b>Rich-text editor</b>Headings, character formats, lists, quotations and alignments, with HTML in and out.</figcaption></figure>
       <figure class="tile w12 r-wide"><div class="pic"><img src="img/jfword-dark.png" width="1424" height="884" loading="lazy" alt="An Office ribbon with font, paragraph and style groups, from jfWord."></div><figcaption><b>Office ribbons</b>Tabs, groups and galleries, as used by jfWord.</figcaption></figure>
-      <figure class="tile w4 r-mid"><div class="pic"><span class="gif">GIF planned</span><img src="img/feature-docking.png" width="960" height="640" loading="lazy" alt="Docked panels in tab groups with drop markers while a panel is dragged."></div><figcaption><b>Docking</b>Tab groups, drop markers, floating tool windows and saved layouts.</figcaption></figure>
-      <figure class="tile w4 r-mid"><div class="pic"><span class="gif">GIF planned</span><img src="img/feature-dragdrop.png" width="720" height="440" loading="lazy" alt="An item dragged into a highlighted basket."></div><figcaption><b>Drag and drop</b>Between widgets, and to and from other programs.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><picture><source srcset="img/feature-docking-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-docking.gif" width="960" height="640" loading="lazy" alt="A panel dragged over docking markers and dropped into a tab group."></picture></div><figcaption><b>Docking</b>Tab groups, drop markers, floating tool windows and saved layouts.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><picture><source srcset="img/feature-dragdrop-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-dragdrop.gif" width="720" height="440" loading="lazy" alt="An item dragged from a shelf into a basket that lights up."></picture></div><figcaption><b>Drag and drop</b>Between widgets, and to and from other programs.</figcaption></figure>
       <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-svg.png" width="1040" height="820" loading="lazy" alt="SVG test pictures with shapes, paths, strokes, gradients, transforms and clip paths."></div><figcaption><b>SVG</b>JFLib's own rasterizer, sharp at every size.</figcaption></figure>
-      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-spellcheck.png" width="640" height="560" loading="lazy" alt="A misspelled word with suggestions in its context menu."></div><figcaption><b>Spell checking</b>Hunspell dictionaries or the Windows spell checker.</figcaption></figure>
-      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-font-dialog.png" width="602" height="606" loading="lazy" alt="The font dialog with a search field, styles, sizes and a preview."></div><figcaption><b>Font dialog</b>Searches the installed fonts and previews the choice.</figcaption></figure>
-      <figure class="tile w4 r-mid"><div class="pic"><img src="img/terminal.png" width="1000" height="300" loading="lazy" alt="The terminal widget with a router prompt."></div><figcaption><b>Terminal</b>A terminal widget, drawn by every style.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-spellcheck.png" width="640" height="436" loading="lazy" alt="A misspelled word with suggestions in its context menu."></div><figcaption><b>Spell checking</b>Hunspell dictionaries or the Windows spell checker.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-font-dialog.png" width="602" height="632" loading="lazy" alt="The font dialog with a search field, styles, sizes and a preview."></div><figcaption><b>Font dialog</b>Searches the installed fonts and previews the choice.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/terminal.png" width="670" height="465" loading="lazy" alt="The terminal widget with a router prompt."></div><figcaption><b>Terminal</b>A terminal widget, drawn by every style.</figcaption></figure>
     </div>
 
     <div class="caps">
@@ -391,7 +392,7 @@ impl App for Counter {
 
 ui::main!(ui::launch(&amp;DESC, Counter::default(), &amp;style::STYLE));</code></pre>
       <div class="start-side">
-        <div class="result-frame"><img src="img/example-counter.png" width="480" height="124" loading="lazy" alt="A window with a click counter, an accent button and a reset button."></div>
+        <div class="result-frame"><img src="img/example-counter.png" width="480" height="300" loading="lazy" alt="A window with a click counter, an accent button and a reset button."></div>
 <pre class="panel cmds"><span class="k">python</span> build_rs.py new hello --title <span class="s">"Hello"</span>
 <span class="k">python</span> build_rs.py test hello
 <span class="k">python</span> build_rs.py run hello --target win</pre>

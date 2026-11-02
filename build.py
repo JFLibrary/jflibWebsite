@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
 VOID = frozenset("area base br col embed hr img input link meta source track wbr use".split())
-PREVIEW_NOTE = "Preview. Most screenshots still show German text until the gallery and demos are translated."
+PREVIEW_NOTE = "Preview. Kritzel, jfWord and the Build Manager are still shown in German."
 ROBOTS_OPEN = "User-agent: *\nAllow: /\n"
 ROBOTS_CLOSED = "User-agent: *\nDisallow: /\n"
 
@@ -142,7 +142,7 @@ class Scan(HTMLParser):
             if a["id"] in self.ids:
                 self.problems.append("id used twice: " + a["id"])
             self.ids.add(a["id"])
-        for key in ("href", "src"):
+        for key in ("href", "src", "srcset"):
             if a.get(key) and not (tag == "use" and a[key].startswith("#")):
                 self.links.append((tag, a[key]))
         if tag == "img":

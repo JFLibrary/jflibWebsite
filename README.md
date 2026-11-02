@@ -17,6 +17,7 @@ python build.py --check     # the pages alone -> _site/
 | `jflib.lock` | The JFLib commit that docs and gallery are built from |
 | `build.py` | Puts it together into `_site/`; `--check` checks links, anchors, images and HTML |
 | `.github/workflows/pages.yml` | Builds every push, publishes `main` |
+| `capture/` | Takes the screenshots and GIFs in `src/img/` from a built JFLib; run by hand on Windows, the results are checked in |
 
 Python's standard library is all `build.py` needs. To include docs and gallery, build them in a JFLib
 checkout at the commit in `jflib.lock` and pass them in:
