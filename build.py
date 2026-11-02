@@ -11,6 +11,7 @@ the scalar and SIMD variants. --preview keeps search engines away and shows the 
 import argparse
 import html
 import json
+import os
 import re
 import shutil
 import sys
@@ -214,7 +215,26 @@ def check(out, docs, gallery):
             problems.append("site.css: missing font: " + font)
     if gallery and (out / "gallery" / "gallery.threads.wasm").exists():
         problems.append("the threaded gallery variant was copied")
+    if docs:
+        problems += check_docs_links(out)
     return problems, len(pages), links
+
+
+def check_docs_links(out):
+    """The docs check their own links in JFLib; what leads out of docs/ to this site is checked here."""
+    problems = []
+    base = out / "docs"
+    pattern = re.compile(r'(?:href|src)="(\.\./[^"#?]*)|url\((\.\./[^)#?]*)\)')
+    for path in sorted(base.rglob("*")):
+        if path.suffix not in (".html", ".css"):
+            continue
+        for match in pattern.finditer(path.read_text(encoding="utf-8")):
+            target = match.group(1) or match.group(2)
+            full = Path(os.path.normpath(path.parent / target))
+            inside = full == base or base in full.parents
+            if not inside and not full.is_file():
+                problems.append(f"{path.relative_to(out).as_posix()}: broken link out of the docs: {target}")
+    return problems
 
 
 def main(argv=None):
