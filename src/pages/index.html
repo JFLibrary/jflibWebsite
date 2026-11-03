@@ -246,8 +246,8 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <p class="prose" style="margin-top:16px">For programs that need more than an interface: compute shaders, rendering with a depth test, indirect draws, timestamps and window swapchains, behind an explicit API in the style of Vulkan and WebGPU.</p>
       <ul class="matrix" aria-label="GPU support by platform">
         <li><span>Windows</span><code>Vulkan</code><span class="now">Available</span></li>
-        <li><span>Linux</span><code>Vulkan</code><span class="next">Planned</span></li>
-        <li><span>Android</span><code>Vulkan</code><span class="next">Planned</span></li>
+        <li><span>Linux</span><code>Vulkan</code><span class="now">Available</span></li>
+        <li><span>Android</span><code>Vulkan</code><span class="now">Available</span></li>
         <li><span>Browser</span><code>WebGPU</code><span class="next">Planned</span></li>
         <li><span>Apple</span><code>Metal</code><span class="next">Later</span></li>
       </ul>
@@ -261,7 +261,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><div><b>WGSL shader</b><span>Your shader source</span></div></li>
         <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><div><b><code>wgsl</code></b><span>Checks it and compiles it to SPIR-V, inside the library</span></div></li>
         <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><div><b><code>gpu</code></b><span>Devices, queues, pipelines and command buffers, with the back end picked at build time</span></div></li>
-        <li><svg viewBox="0 0 100 100" style="color:var(--on-ink)" aria-hidden="true"><use href="#square"/></svg><div><b>Your window</b><span>The widgets still rasterize on the CPU. On Windows, the GPU takes over output, layers, images and canvases.</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--on-ink)" aria-hidden="true"><use href="#square"/></svg><div><b>Your window</b><span>The widgets still rasterize on the CPU. On Windows, Linux and Android, the GPU takes over output, layers, images and canvases.</span></div></li>
       </ol>
     </div>
   </div>
