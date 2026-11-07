@@ -381,8 +381,9 @@ python build_rs.py test hello</pre>
 <span class="k">use</span> ui::*;</pre>
       </div>
       <dl class="fl">
-        <div><dt><code>no_std</code></dt><dd>The Rust code uses <code>core</code> and <code>alloc</code>, with no GUI framework underneath.</dd></div>
-        <div><dt>Direct builds</dt><dd>A Python script calls <code>rustc</code> directly. Complex text shaping adds a small pinned Cargo project with HarfRust, linked statically.</dd></div>
+        <div><dt><code>no_std</code></dt><dd>The library uses <code>core</code> and <code>alloc</code>. Apps are best <code>no_std</code> too.</dd></div>
+        <div><dt>std when you need it</dt><dd><code>features = ["std"]</code> lets an app use any std crate. Crash reports stay JFLib's; <code>PERMISSIONS</code> then covers JFLib's own calls, the <code>sandbox</code> line all code.</dd></div>
+        <div><dt>From one hand</dt><dd>Windows, input, widgets, files, network, threads and async tasks come from one library. A second window loop (winit, eframe) or tokio on the UI thread fights JFLib's own.</dd></div>
         <div><dt>Modular</dt><dd>50 crates with safe APIs for your app.</dd></div>
         <div><dt>Contained <code>unsafe</code></dt><dd>It stays inside the runtime, platform, SIMD and plugin layers.</dd></div>
         <div><dt>Open licences</dt><dd>MIT or Apache 2.0, at your option.</dd></div>

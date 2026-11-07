@@ -140,8 +140,8 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
     <h2 id="nostd-title">#![no_std]</h2>
     <div class="nostd-grid">
       <div>
-        <p class="nostd-sub">No GUI framework underneath.</p>
-        <p class="prose">The renderer, the widgets, the image codecs and the platform layer all live in this library, on top of Rust's <code>core</code> and <code>alloc</code>. A Python script calls <code>rustc</code> directly. Complex text shaping adds a small pinned Cargo project with HarfRust, linked statically.</p>
+        <p class="nostd-sub">No GUI framework underneath. Everything from one hand.</p>
+        <p class="prose">The renderer, the widgets, the image codecs, the network and the platform layer all live in this library, on top of Rust's <code>core</code> and <code>alloc</code>. You don't put a window crate, an event loop and a UI crate together, as egui apps do with eframe: one dependency, <code>jflib</code>, is the whole stack. Write your app <code>no_std</code> as well. When it needs a crate that uses <code>std</code>, one feature turns std on, and any crate links. Just don't add a second window loop or run an async runtime on the UI thread: JFLib already has both.</p>
       </div>
       <div>
         <p class="bars-head">One app, one file</p>
