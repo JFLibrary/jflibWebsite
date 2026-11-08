@@ -305,15 +305,18 @@ description: Everything the JFLib GUI library can do, explained without code and
         <figure><picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="The live inspector naming each widget under the pointer."></picture></figure>
         <figure><img src="img/build-manager.png" width="1320" height="782" loading="lazy" alt="The Build Manager with an app list and build settings."></figure>
       </div>
-      <dl class="fl">
-        <div><dt>Hot reload</dt><dd>Save a file, and the app rebuilds and comes back where it was with your change in it.</dd></div>
-        <div><dt>Live inspector</dt><dd>Point at a widget to see its id, label, size and state, with a widget tree, properties and frame statistics.</dd></div>
-        <div><dt><code>.uis</code> test scripts</dt><dd>Readable scripts that click, type, check and take screenshots in the real app.</dd></div>
-        <div><dt>Screenshots without a window</dt><dd>Any app renders straight to a PNG.</dd></div>
-        <div><dt>Widget dumps</dt><dd>The state of the interface as text.</dd></div>
-        <div><dt>New app in one command</dt><dd>Sources, permissions, package data, a passing test and a README.</dd></div>
-        <div><dt>Build Manager</dt><dd>A graphical app for builds, profiles, tests and release packages.</dd></div>
-      </dl>
+      <div>
+        <dl class="fl">
+          <div><dt>Hot reload</dt><dd>Save a file, and the app rebuilds and comes back where it was with your change in it.</dd></div>
+          <div><dt>Live inspector</dt><dd>Point at a widget to see its id, label, size and state, with a widget tree, properties and frame statistics.</dd></div>
+          <div><dt><code>.uis</code> test scripts</dt><dd>Readable scripts that click, type, check and take screenshots in the real app.</dd></div>
+          <div><dt>Screenshots without a window</dt><dd>Any app renders straight to a PNG.</dd></div>
+          <div><dt>Widget dumps</dt><dd>The state of the interface as text.</dd></div>
+          <div><dt>New app in one command</dt><dd><code>cargo jflib new</code> writes a Cargo project with permissions, package data and a passing test.</dd></div>
+          <div><dt>Build Manager</dt><dd>A graphical app for builds, profiles, tests and release packages.</dd></div>
+        </dl>
+        <div class="cta" style="margin-top:24px"><a class="btn primary" href="inspector.html">The live inspector</a><a class="btn" href="testing.html">The test language</a></div>
+      </div>
     </div>
   </article>
 
@@ -322,13 +325,13 @@ description: Everything the JFLib GUI library can do, explained without code and
     <div class="ch-grid">
       <div class="ch-media">
 <pre class="panel"><span class="d"># see</span>
---shot build/app.png --size 1000x800
+--shot target/app.png --size 1000x800
 <span class="d"># act</span>
 --script tests/smoke.uis
 --agent-json
 --agent-mcp
 <span class="d"># check</span>
-python build_rs.py test hello</pre>
+cargo jflib test</pre>
       </div>
       <dl class="fl">
         <div><dt>See</dt><dd>Screenshots and widget dumps show an agent what is on screen.</dd></div>

@@ -1,0 +1,144 @@
+title: JFLib Live Inspector
+description: The live inspector of the JFLib GUI library: the widget under the pointer, the widget tree, frame costs, colours, editing the look while the app runs, and the line of code behind every widget.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <code class="flag">--inspect · Ctrl+Shift+I · F12</code>
+    <h1>Look inside <em>a running app.</em></h1>
+    <p class="lede">The live inspector shows which widget is where, how the layout nests, what each frame repainted and what it cost. In a development build it also changes the look while the app runs and takes you to the line of code that built a widget. It is part of every JFLib app, and closed it costs nothing.</p>
+    <div class="cta">
+      <a class="btn primary" href="docs/GUIDE.html">Read the developer guide</a>
+      <a class="btn" href="features.html#tools">All developer tools</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="pick-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="pick-title">Point, click, know.</h2>
+      <p class="prose">Press Pick in the inspector, then click any widget in your app. The click selects instead of acting, and the tool window jumps to the widget: its kind, id, label, rectangle, value, state, layer and window, a selector for your test scripts, and the file and line where your code created it.</p>
+    </div>
+    <figure class="big-shot">
+      <picture><source srcset="img/inspector-pick-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/inspector-pick.gif" width="1418" height="700" loading="lazy" alt="The gallery app with the inspector beside it. Pick is pressed, the pointer moves to the radio button Green, the click selects it, and the inspector shows its properties. Then the accent colour changes to orange in the Appearance tab."></picture>
+      <figcaption>The Feature Gallery with its inspector, recorded by a test script.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="on-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="on-title">Three ways to open it.</h2>
+      <p class="prose">The inspector lives inside the library, so every app has it without a line of extra code. Nothing is recorded or drawn while it is closed: the frames are byte for byte those of an app without it.</p>
+    </div>
+    <div class="ways">
+      <div class="way"><h3>At the start</h3><pre class="panel">hello --inspect</pre><p class="soft">Opens the inspector together with the app.</p></div>
+      <div class="way"><h3>With a key</h3><pre class="panel">jfgui_INSPECT=1
+<span class="d"># then</span> Ctrl+Shift+I <span class="d">or</span> F12</pre><p class="soft">Arms it, so the hot keys open and close it while you work. You can choose other keys.</p></div>
+      <div class="way"><h3>From code</h3><pre class="panel">ui.inspect_show(<span class="k">true</span>);</pre><p class="soft">For a debug menu in your own app.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="overlay-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="overlay-title">An overlay in every window.</h2>
+        <p class="prose" style="margin-top:16px">The widget under the pointer gets an orange outline and a tag with its kind, id, label, size and state. The selected widget is outlined in blue. The overlay is drawn after your app, outside its draw lists, so your app's repaint regions stay its own.</p>
+      </div>
+      <figure><picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="The overlay naming each widget under the pointer with its id, label, size and state."></picture></figure>
+    </div>
+    <div class="trio" style="margin-top:clamp(36px,5vw,64px)">
+      <figure><img src="img/inspector-outlines.png" width="1000" height="700" loading="lazy" alt="Every layout box of the gallery outlined in cyan."><figcaption><b>Outlines</b>Every layout box, so you see how rows and columns nest.</figcaption></figure>
+      <figure><img src="img/inspector-order.png" width="1000" height="700" loading="lazy" alt="Purple numbers on every focusable widget, in the order the Tab key visits them."><figcaption><b>Tab order</b>The Tab stops, numbered in the order the keyboard visits them.</figcaption></figure>
+      <figure><img src="img/inspector-repaints.png" width="1000" height="700" loading="lazy" alt="A red rectangle over the Toggle button, the area the last frame repainted."><figcaption><b>Repaints</b>The rectangles each frame repainted, fading out. A widget that repaints too much shows at once.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="window-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="window-title">A tool window with four tabs.</h2>
+      <p class="prose">The inspector's own window never takes the keyboard by itself, and it never shows up in its own tree, overlay or pick. Its selector line copies straight into a <a href="testing.html">test script</a>.</p>
+    </div>
+    <div class="quad">
+      <figure><img src="img/inspector-widgets.png" width="402" height="690" loading="lazy" alt="The Widgets tab with the widget tree and the selected widget's properties."><figcaption><b>Widgets</b>The tree of the current frame inside its layout boxes, and everything about the selected widget.</figcaption></figure>
+      <figure><img src="img/inspector-frame.png" width="402" height="690" loading="lazy" alt="The Frame tab with passes, build and render times, the repainted area, draw commands, widgets and the glyph cache."><figcaption><b>Frame</b>Passes, the time to build and to render, the repainted area, draw commands and the glyph cache.</figcaption></figure>
+      <figure><img src="img/inspector-colors.png" width="402" height="690" loading="lazy" alt="The Colors tab listing every theme token with its colour value."><figcaption><b>Colors</b>Every theme token with its colour, editable in a development build.</figcaption></figure>
+      <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="The Appearance tab with style, mode, accent, language, scale, text scale, corner radius, spacing, control height and font."><figcaption><b>Appearance</b>Style, mode, accent, language, scales, metrics and fonts, while the app runs.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="edit-title">
+  <div class="wrap">
+    <div class="split top">
+      <div>
+        <h2 id="edit-title">Change the look while it runs.</h2>
+        <p class="prose" style="margin-top:16px">In a development build, the inspector edits the running app through what already exists: no API to call and no state structure to follow. Try another style, dark mode or high contrast, an accent, a language, a scale, rounder corners or another font, and see it at once.</p>
+      </div>
+      <ul class="ticks">
+          <li>Every change is marked, with its own reset button and a list of old and new values.</li>
+          <li>Undo and redo, also for a whole slider drag as one step.</li>
+          <li>Save your changes as a theme file the app can load.</li>
+          <li>Copy what you changed, as theme lines and as code.</li>
+          <li><b>Operate</b> clicks, drags, types or sets a value on the selected widget, as input. Your app's own values are never written behind its back.</li>
+      </ul>
+    </div>
+    <div class="duo" style="margin-top:clamp(30px,4vw,48px)">
+        <figure><img src="img/inspector-appearance-app.png" width="1000" height="700" loading="lazy" alt="The gallery with an orange accent colour and rounder corners."></figure>
+        <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="The Appearance tab with two changes: the accent colour E8590C and a corner radius of 8."></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue" aria-labelledby="source-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="source-title">From the widget to your code.</h2>
+        <p class="prose" style="margin-top:16px">The Widgets tab names the file and line where your app built the selected widget. <b>Open in editor</b> starts VS Code, CLion or the editor you name, at that line. A composite widget such as a number box or a menu reports your call, not the library's inner one.</p>
+        <p class="prose" style="margin-top:12px">Release builds leave this out completely, so they carry no file paths and run the same code as without the feature. Starting the editor follows your app's permission manifest like any other program it starts.</p>
+      </div>
+<pre class="panel"><span class="d"># the inspector's Widgets tab</span>
+Kind      radio
+Label     Green
+Selector  radio:<span class="s">"Green"</span>
+Source    apps/gallery/main.rs:215
+          [ Open in editor ]
+
+<span class="d"># your editor, set once</span>
+jfgui_EDITOR=<span class="s">"code -g {file}:{line}"</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="test-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="test-title">Tested like everything else.</h2>
+        <p class="prose" style="margin-top:16px">The inspector runs headless in <a href="testing.html">.uis test scripts</a> too: open it, pick, select, check the overlay and the selector, edit the look and undo it. A script can even prove that a closed inspector changed nothing at all.</p>
+        <p class="prose" style="margin-top:12px">With <a href="index.html#tools">hot reload</a>, the inspector keeps its tab, options and selection across every rebuild. A failed build keeps the old version running and shows the error at the top of the inspector.</p>
+      </div>
+<pre class="panel"><span class="k">inspect</span> arm
+<span class="k">key</span> f12                         <span class="d"># the hot key opens it</span>
+<span class="k">inspect</span> pick
+<span class="k">click</span> <span class="s">"Standard"</span>                <span class="d"># selects, the app sees nothing</span>
+<span class="k">inspect expect</span> selected button:<span class="s">"Standard"</span>
+<span class="k">inspect set</span> radius 8
+<span class="k">inspect expect</span> changes 1
+<span class="k">inspect</span> undo
+<span class="k">key</span> f12                         <span class="d"># closed again</span>
+<span class="k">inspect expect</span> same              <span class="d"># byte for byte as before</span>
+<span class="k">inspect expect</span> idle              <span class="d"># and no work since</span></pre>
+    </div>
+    <div class="cta" style="margin-top:clamp(36px,5vw,56px)">
+      <a class="btn primary" href="testing.html">The test language</a>
+      <a class="btn" href="docs/GUIDE.html">Developer guide</a>
+    </div>
+  </div>
+</section>

@@ -48,7 +48,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
   </div>
   <div class="status">
     <div class="wrap">
-      <span>Ready</span><span><b>50</b> crates</span><span><b>7</b> styles</span><span><b>9</b> languages</span><span><b>595</b> test scripts</span><span>MIT or Apache 2.0</span>
+      <span>Ready</span><span><b>50</b> crates</span><span><b>7</b> styles</span><span><b>9</b> languages</span><span>MIT or Apache 2.0</span>
     </div>
   </div>
 </section>
@@ -164,7 +164,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
 
     <div class="tool">
       <div>
-        <code class="flag">python build_rs.py watch hello</code>
+        <code class="flag">cargo jflib watch</code>
         <h3>Save a file and keep your place.</h3>
         <p>Hot reload rebuilds the app and brings it back where it was, with your change in it. Your session's input replays through the new code, so the widgets stay compiled Rust and your app needs no special state structure.</p>
       </div>
@@ -181,6 +181,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <code class="flag">--inspect · Ctrl+Shift+I · F12</code>
         <h3>Point at any widget in a running app.</h3>
         <p>The overlay names the widget under the pointer with its id, label, size and state. A tool window adds the widget tree, properties, a script selector and frame statistics. Turned off, it costs nothing.</p>
+        <p class="more"><a href="inspector.html">The inspector in detail</a></p>
       </div>
       <div class="media">
         <picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="The live inspector naming each widget under the pointer with its id, label, size and state."></picture>
@@ -191,7 +192,8 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <div>
         <code class="flag">--script tests/smoke.uis</code>
         <h3>Tests that read like instructions.</h3>
-        <p>A <code>.uis</code> script clicks, types, switches themes, checks the result and saves a screenshot, against the real app on Windows and Linux. The repository holds 595 of them.</p>
+        <p>A <code>.uis</code> script clicks, types, switches themes, checks the result and saves a screenshot, against the real app on Windows and Linux.</p>
+        <p class="more"><a href="testing.html">More about the test language</a></p>
       </div>
       <div class="media script-scene">
         <pre class="panel"><span class="d"># a smoke test</span>
@@ -278,7 +280,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <div class="step">
         <svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg>
         <div><h3>See</h3><p style="margin-top:6px">PNG screenshots without a visible window, and dumps of the widget tree.</p></div>
-<pre class="panel">--shot build/app.png
+<pre class="panel">--shot target/app.png
 --size 1000x800</pre>
       </div>
       <div class="step">
@@ -292,7 +294,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
         <svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg>
         <div><h3>Check</h3><p style="margin-top:6px">Every new app starts with a test that already passes.</p></div>
 <pre class="panel">expect text:"Clicks: 2" exists
-python build_rs.py test hello</pre>
+cargo jflib test</pre>
       </div>
     </div>
     <p class="loop-note">No language model runs inside your app. The agent endpoint stays closed until the app is started with <code>--agent</code>, <code>--agent-json</code> or <code>--agent-mcp</code>.</p>
@@ -349,15 +351,16 @@ python build_rs.py test hello</pre>
 <section class="sec" id="start" aria-labelledby="start-title">
   <div class="wrap">
     <div class="head">
-      <code class="flag" style="margin-bottom:0;color:var(--muted)">python build_rs.py new hello</code>
+      <code class="flag" style="margin-bottom:0;color:var(--muted)">cargo jflib new hello</code>
       <h2 id="start-title">A complete app fits on one screen.</h2>
     </div>
     <div class="start-grid">
-<pre class="panel"><code id="rust-sample">#![no_std]
-#![no_main]
+<pre class="panel"><code id="rust-sample">// src/lib.rs
+#![no_std]
 #![deny(unsafe_code)]
 
 extern crate alloc;
+use jflib::{style, ui};
 use ui::*;
 
 const DESC: AppDesc = AppDesc {
@@ -393,10 +396,12 @@ impl App for Counter {
 ui::main!(ui::launch(&amp;DESC, Counter::default(), &amp;style::STYLE));</code></pre>
       <div class="start-side">
         <div class="result-frame"><img src="img/example-counter.png" width="480" height="300" loading="lazy" alt="A window with a click counter, an accent button and a reset button."></div>
-<pre class="panel cmds"><span class="k">python</span> build_rs.py new hello --title <span class="s">"Hello"</span>
-<span class="k">python</span> build_rs.py test hello
-<span class="k">python</span> build_rs.py run hello --target win</pre>
-        <p class="req">You need Python 3, Rust through rustup, and LLVM's linker. The new app comes with its sources, permissions, package data, a smoke test and a README.</p>
+<pre class="panel cmds"><span class="k">cargo</span> install cargo-jflib
+<span class="k">cargo</span> jflib new hello
+<span class="k">cd</span> hello
+<span class="k">cargo</span> run
+<span class="k">cargo</span> jflib test</pre>
+        <p class="req">You need Rust through rustup. The new app is a normal Cargo project with one dependency, <code>jflib</code>, and comes with its permissions, package data and a smoke test.</p>
         <div class="cta">
           <a class="btn primary" href="docs/GUIDE.html">Developer guide</a>
           <a class="btn" href="docs/API.html">API reference</a>

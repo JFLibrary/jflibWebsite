@@ -1,6 +1,6 @@
 title: JFLib Roadmap
 nav: roadmap
-description: What is coming next for the JFLib GUI library: GPU support, native macOS, a 3D engine and Cargo support.
+description: What is coming next for the JFLib GUI library: GPU support, native macOS and iOS, and a 3D engine.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -63,21 +63,6 @@ description: What is coming next for the JFLib GUI library: GPU support, native 
       <div class="bignum small"><b>90 ms</b><span>for the same scene with one draw call per object.</span></div>
       <p class="rm-note soft">JFLib's GPU test scene on a GeForce RTX 2070 SUPER and a Ryzen 5 3600.</p>
     </div>
-  </div>
-</section>
-
-<section class="sec band b-green" id="cargo" aria-labelledby="cargo-title">
-  <div class="wrap rm">
-    <div>
-      <span class="state">Planned</span>
-      <h2 id="cargo-title">Crates and Cargo</h2>
-      <p class="prose">Today a Python script calls <code>rustc</code> directly, which makes outside crates hard to use. The goal is to use JFLib from a normal Cargo project and to publish it as crates. The details are still open.</p>
-    </div>
-<pre class="panel"><span class="d"># today</span>
-python build_rs.py run hello --target win
-
-<span class="d"># the goal</span>
-cargo run</pre>
   </div>
 </section>
 

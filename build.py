@@ -7,6 +7,11 @@
 
 --docs is the output of `python build_rs.py site` in JFLib, --gallery its build/web/gallery with
 the scalar and SIMD variants. --preview keeps search engines away and shows the preview note.
+
+Languages: English pages are src/pages/*.html and go to the root. A translation is
+src/i18n/LANG/PAGE.html in the same format and goes to LANG/PAGE.html; a page without one is
+built there in English with a note. src/i18n/strings.json translates the layout ({{t:English}})
+and the texts of site.js.
 """
 import argparse
 import html
@@ -24,6 +29,13 @@ VOID = frozenset("area base br col embed hr img input link meta source track wbr
 PREVIEW_NOTE = "Preview. Kritzel, jfWord and the Build Manager are still shown in German."
 ROBOTS_OPEN = "User-agent: *\nAllow: /\n"
 ROBOTS_CLOSED = "User-agent: *\nDisallow: /\n"
+SITE_URL = "https://jflib.org/"
+LANGS = (("en", "English"), ("de", "Deutsch"), ("fr", "Français"), ("it", "Italiano"), ("es", "Español"))
+JS_KEYS = ("Feature Gallery", "Running in your browser as WebAssembly", "Close", "Feature Gallery, running live",
+           "The gallery could not be loaded here. This is what it looks like:", "A picture of the Feature Gallery.",
+           "Picture viewer", "Previous picture", "Next picture", "Zoom out", "Zoom in", "Fit to the screen", "Fit",
+           "Enlarge: ", "Line {n} of {m}", "Pause", "Play")
+NAV = ("features", "apps", "compare", "roadmap")
 
 
 class SiteError(Exception):
@@ -79,6 +91,48 @@ def contact_line(config, preview):
     return "<em>still to be added</em>"
 
 
+def translator(strings, lang):
+    table = strings.get(lang, {})
+
+    def t(key):
+        if lang != "en" and key not in table:
+            raise SiteError(f"src/i18n/strings.json: {lang} has no text for {key!r}")
+        return table.get(key, key)
+    return t
+
+
+def localize_links(text):
+    """A page in LANG/ keeps its links to other pages, so they stay in its language; everything
+    else (pictures, fonts, styles, docs, gallery) lies one folder up."""
+    def one(url):
+        if re.match(r"[a-z][a-z0-9+.-]*:|#|/|\.\./", url):
+            return url
+        path = url.split("#")[0].split("?")[0]
+        if path.endswith(".html") and "/" not in path:
+            return url
+        return "../" + url
+
+    def attr(m):
+        name, value = m.group(1), m.group(2)
+        if name == "srcset":
+            value = ", ".join(" ".join([one(part.split()[0])] + part.split()[1:]) for part in value.split(","))
+        else:
+            value = one(value)
+        return f'{name}="{value}"'
+    return re.sub(r'\b(href|src|srcset)="([^"]*)"', attr, text)
+
+
+def lang_menu(page, lang, base, done):
+    rows = []
+    for code, name in LANGS:
+        href = base + ("" if code == "en" else code + "/") + page
+        here = ' aria-current="true"' if code == lang else ""
+        rows.append(f'<li><a href="{href}" hreflang="{code}" lang="{code}" data-lang="{code}"{here}>{name}</a></li>')
+    label = dict(LANGS)[lang]
+    return ('<details class="lang"><summary aria-label="{{t:Language}}: %s"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg>'
+            '<span>%s</span></summary><ul>%s</ul></details>' % (label, lang.upper(), "".join(rows)))
+
+
 def gallery_copy(src, out):
     """The browser host without its service bar, and without the threaded variant, which needs
     server headers that GitHub Pages cannot send."""
@@ -104,22 +158,61 @@ def build(out, docs, gallery, preview):
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
     apps = json.loads((ROOT / "apps.json").read_text(encoding="utf-8"))
     config = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
-    note = '<span class="draft">%s</span>\n    ' % PREVIEW_NOTE if preview else ""
+    strings = json.loads((SRC / "i18n" / "strings.json").read_text(encoding="utf-8"))
     robots = '<meta name="robots" content="noindex">\n' if preview else ""
-    for path in sorted((SRC / "pages").glob("*.html")):
-        fields, body = page_parts(path)
-        body = (body.replace("{{apps-rail}}", apps_rail(apps))
-                    .replace("{{apps-list}}", apps_list(apps))
-                    .replace("{{contact}}", contact_line(config, preview)))
-        text = layout
-        for nav in ("features", "apps", "roadmap"):
-            text = text.replace("{{current-%s}}" % nav, ' aria-current="page"' if fields.get("nav") == nav else "")
-        text = (text.replace("{{title}}", html.escape(fields["title"]))
-                    .replace("{{description}}", html.escape(fields["description"], quote=True))
-                    .replace("{{robots}}", robots)
-                    .replace("{{preview-note}}", note)
-                    .replace("{{main}}", body.rstrip("\n")))
-        (out / path.name).write_text(text, encoding="utf-8", newline="\n")
+    pages = sorted((SRC / "pages").glob("*.html"))
+    translated = {code: {p.name for p in (SRC / "i18n" / code).glob("*.html")} for code, _ in LANGS[1:]}
+    for code in translated:
+        for name in translated[code]:
+            if not (SRC / "pages" / name).is_file():
+                raise SiteError(f"src/i18n/{code}/{name}: there is no English page of that name")
+    for lang, _ in LANGS:
+        t = translator(strings, lang)
+        base = "" if lang == "en" else "../"
+        folder = out if lang == "en" else out / lang
+        folder.mkdir(exist_ok=True)
+        note = '<span class="draft">%s</span>\n    ' % html.escape(t("@preview")) if preview else ""
+        licence = t("@licence").format(
+            mit='<a href="https://github.com/JFLibrary/JFLib/blob/main/LICENSE-MIT">%s</a>' % html.escape(t("MIT License")),
+            apache='<a href="https://github.com/JFLibrary/JFLib/blob/main/LICENSE-APACHE">%s</a>' % html.escape(t("Apache License 2.0")))
+        for path in pages:
+            own = lang == "en" or path.name in translated[lang]
+            source = path if lang == "en" or not own else SRC / "i18n" / lang / path.name
+            fields, body = page_parts(source)
+            body = (body.replace("{{apps-rail}}", apps_rail(apps))
+                        .replace("{{apps-list}}", apps_list(apps))
+                        .replace("{{contact}}", contact_line(config, preview)))
+            done = ["en"] + [c for c, _ in LANGS[1:] if path.name in translated[c]]
+            alternates = ""
+            if len(done) > 1:
+                alternates = "".join('<link rel="alternate" hreflang="%s" href="%s%s%s">\n' % (
+                    c, SITE_URL, "" if c == "en" else c + "/", path.name) for c in done)
+                alternates += '<link rel="alternate" hreflang="x-default" href="%s%s">\n' % (SITE_URL, path.name)
+            js = {k: t(k) for k in JS_KEYS} if lang != "en" else {}
+            if lang == "en":
+                hints = {c: [strings[c]["@hint"], strings[c]["@hint-go"], c + "/" + path.name, strings[c]["Close"]] for c in done[1:]}
+                if hints:
+                    js["hints"] = hints
+            text = layout
+            for nav in NAV:
+                text = text.replace("{{current-%s}}" % nav, ' aria-current="page"' if fields.get("nav") == nav else "")
+            untranslated = "" if own else '<p class="untranslated"><span class="wrap">%s</span></p>\n' % html.escape(t("@untranslated"))
+            text = (text.replace("{{lang-menu}}", lang_menu(path.name, lang, base, done))
+                        .replace("{{title}}", html.escape(fields["title"]))
+                        .replace("{{description}}", html.escape(fields["description"], quote=True))
+                        .replace("{{robots}}", robots)
+                        .replace("{{alternates}}", alternates)
+                        .replace("{{lang}}", lang if own else "en")
+                        .replace("{{base}}", base)
+                        .replace("{{licence}}", licence)
+                        .replace("{{preview-note}}", note)
+                        .replace("{{untranslated}}", untranslated)
+                        .replace("{{js-strings}}", '<script type="application/json" id="strings">%s</script>\n' % json.dumps(js, ensure_ascii=False).replace("</", "<\\/"))
+                        .replace("{{main}}", body.rstrip("\n")))
+            text = re.sub(r"\{\{t:([^}]*)\}\}", lambda m: html.escape(t(m.group(1)), quote=True), text)
+            if lang != "en":
+                text = localize_links(text)
+            (folder / path.name).write_text(text, encoding="utf-8", newline="\n")
     for name in ("site.css", "site.js", "favicon.svg"):
         shutil.copyfile(SRC / name, out / name)
     shutil.copytree(SRC / "img", out / "img")
@@ -171,19 +264,20 @@ class Scan(HTMLParser):
 
 def check(out, docs, gallery):
     problems, scans = [], {}
-    pages = sorted(out.glob("*.html"))
+    pages = sorted(out.glob("*.html")) + sorted(p for code, _ in LANGS[1:] for p in (out / code).glob("*.html"))
     for p in pages:
         s = Scan()
         text = p.read_text(encoding="utf-8")
         s.feed(text)
-        scans[p.name] = s
-        problems += [f"{p.name}: {m}" for m in s.problems]
+        rel = p.relative_to(out).as_posix()
+        scans[rel] = s
+        problems += [f"{rel}: {m}" for m in s.problems]
         if s.stack:
-            problems.append(f"{p.name}: never closed: {' '.join(s.stack)}")
+            problems.append(f"{rel}: never closed: {' '.join(s.stack)}")
         if "{{" in text:
-            problems.append(f"{p.name}: a placeholder is left: " + re.search(r"\{\{[^}]*\}\}", text).group(0))
+            problems.append(f"{rel}: a placeholder is left: " + re.search(r"\{\{[^}]*\}\}", text).group(0))
         if re.search(r'(?:src|href)="https?://[^"]+\.(?:js|css|woff2?)"', text) or "fonts.googleapis" in text:
-            problems.append(f"{p.name}: loads a script, style or font from another host")
+            problems.append(f"{rel}: loads a script, style or font from another host")
     used = set()
     links = 0
     for name, s in scans.items():
@@ -192,7 +286,11 @@ def check(out, docs, gallery):
                 continue
             links += 1
             path, _, frag = target.partition("#")
-            path = path.split("?")[0] or name
+            path = path.split("?")[0]
+            path = os.path.normpath(os.path.join(os.path.dirname(name), path)).replace("\\", "/") if path else name
+            if path.startswith("..") :
+                problems.append(f"{name}: link out of the site: {target}")
+                continue
             if path.startswith("docs/") and not docs or path.startswith("gallery/") and not gallery:
                 continue
             if not (out / path).is_file():

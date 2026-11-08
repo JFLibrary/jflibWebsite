@@ -46,9 +46,11 @@ class Reel:
     """One GIF: a script that takes a frame after each step, with the pointer drawn in afterwards,
     because the app does not draw one. still: the frame for people who ask for reduced motion."""
 
-    def __init__(self, name, exe, size, args=(), theme="light"):
+    def __init__(self, name, exe, size, args=(), theme="light", side=None):
         self.name, self.exe, self.size, self.args, self.theme = name, exe, size, list(args), theme
         self.lines, self.frames, self.at, self.still = [], [], None, 0
+        self.side = side                    # a second window, drawn right of the main one
+        self.width = int(size.split("x")[0])
 
     def cmd(self, line):
         self.lines.append(line)
@@ -56,6 +58,8 @@ class Reel:
 
     def snap(self, ms):
         self.lines.append("shot frames/%03d.png" % len(self.frames))
+        if self.side:
+            self.lines.append("shot frames/%03ds.png window %d" % (len(self.frames), self.side))
         self.frames.append((ms, self.at))
         return self
 
@@ -63,7 +67,8 @@ class Reel:
         x0, y0 = self.at or (x, y)
         for i in range(1, steps + 1):
             self.at = (round(x0 + (x - x0) * i / steps), round(y0 + (y - y0) * i / steps))
-            self.lines.append("move %d,%d" % self.at)
+            if self.at[0] < self.width:     # beyond it the pointer is over the second window
+                self.lines.append("move %d,%d" % self.at)
             self.snap(ms)
         return self
 
@@ -78,9 +83,40 @@ class Reel:
         return self
 
 
+class Player:
+    """The test page's script player: a picture after each command that does something, with the
+    pointer where that command acted. Expectations take no picture; the page shows them passed."""
+
+    def __init__(self, name, exe, size, steps, crop):
+        self.name, self.exe, self.size, self.steps, self.crop = name, exe, size, steps, crop
+
+
+# (line, where the pointer is after it); None: an expectation
+FORM = Player("uis-form", "win/winui/gallery", "1000x700", [
+    ("click #700", (144, 564)),
+    ('type "Ada Lovelace"', (144, 564)),
+    ('expect #700 text "Ada Lovelace"', None),
+    ('click "Option A"', (66, 328)),
+    ('expect checkbox:"Option A" unchecked', None),
+    ('click "Blue"', (464, 328)),
+    ('expect radio:"Blue" checked', None),
+    ("drag 105,446 186,446 12", (186, 446)),
+    ("expect #140 value 84", None),
+    ("key tab up up", (186, 446)),
+    ("expect #141 focused", None),
+    ("expect #141 value 14", None),
+    ("theme dark", (186, 446)),
+], crop=(0, 0, 1000, 620))
+
+
 def gallery(style):
     return f"win/{style}/gallery"
 
+
+INSPECTOR = 2147422208
+SIDE_GAP = 16
+INSPECT_PICKED = ["inspect on", "wait 100", "inspect select #101", "move 450,330", "wait 100"]
+INSPECT_EDITED = ["inspect on", "inspect tab look", "inspect set accent #E8590C", "inspect set radius 8", "move 450,330", "wait 100"]
 
 SHOTS = [
     Shot("gallery-winui", gallery("winui"), "1000x700"),
@@ -112,6 +148,15 @@ SHOTS = [
          lines=["wait 300", "drag 630,671 630,380 8", 'dblclick listitem:"R1"', "wait 300", 'type "\\n"', "wait 100", 'type "enable\\n"', "wait 100",
                 'type "show ip interface brief\\n"', "wait 200"], crop=(266, 410, 670, 465)),
     Shot("example-counter", "win/hello", "480x300", lines=['click "Click me"', 'click "Click me"', "wait 50"]),
+    # the inspector's page: the tool window has the id 2147422208
+    Shot("inspector-widgets", gallery("winui"), "1000x700", lines=INSPECT_PICKED, window=INSPECTOR),
+    Shot("inspector-frame", gallery("winui"), "1000x700", lines=INSPECT_PICKED + ["inspect tab frame", "wait 50"], window=INSPECTOR),
+    Shot("inspector-colors", gallery("winui"), "1000x700", lines=["inspect on", "inspect tab colors", "wait 100"], window=INSPECTOR),
+    Shot("inspector-appearance", gallery("winui"), "1000x700", lines=INSPECT_EDITED, window=INSPECTOR),
+    Shot("inspector-appearance-app", gallery("winui"), "1000x700", lines=INSPECT_EDITED),
+    Shot("inspector-outlines", gallery("winui"), "1000x700", lines=["inspect on", "inspect option outlines on", "wait 100"]),
+    Shot("inspector-order", gallery("winui"), "1000x700", lines=["inspect on", "inspect option order on", "wait 100"]),
+    Shot("inspector-repaints", gallery("winui"), "1000x700", lines=["inspect on", "inspect option dirty on", 'click "Toggle"', "wait 30"]),
 ]
 
 
@@ -127,6 +172,19 @@ def reels():
         if (x, y) == (142, 201):
             insp.keep()
     r["inspector"] = insp
+
+    # the pick: a button in the tool window, then a click into the app selects instead of acting
+    pick = Reel("inspector-pick", gallery("winui"), "1000x700", side=INSPECTOR)
+    tool = 1000 + SIDE_GAP
+    pick.at = (720, 600)
+    pick.cmd("inspect on").cmd("move 720,600").cmd("wait 100").snap(1000)
+    pick.go(tool + 32, 54, steps=10).snap(300)
+    pick.cmd("window %d" % INSPECTOR).cmd('click button:"Pick"').cmd("window main").cmd("wait 50").snap(700)
+    pick.go(393, 329, steps=12).cmd("wait 50").snap(1000)
+    pick.cmd("click 393,329").cmd("wait 100").snap(2200).keep()
+    pick.go(tool + 329, 92, steps=10).cmd("inspect tab look").cmd("wait 50").snap(900)
+    pick.go(tool + 240, 295, steps=6).cmd("inspect set accent #E8590C").cmd("wait 50").snap(2600)
+    r["pick"] = pick
 
     # the page shows these same lines as the script
     test = Reel("uis-test", "win/template", "480x300")
@@ -213,6 +271,12 @@ def take_reel(r, build, work):
     listing = []
     for i, (ms, at) in enumerate(r.frames):
         src = frames / ("%03d.png" % i)
+        if r.side:
+            both = frames / ("c%03d.png" % i)
+            h = int(r.size.split("x")[1])
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-i", str(frames / ("%03ds.png" % i)), "-filter_complex",
+                            "[1]pad=iw+%d:%d:%d:0:color=0xD5D8E0[s];[0][s]hstack" % (SIDE_GAP, h, SIDE_GAP), str(both)], check=True)
+            src = both
         if at:
             drawn = frames / ("p%03d.png" % i)
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-i", str(POINTER), "-filter_complex",
@@ -229,6 +293,30 @@ def take_reel(r, build, work):
                     "-fps_mode", "vfr", "-loop", "0", str(out)], check=True)
     total = sum(ms for ms, _ in r.frames) / 1000
     print(f"{r.name}: {len(r.frames)} frames, {total:.1f} s, {out.stat().st_size // 1024} KB")
+
+
+def take_player(pl, build, work):
+    frames = work / "frames"
+    if frames.exists():
+        shutil.rmtree(frames)
+    frames.mkdir()
+    lines, n = [], 0
+    for line, at in pl.steps:
+        lines.append(line)
+        if at:
+            lines.append("shot frames/%03d.png %d %d %d %d" % ((n,) + pl.crop))
+            n += 1
+    (work / "player.uis").write_text("\n".join(lines + ["quit", ""]), encoding="utf-8")
+    run_app(build / (pl.exe + ".exe"), common_args(pl.size, "light") + ["--script", "player.uis"], work, {})
+    n = 0
+    for line, at in pl.steps:
+        if not at:
+            continue
+        out = IMG / ("%s-%d.png" % (pl.name, n + 1))
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(frames / ("%03d.png" % n)), "-i", str(POINTER), "-filter_complex",
+                        "overlay=%d:%d" % at, str(out)], check=True)
+        n += 1
+    print(f"{pl.name}: {n} pictures")
 
 
 def main(argv=None):
@@ -257,6 +345,12 @@ def main(argv=None):
             except (OSError, subprocess.SubprocessError) as e:
                 failed.append("gpu-scene")
                 print(f"gpu-scene: FAILED {e}")
+        if not want or FORM.name in want:
+            try:
+                take_player(FORM, build, work)
+            except (RuntimeError, OSError, subprocess.SubprocessError) as e:
+                failed.append(FORM.name)
+                print(f"{FORM.name}: FAILED {e}")
         for key, r in reels().items():
             if want and key not in want and r.name not in want:
                 continue

@@ -1,0 +1,207 @@
+title: JFLib Test Scripts (.uis)
+description: The .uis test language of the JFLib GUI library: readable scripts that click, type, drag, touch and check a real app, headless and deterministic, on Windows and Linux.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <code class="flag">cargo jflib test</code>
+    <h1>Tests that read <em>like instructions.</em></h1>
+    <p class="lede">A <code>.uis</code> script uses your app the way a person does. It clicks, types, drags, swipes and presses keys, then checks what happened. It runs the real app without a window, on a virtual clock, so every run ends with the same result and the same pixels, on your machine and in CI.</p>
+    <div class="cta">
+      <a class="btn primary" href="#player">Watch a script run</a>
+      <a class="btn" href="docs/GUIDE.html">The language in the guide</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="player" aria-labelledby="player-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="player-title">One line, one step.</h2>
+      <p class="prose">This script fills in part of the Feature Gallery. Each picture is what the app looked like right after that line. Lines that start with <code>expect</code> are the checks. Click a line to jump there.</p>
+    </div>
+    <div class="player" data-player>
+      <div class="player-view" data-nozoom>
+        <img src="img/uis-form-1.png" width="1000" height="620" loading="lazy" alt="The text field Enter a name has the focus.">
+        <img src="img/uis-form-2.png" width="1000" height="620" loading="lazy" alt="The text field now holds Ada Lovelace.">
+        <img src="img/uis-form-3.png" width="1000" height="620" loading="lazy" alt="The check box Option A is cleared.">
+        <img src="img/uis-form-4.png" width="1000" height="620" loading="lazy" alt="The radio button Blue is chosen.">
+        <img src="img/uis-form-5.png" width="1000" height="620" loading="lazy" alt="The slider is dragged to 84 percent.">
+        <img src="img/uis-form-6.png" width="1000" height="620" loading="lazy" alt="Tab moved the focus to the vertical slider, and two presses of the up key raised it.">
+        <img class="on" src="img/uis-form-7.png" width="1000" height="620" loading="lazy" alt="The same form in dark mode.">
+      </div>
+      <div class="player-side">
+<ol class="panel player-lines">
+<li data-f="0"><span class="k">click</span> #700</li>
+<li data-f="1"><span class="k">type</span> <span class="s">"Ada Lovelace"</span></li>
+<li data-f="1" class="exp"><span class="k">expect</span> #700 text <span class="s">"Ada Lovelace"</span></li>
+<li data-f="2"><span class="k">click</span> <span class="s">"Option A"</span></li>
+<li data-f="2" class="exp"><span class="k">expect</span> checkbox:<span class="s">"Option A"</span> unchecked</li>
+<li data-f="3"><span class="k">click</span> <span class="s">"Blue"</span></li>
+<li data-f="3" class="exp"><span class="k">expect</span> radio:<span class="s">"Blue"</span> checked</li>
+<li data-f="4"><span class="k">drag</span> 105,446 186,446 12</li>
+<li data-f="4" class="exp"><span class="k">expect</span> #140 value 84</li>
+<li data-f="5"><span class="k">key</span> tab up up</li>
+<li data-f="5" class="exp"><span class="k">expect</span> #141 focused</li>
+<li data-f="5" class="exp"><span class="k">expect</span> #141 value 14</li>
+<li data-f="6"><span class="k">theme</span> dark</li>
+</ol>
+        <div class="player-ctl" hidden>
+          <button class="btn" type="button" data-p="prev" aria-label="Previous line">&#8249;</button>
+          <button class="btn" type="button" data-p="play">Pause</button>
+          <button class="btn" type="button" data-p="next" aria-label="Next line">&#8250;</button>
+          <span class="player-state" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="head"><h2 id="why-title">Why it works so well.</h2></div>
+    <div class="caps caps-ink">
+      <div class="cap"><h3>The real app</h3><p>No mocks and no test build. The script feeds the compiled app the same events the platform would.</p></div>
+      <div class="cap"><h3>Headless</h3><p>The app draws into memory. No window opens, nothing steals your keyboard, and a server without a desktop runs it too.</p></div>
+      <div class="cap"><h3>Deterministic</h3><p>Time is a virtual clock in 16 ms frames. Timers and animations follow it, so a run never waits and never flakes.</p></div>
+      <div class="cap"><h3>Readable selectors</h3><p>Name a widget by its label, by kind and label, by id or by a point. Clear rules decide when a label appears twice.</p></div>
+      <div class="cap"><h3>Clear failures</h3><p><code>FAIL line 9: …</code> names the line and what was found instead. The script goes on, and the exit code tells CI.</p></div>
+      <div class="cap"><h3>One language everywhere</h3><p>The same scripts run on Windows and Linux, and they drive the <a href="inspector.html">inspector</a> too.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="do-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="do-title">Everything a person can do.</h2>
+      <p class="prose">And a few things a person cannot: a script can drop files from another program, suspend the app, feed it sensor readings or lose the GPU, all without a real device.</p>
+    </div>
+    <div class="examples">
+      <figure class="ex"><figcaption><b>Mouse and keyboard</b>Buttons, modifiers, wheel zoom and key chords, one pass each, as the platform delivers them.</figcaption>
+<pre class="panel"><span class="k">rclick</span> listitem:<span class="s">"report.pdf"</span>
+<span class="k">click</span> <span class="s">"Rename"</span>
+<span class="k">type</span> <span class="s">"final.pdf\n"</span>
+<span class="k">drag</span> #20 #31 hold 300 shift
+<span class="k">wheel</span> 400,300 120 ctrl
+<span class="k">key</span> ctrl+s</pre></figure>
+      <figure class="ex"><figcaption><b>Touch and pen</b>Fingers with real speeds, two-finger gestures and pen pressure.</figcaption>
+<pre class="panel"><span class="k">tap</span> <span class="s">"Photos"</span>
+<span class="k">longpress</span> #44 800
+<span class="k">swipe</span> 200,600 200,150 250
+<span class="k">pinch</span> 300,300 80 240
+<span class="k">pan2</span> 300,300 0 -120
+<span class="k">drag</span> 100,100 300,180 pen 20 90</pre></figure>
+      <figure class="ex"><figcaption><b>Windows and dialogs</b>Tool windows, dialogs and popups, each with its own state.</figcaption>
+<pre class="panel"><span class="k">click</span> <span class="s">"Save as…"</span>
+<span class="k">expect</span> dialog:<span class="s">"Save as"</span> open
+<span class="k">window</span> any
+<span class="k">click</span> button:<span class="s">"Cancel"</span>
+<span class="k">expect window</span> 20 closed
+<span class="k">shot</span> popups.png desktop</pre></figure>
+      <figure class="ex"><figcaption><b>Drag and drop</b>Files, text, HTML, URLs and images from other programs, and what your app hands out.</figcaption>
+<pre class="panel"><span class="k">drop</span> 300,200 photo.png notes.txt
+<span class="k">dragover</span> 300,200 text
+<span class="k">dragleave</span>
+<span class="k">drag</span> #12 1200,300
+<span class="k">dragout expect</span> files 1
+<span class="k">dragout end</span> copy</pre></figure>
+      <figure class="ex"><figcaption><b>Clipboard</b>A clipboard of its own for every run. Your real one is never touched.</figcaption>
+<pre class="panel"><span class="k">clip text</span> <span class="s">"Hello"</span>
+<span class="k">key</span> ctrl+v
+<span class="k">expect</span> #700 text <span class="s">"Hello"</span>
+<span class="k">key</span> ctrl+a ctrl+c
+<span class="k">clip expect</span> text</pre></figure>
+      <figure class="ex"><figcaption><b>The system around the app</b>Lifecycle, settings, sensors and location, as the host would deliver them.</figcaption>
+<pre class="panel"><span class="k">system</span> suspend
+<span class="k">system</span> resume
+<span class="k">system settings</span> theme
+<span class="k">sensor</span> accel 0 9.81 0
+<span class="k">location</span> 52.52 13.40 12
+<span class="k">location expect</span> fix</pre></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="check-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="check-title">Check what matters, down to the pixel.</h2>
+        <p class="prose" style="margin-top:16px">Expectations read states, values, texts and rectangles from the same records that screen readers and the inspector see. When pixels matter, a script compares a point, an area or the whole window with an earlier picture, byte for byte.</p>
+        <ul class="ticks">
+          <li>States: exists, focused, checked, disabled, selected, open, pressed and more.</li>
+          <li>Values, ranges, texts and rectangles in device-independent pixels.</li>
+          <li>Theme tokens, the style in use, sounds asked for and warnings printed.</li>
+          <li><code>--verify-dirty</code> compares every partial redraw with a full one, so a missed pixel cannot hide.</li>
+        </ul>
+      </div>
+<pre class="panel"><span class="k">expect</span> button:<span class="s">"Send"</span> disabled
+<span class="k">type</span> <span class="s">"Hi"</span>
+<span class="k">expect</span> button:<span class="s">"Send"</span> enabled
+<span class="k">expect</span> #140 value 40..60
+<span class="k">expect</span> text:<span class="s">"Saved"</span> exists
+<span class="k">expect</span> #9 rect * * * 36
+<span class="k">expect</span> pixel 12 40 #0067C0
+<span class="k">expect token</span> accent_text #FFFFFF
+
+<span class="k">shot</span> before.png
+<span class="k">theme</span> dark
+<span class="k">theme</span> light
+<span class="k">expect same</span> before.png       <span class="d"># byte for byte</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="perf-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="perf-title">Frame budgets as tests.</h2>
+        <p class="prose" style="margin-top:16px"><code>bench</code> times real frames while things move: an animation, a drag, a stream of wheel turns. It prints the mean, the median and the worst frame, and with a limit it fails when the median is over budget. Three tries ride out a busy build machine.</p>
+        <p class="prose" style="margin-top:12px">JFNetworker's performance test pans, zooms and drags a network of 500 devices and 800 cables at 1920 × 1080 this way.</p>
+      </div>
+<pre class="panel"><span class="d"># 300 frames of a drag, at most 16.6 ms each</span>
+<span class="k">bench</span> 300 drag #50 900,500 16600
+
+<span class="d"># smooth scrolling</span>
+<span class="k">wheel</span> 500,400 -360
+<span class="k">bench</span> 60 anim 16600</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue" aria-labelledby="gif-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="gif-title">Every animation on this site is a script.</h2>
+        <p class="prose" style="margin-top:16px">The GIFs and screenshots here were not recorded by hand. A script brings each app into the right state and takes a picture after each step, headless. Run it again after a change, and the pictures update themselves.</p>
+        <div class="cta" style="margin-top:22px"><a class="btn light" href="features.html">See them on the Features page</a></div>
+      </div>
+      <figure><picture><source srcset="img/feature-docking-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-docking.gif" width="960" height="640" loading="lazy" alt="A panel dragged out of its tab group, over the drop markers, and docked again."></picture></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="run-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="run-title">Every new app starts with a passing test.</h2>
+        <p class="prose" style="margin-top:16px"><code>cargo jflib new</code> writes <code>tests/smoke.uis</code> next to your code. <code>cargo jflib test</code> builds the app and runs every script in <code>tests/</code>. A first line <code>#!args</code> passes program arguments, and <code>dump</code> prints the widget tree with ids and positions when you write a new script.</p>
+        <p class="prose" style="margin-top:12px">The <a href="inspector.html">inspector</a> shows the selector of any widget you point at, ready to paste.</p>
+        <div class="cta" style="margin-top:22px">
+          <a class="btn primary" href="docs/GUIDE.html">Developer guide</a>
+          <a class="btn" href="inspector.html">Live inspector</a>
+        </div>
+      </div>
+<pre class="panel"><span class="d"># tests/smoke.uis</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 2"</span> exists
+<span class="k">click</span> <span class="s">"Reset"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 0"</span> exists
+<span class="k">shot</span> target/smoke.png</pre>
+    </div>
+  </div>
+</section>

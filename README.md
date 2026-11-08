@@ -10,6 +10,7 @@ python build.py --check     # the pages alone -> _site/
 | --- | --- |
 | `src/pages/` | The pages: fields, a line `---`, then the content of `<main>` |
 | `src/layout.html` | Head, top bar and footer of every page |
+| `src/i18n/` | `strings.json` translates the layout and the texts of `site.js`; `LANG/PAGE.html` is a page translated into German, French, Italian or Spanish, built to `LANG/PAGE.html` (a page without one is built there in English with a note) |
 | `src/site.css`, `src/site.js` | Look and behaviour, no libraries |
 | `src/img/`, `src/fonts/` | Screenshots, and the fonts with their licences |
 | `apps.json` | Name, text, picture and product page link of every app, used by the start page and the Apps page |

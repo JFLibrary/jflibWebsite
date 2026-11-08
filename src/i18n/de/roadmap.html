@@ -1,0 +1,79 @@
+title: JFLib Roadmap
+nav: roadmap
+description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterstützung, natives macOS und iOS und eine 3D-Engine.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Was <em>als Nächstes kommt.</em></h1>
+    <p class="lede">JFLib wird aktiv weiterentwickelt. Das sind die großen Schritte, die vor uns liegen. Termine gibt es keine, und die Reihenfolge kann sich noch ändern.</p>
+    <div class="rm-key" aria-label="Legende">
+      <span><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg>Fertig</span>
+      <span><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg>Als Nächstes</span>
+      <span><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg>Geplant</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" id="gpu" aria-labelledby="gpu-title">
+  <div class="wrap">
+    <span class="state">In Arbeit</span>
+    <h2 id="gpu-title">GPU-Unterstützung</h2>
+    <p class="prose" style="margin-top:16px">Eine GPU-Schicht in der Bibliothek, für Oberflächen, 2D-CAD und 3D-Spiele, mit einer API auf jeder Plattform. Die Widgets werden weiter auf der CPU gezeichnet und bleiben so pixelgleich. Die GPU übernimmt Ausgabe, Ebenen, Bilder und Leinwände.</p>
+    <ol class="road">
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU-Schicht</b><span>Compute-Shader, Rendering mit Tiefentest und Swapchains, mit Vulkan unter Windows, Linux und Android.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Shader-Compiler</b><span>WGSL nach SPIR-V, in der Bibliothek selbst.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Oberfläche auf der GPU</b><span>Ausgabe mit VSync, Ebenen und Leinwände, die sich verschieben und zoomen lassen, unter Windows, Linux und Android.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>Dieselbe Schicht auf WebGPU, mit Shadern als WGSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>3D-Engine und CAD</b><span>Ein Kern für eine 3D-Engine und ein 2D-Renderer für CAD.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Für eine native Portierung auf Apples Systeme.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec band b-blue" id="macos" aria-labelledby="macos-title">
+  <div class="wrap rm">
+    <div>
+      <span class="state">Geplant</span>
+      <h2 id="macos-title">Natives macOS</h2>
+      <p class="prose">Heute erreichen JFLib-Apps macOS über den Browser. Das Ziel ist eine echte native App mit Cocoa-Fenstern und Desktop-Integration, und Metal für die GPU-Schicht. Eine native iOS-Version steht ebenfalls auf der Liste.</p>
+    </div>
+    <figure>
+      <img class="shot" src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="Die Widget-Galerie im macOS-Stil von JFLib.">
+      <figcaption class="soft">Den macOS-Stil gibt es schon. Hier läuft er unter Windows.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
+  <div class="wrap rm">
+    <div>
+      <span class="state">Geplant</span>
+      <h2 id="engine-title">3D-Engine</h2>
+      <p class="prose">Ein Engine-Kern auf der GPU-Schicht, gewachsen aus der Testszene, die heute schon läuft.</p>
+      <ul class="rm-list soft">
+        <li>Szenen, Meshes und Materialien</li>
+        <li>Licht und Schatten</li>
+        <li>Sichtbarkeit auf der GPU und Instancing</li>
+        <li>glTF-Import</li>
+        <li>Später: Animation, große Welten, Physik und Werkzeuge</li>
+      </ul>
+    </div>
+    <div class="bignums">
+      <div class="bignum"><b>1,71 ms</b><span>pro Frame für eine Million bewegter Würfel in 1080p. Die GPU entscheidet selbst, was sichtbar ist, und schreibt ihre eigenen Draw Calls.</span></div>
+      <div class="bignum small"><b>90 ms</b><span>für dieselbe Szene mit einem Draw Call pro Objekt.</span></div>
+      <p class="rm-note soft">Die GPU-Testszene von JFLib auf einer GeForce RTX 2070 SUPER und einem Ryzen 5 3600.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="more" aria-labelledby="more-title">
+  <div class="wrap">
+    <div class="head"><h2 id="more-title">Außerdem auf der Liste.</h2></div>
+    <div class="caps">
+      <div class="cap"><h3>Natives iOS</h3><p>Heute erreicht man iOS wie macOS über den Browser.</p></div>
+      <div class="cap"><h3>Safari im Testplan</h3><p>Die Browsertests decken bisher Chromium und Firefox ab.</p></div>
+      <div class="cap"><h3>Bausteine für Spiele</h3><p>Animation, große Welten, Physik und Werkzeuge, aufbauend auf der 3D-Engine.</p></div>
+    </div>
+    <div class="cta rm-more"><a class="btn" href="docs/ROADMAP.html">Die vollständige Liste</a></div>
+  </div>
+</section>
