@@ -50,16 +50,28 @@ def page_parts(path):
     return fields, body
 
 
-def app_action(app):
+def app_action(app, t):
     if app.get("link"):
-        return '<a class="btn" href="%s">Product page</a>' % html.escape(app["link"], quote=True)
+        return '<a class="btn" href="%s">%s</a>' % (html.escape(app["link"], quote=True), html.escape(t("Product page")))
     return None
 
 
-def apps_rail(apps):
+def apps_in(apps, lang):
+    """apps.json with the texts of src/i18n/LANG/apps.json: {name: {text, alt, note}}."""
+    path = SRC / "i18n" / lang / "apps.json"
+    if lang == "en" or not path.is_file():
+        return apps
+    own = json.loads(path.read_text(encoding="utf-8"))
+    for name in own:
+        if name not in {a["name"] for a in apps}:
+            raise SiteError(f"src/i18n/{lang}/apps.json: no app {name!r} in apps.json")
+    return [dict(a, **own.get(a["name"], {})) for a in apps]
+
+
+def apps_rail(apps, t):
     rows = []
     for a in apps:
-        action = app_action(a) or '<span class="soon">Product page coming soon</span>'
+        action = app_action(a, t) or '<span class="soon">%s</span>' % html.escape(t("Product page coming soon"))
         rows.append('      <article class="app"><img src="img/%s" width="%d" height="%d" loading="lazy" alt="%s"><h3>%s</h3>'
                     '<p class="soft">%s</p>%s</article>' % (
                         a["image"], a["width"], a["height"], html.escape(a["alt"], quote=True),
@@ -67,18 +79,18 @@ def apps_rail(apps):
     return "\n".join(rows)
 
 
-def apps_list(apps):
+def apps_list(apps, t):
     rows = []
     for i, a in enumerate(apps):
         text = a["text"] + (" " + a["note"] if a.get("note") else "")
-        chips = "".join("<span>%s</span>" % html.escape(p) for p in a["platforms"])
-        action = app_action(a) or '<span class="soon-btn">Product page coming soon</span>'
+        chips = "".join("<span>%s</span>" % html.escape(t(p) if p == "Browser" else p) for p in a["platforms"])
+        action = app_action(a, t) or '<span class="soon-btn">%s</span>' % html.escape(t("Product page coming soon"))
         rows.append('  <article class="ap%s">\n    <div class="ap-pic"><img src="img/%s" width="%d" height="%d"%s alt="%s"></div>\n'
                     '    <div>\n      <h2>%s</h2>\n      <p>%s</p>\n'
-                    '      <div class="chips platforms" aria-label="Platforms">%s</div>\n      %s\n    </div>\n  </article>' % (
+                    '      <div class="chips platforms" aria-label="%s">%s</div>\n      %s\n    </div>\n  </article>' % (
                         " flip" if i % 2 else "", a["image"], a["width"], a["height"],
                         ' loading="lazy"' if i else "", html.escape(a["alt"], quote=True),
-                        html.escape(a["name"]), html.escape(text), chips, action))
+                        html.escape(a["name"]), html.escape(text), html.escape(t("Platforms"), quote=True), chips, action))
     return "\n\n".join(rows)
 
 
@@ -179,8 +191,8 @@ def build(out, docs, gallery, preview):
             own = lang == "en" or path.name in translated[lang]
             source = path if lang == "en" or not own else SRC / "i18n" / lang / path.name
             fields, body = page_parts(source)
-            body = (body.replace("{{apps-rail}}", apps_rail(apps))
-                        .replace("{{apps-list}}", apps_list(apps))
+            body = (body.replace("{{apps-rail}}", apps_rail(apps_in(apps, lang) if own else apps, t))
+                        .replace("{{apps-list}}", apps_list(apps_in(apps, lang) if own else apps, t))
                         .replace("{{contact}}", contact_line(config, preview)))
             done = ["en"] + [c for c, _ in LANGS[1:] if path.name in translated[c]]
             alternates = ""

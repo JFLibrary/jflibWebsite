@@ -1,0 +1,27 @@
+{
+  "JFNetworker": {
+    "text": "Un simulador y laboratorio de redes con editor de topologías, consolas de dispositivos y un modo de simulación paso a paso.",
+    "alt": "JFNetworker con una red de campus formada por un switch, un router, un servidor y cuatro PC sobre una cuadrícula."
+  },
+  "BackupCraft": {
+    "text": "Una suite de copias de seguridad con copias deduplicadas, cifradas y firmadas, programaciones y roles, y su propio servidor y agentes.",
+    "alt": "La lista de tareas de copia de seguridad de BackupCraft, con indicadores de estado y un panel de navegación, con datos de demostración."
+  },
+  "jfWord": {
+    "text": "Un procesador de textos con cinta de opciones, vista de página, estilos de texto, tablas, referencias y compatibilidad con DOCX.",
+    "alt": "jfWord con su cinta de opciones, un panel de navegación y un documento.",
+    "note": "En desarrollo activo."
+  },
+  "PaintCraft": {
+    "text": "Un editor de imágenes con capas, historial, efectos, muchos formatos de imagen y plugins nativos.",
+    "alt": "PaintCraft con el dibujo de ejemplo de JFLib abierto."
+  },
+  "Kritzel": {
+    "text": "Una app de dibujo con pinceles, formas, texto, selecciones y capas.",
+    "alt": "Kritzel con el dibujo de ejemplo de JFLib."
+  },
+  "Build Manager": {
+    "text": "Una app gráfica de compilación para aplicaciones, estilos, perfiles, pruebas y paquetes de distribución.",
+    "alt": "El Build Manager con una lista de apps y ajustes de compilación."
+  }
+}

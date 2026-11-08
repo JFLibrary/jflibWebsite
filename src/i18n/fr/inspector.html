@@ -1,0 +1,144 @@
+title: Inspecteur en direct de JFLib
+description: L’inspecteur en direct de la bibliothèque d’interfaces graphiques JFLib : le widget sous le pointeur, l’arbre des widgets, le coût de chaque image, les couleurs, l’apparence modifiée pendant l’exécution et la ligne de code derrière chaque widget.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <code class="flag">--inspect · Ctrl+Shift+I · F12</code>
+    <h1>Au cœur d’une <em>application en marche.</em></h1>
+    <p class="lede">L’inspecteur en direct montre quel widget se trouve où, comment la mise en page s’imbrique, ce que chaque image a redessiné et ce que cela a coûté. Dans un build de développement, il modifie aussi l’apparence pendant que l’application tourne et vous amène à la ligne de code qui a créé un widget. Il fait partie de chaque application JFLib et, fermé, il ne coûte rien.</p>
+    <div class="cta">
+      <a class="btn primary" href="docs/GUIDE.html">Lire le guide du développeur</a>
+      <a class="btn" href="features.html#tools">Tous les outils de développement</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="pick-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="pick-title">Pointer, cliquer, savoir.</h2>
+      <p class="prose">Appuyez sur « Pick » dans l’inspecteur, puis cliquez sur n’importe quel widget de votre application. Le clic sélectionne au lieu d’agir, et la fenêtre d’outils saute au widget : son type, son id, son libellé, son rectangle, sa valeur, son état, sa couche et sa fenêtre, un sélecteur pour vos scripts de test, ainsi que le fichier et la ligne où votre code l’a créé.</p>
+    </div>
+    <figure class="big-shot">
+      <picture><source srcset="img/inspector-pick-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/inspector-pick.gif" width="1418" height="700" loading="lazy" alt="L’application galerie avec l’inspecteur à côté. « Pick » est enfoncé, le pointeur va sur le bouton radio « Green », le clic le sélectionne et l’inspecteur affiche ses propriétés. Puis la couleur d’accentuation passe à l’orange dans l’onglet « Appearance »."></picture>
+      <figcaption>La galerie des fonctionnalités avec son inspecteur, enregistrée par un script de test.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="on-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="on-title">Trois façons de l’ouvrir.</h2>
+      <p class="prose">L’inspecteur vit dans la bibliothèque : chaque application en dispose sans une ligne de code supplémentaire. Rien n’est enregistré ni dessiné tant qu’il est fermé, et les images sont alors identiques, octet pour octet, à celles d’une application qui ne l’a pas.</p>
+    </div>
+    <div class="ways">
+      <div class="way"><h3>Au démarrage</h3><pre class="panel">hello --inspect</pre><p class="soft">Ouvre l’inspecteur en même temps que l’application.</p></div>
+      <div class="way"><h3>Avec une touche</h3><pre class="panel">jfgui_INSPECT=1
+<span class="d"># puis</span> Ctrl+Shift+I <span class="d">ou</span> F12</pre><p class="soft">L’arme, pour que les raccourcis l’ouvrent et le ferment pendant que vous travaillez. Vous pouvez choisir d’autres touches.</p></div>
+      <div class="way"><h3>Depuis le code</h3><pre class="panel">ui.inspect_show(<span class="k">true</span>);</pre><p class="soft">Pour un menu de débogage dans votre propre application.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="overlay-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="overlay-title">Une surcouche dans chaque fenêtre.</h2>
+        <p class="prose" style="margin-top:16px">Le widget sous le pointeur reçoit un contour orange et une étiquette avec son type, son id, son libellé, sa taille et son état. Le widget sélectionné est entouré de bleu. La surcouche est dessinée après votre application, hors de ses listes de dessin : les zones à redessiner de votre application restent les siennes.</p>
+      </div>
+      <figure><picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="La surcouche nomme chaque widget sous le pointeur avec son id, son libellé, sa taille et son état."></picture></figure>
+    </div>
+    <div class="trio" style="margin-top:clamp(36px,5vw,64px)">
+      <figure><img src="img/inspector-outlines.png" width="1000" height="700" loading="lazy" alt="Chaque boîte de mise en page de la galerie, entourée en cyan."><figcaption><b>Contours</b>Chaque boîte de mise en page, pour voir comment lignes et colonnes s’imbriquent.</figcaption></figure>
+      <figure><img src="img/inspector-order.png" width="1000" height="700" loading="lazy" alt="Des numéros violets sur chaque widget pouvant recevoir le focus, dans l’ordre où la touche Tab les parcourt."><figcaption><b>Ordre de tabulation</b>Les arrêts de tabulation, numérotés dans l’ordre où le clavier les parcourt.</figcaption></figure>
+      <figure><img src="img/inspector-repaints.png" width="1000" height="700" loading="lazy" alt="Un rectangle rouge sur le bouton « Toggle » : la zone que la dernière image a redessinée."><figcaption><b>Zones redessinées</b>Les rectangles redessinés à chaque image, qui s’estompent peu à peu. Un widget qui se redessine trop se repère tout de suite.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="window-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="window-title">Une fenêtre d’outils à quatre onglets.</h2>
+      <p class="prose">La fenêtre de l’inspecteur ne prend jamais le clavier d’elle-même, et n’apparaît jamais dans son propre arbre, sa surcouche ou sa sélection. Sa ligne de sélecteur se copie directement dans un <a href="testing.html">script de test</a>.</p>
+    </div>
+    <div class="quad">
+      <figure><img src="img/inspector-widgets.png" width="402" height="690" loading="lazy" alt="L’onglet « Widgets » avec l’arbre des widgets et les propriétés du widget sélectionné."><figcaption><b>Widgets</b>L’arbre de l’image courante dans ses boîtes de mise en page, et tout sur le widget sélectionné.</figcaption></figure>
+      <figure><img src="img/inspector-frame.png" width="402" height="690" loading="lazy" alt="L’onglet « Frame » avec les passes, les temps de construction et de rendu, la zone redessinée, les commandes de dessin, les widgets et le cache de glyphes."><figcaption><b>Frame</b>Les passes, le temps de construction et de rendu, la zone redessinée, les commandes de dessin et le cache de glyphes.</figcaption></figure>
+      <figure><img src="img/inspector-colors.png" width="402" height="690" loading="lazy" alt="L’onglet « Colors » qui liste chaque jeton du thème avec sa valeur de couleur."><figcaption><b>Colors</b>Chaque jeton du thème avec sa couleur, modifiable dans un build de développement.</figcaption></figure>
+      <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="L’onglet « Appearance » avec le style, le mode, l’accent, la langue, l’échelle, l’échelle du texte, le rayon d’arrondi, l’espacement, la hauteur des contrôles et la police."><figcaption><b>Appearance</b>Style, mode, accent, langue, échelles, métriques et polices, pendant que l’application tourne.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="edit-title">
+  <div class="wrap">
+    <div class="split top">
+      <div>
+        <h2 id="edit-title">Changez l’apparence en direct.</h2>
+        <p class="prose" style="margin-top:16px">Dans un build de développement, l’inspecteur modifie l’application en cours d’exécution par ce qui existe déjà : aucune API à appeler, aucune structure d’état à respecter. Essayez un autre style, le mode sombre ou le contraste élevé, une couleur d’accentuation, une langue, une échelle, des coins plus arrondis ou une autre police, et voyez le résultat aussitôt.</p>
+      </div>
+      <ul class="ticks">
+          <li>Chaque modification est signalée, avec son propre bouton de réinitialisation et une liste des anciennes et des nouvelles valeurs.</li>
+          <li>Annuler et rétablir, y compris un glissement complet de curseur en une seule étape.</li>
+          <li>Enregistrez vos modifications dans un fichier de thème que l’application peut charger.</li>
+          <li>Copiez ce que vous avez changé, sous forme de lignes de thème et de code.</li>
+          <li><b>Operate</b> clique, glisse, tape ou définit une valeur sur le widget sélectionné, comme une saisie. Les valeurs propres à votre application ne sont jamais écrites dans son dos.</li>
+      </ul>
+    </div>
+    <div class="duo" style="margin-top:clamp(30px,4vw,48px)">
+        <figure><img src="img/inspector-appearance-app.png" width="1000" height="700" loading="lazy" alt="La galerie avec une couleur d’accentuation orange et des coins plus arrondis."></figure>
+        <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="L’onglet « Appearance » avec deux modifications : la couleur d’accentuation E8590C et un rayon d’arrondi de 8."></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue" aria-labelledby="source-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="source-title">Du widget à votre code.</h2>
+        <p class="prose" style="margin-top:16px">L’onglet « Widgets » indique le fichier et la ligne où votre application a créé le widget sélectionné. <b>Open in editor</b> lance VS Code, CLion ou l’éditeur que vous indiquez, à cette ligne. Un widget composite, comme un champ numérique ou un menu, renvoie à votre appel, pas à l’appel interne de la bibliothèque.</p>
+        <p class="prose" style="margin-top:12px">Les builds release laissent entièrement cela de côté : ils ne contiennent aucun chemin de fichier et exécutent le même code que sans cette fonctionnalité. Le lancement de l’éditeur suit le manifeste de permissions de votre application, comme tout autre programme qu’elle lance.</p>
+      </div>
+<pre class="panel"><span class="d"># l’onglet Widgets de l’inspecteur</span>
+Kind      radio
+Label     Green
+Selector  radio:<span class="s">"Green"</span>
+Source    apps/gallery/main.rs:215
+          [ Open in editor ]
+
+<span class="d"># votre éditeur, défini une fois pour toutes</span>
+jfgui_EDITOR=<span class="s">"code -g {file}:{line}"</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="test-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="test-title">Testé comme tout le reste.</h2>
+        <p class="prose" style="margin-top:16px">L’inspecteur fonctionne aussi sans fenêtre dans les <a href="testing.html">scripts de test .uis</a> : l’ouvrir, pointer, sélectionner, vérifier la surcouche et le sélecteur, modifier l’apparence et annuler. Un script peut même prouver qu’un inspecteur fermé n’a absolument rien changé.</p>
+        <p class="prose" style="margin-top:12px">Avec le <a href="index.html#tools">rechargement à chaud</a>, l’inspecteur garde son onglet, ses options et sa sélection à chaque recompilation. Si une compilation échoue, l’ancienne version continue de tourner et l’erreur s’affiche en haut de l’inspecteur.</p>
+      </div>
+<pre class="panel"><span class="k">inspect</span> arm
+<span class="k">key</span> f12                         <span class="d"># le raccourci l’ouvre</span>
+<span class="k">inspect</span> pick
+<span class="k">click</span> <span class="s">"Standard"</span>                <span class="d"># sélectionne, l’app ne voit rien</span>
+<span class="k">inspect expect</span> selected button:<span class="s">"Standard"</span>
+<span class="k">inspect set</span> radius 8
+<span class="k">inspect expect</span> changes 1
+<span class="k">inspect</span> undo
+<span class="k">key</span> f12                         <span class="d"># refermé</span>
+<span class="k">inspect expect</span> same              <span class="d"># octet pour octet comme avant</span>
+<span class="k">inspect expect</span> idle              <span class="d"># et plus aucun travail depuis</span></pre>
+    </div>
+    <div class="cta" style="margin-top:clamp(36px,5vw,56px)">
+      <a class="btn primary" href="testing.html">Le langage de test</a>
+      <a class="btn" href="docs/GUIDE.html">Guide du développeur</a>
+    </div>
+  </div>
+</section>

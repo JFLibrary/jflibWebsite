@@ -1,0 +1,144 @@
+title: Inspector dal vivo di JFLib
+description: L’inspector dal vivo della libreria GUI JFLib: il widget sotto il puntatore, l’albero dei widget, il costo dei frame, i colori, la modifica dell’aspetto mentre l’app gira e la riga di codice dietro ogni widget.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <code class="flag">--inspect · Ctrl+Shift+I · F12</code>
+    <h1>Guarda dentro <em>un’app che gira.</em></h1>
+    <p class="lede">L’inspector dal vivo mostra quale widget si trova dove, come si annida il layout, cosa ha ridisegnato ogni frame e quanto è costato. In una build di sviluppo cambia anche l’aspetto mentre l’app gira e ti porta alla riga di codice che ha creato un widget. Fa parte di ogni app JFLib, e da chiuso non costa nulla.</p>
+    <div class="cta">
+      <a class="btn primary" href="docs/GUIDE.html">Leggi la guida per sviluppatori</a>
+      <a class="btn" href="features.html#tools">Tutti gli strumenti per sviluppatori</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="pick-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="pick-title">Punta, clicca, scopri.</h2>
+      <p class="prose">Premi «Pick» nell’inspector, poi clicca un widget qualsiasi della tua app. Il clic seleziona invece di agire, e la finestra degli strumenti salta al widget: tipo, id, etichetta, rettangolo, valore, stato, livello e finestra, un selettore per i tuoi script di test, e il file e la riga in cui il tuo codice l’ha creato.</p>
+    </div>
+    <figure class="big-shot">
+      <picture><source srcset="img/inspector-pick-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/inspector-pick.gif" width="1418" height="700" loading="lazy" alt="L’app della galleria con l’inspector accanto. «Pick» è premuto, il puntatore va sul pulsante di opzione «Green», il clic lo seleziona e l’inspector ne mostra le proprietà. Poi, nella scheda «Appearance», il colore d’accento diventa arancione."></picture>
+      <figcaption>La galleria delle funzionalità con il suo inspector, registrata da uno script di test.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="on-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="on-title">Tre modi per aprirlo.</h2>
+      <p class="prose">L’inspector vive dentro la libreria, quindi ogni app ce l’ha senza una riga di codice in più. Finché è chiuso non viene registrato né disegnato nulla: i frame sono, byte per byte, quelli di un’app senza inspector.</p>
+    </div>
+    <div class="ways">
+      <div class="way"><h3>All’avvio</h3><pre class="panel">hello --inspect</pre><p class="soft">Apre l’inspector insieme all’app.</p></div>
+      <div class="way"><h3>Con un tasto</h3><pre class="panel">jfgui_INSPECT=1
+<span class="d"># poi</span> Ctrl+Shift+I <span class="d">o</span> F12</pre><p class="soft">Lo predispone, così i tasti rapidi lo aprono e lo chiudono mentre lavori. Puoi scegliere altri tasti.</p></div>
+      <div class="way"><h3>Dal codice</h3><pre class="panel">ui.inspect_show(<span class="k">true</span>);</pre><p class="soft">Per un menu di debug nella tua app.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="overlay-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="overlay-title">Un overlay in ogni finestra.</h2>
+        <p class="prose" style="margin-top:16px">Il widget sotto il puntatore riceve un contorno arancione e un cartellino con tipo, id, etichetta, dimensioni e stato. Il widget selezionato ha il contorno blu. L’overlay viene disegnato dopo la tua app, fuori dalle sue draw list, così le regioni di ridisegno della tua app restano solo sue.</p>
+      </div>
+      <figure><picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="L’overlay che indica ogni widget sotto il puntatore con id, etichetta, dimensioni e stato."></picture></figure>
+    </div>
+    <div class="trio" style="margin-top:clamp(36px,5vw,64px)">
+      <figure><img src="img/inspector-outlines.png" width="1000" height="700" loading="lazy" alt="Ogni box di layout della galleria con il contorno ciano."><figcaption><b>Outlines</b>Ogni box di layout, così vedi come si annidano righe e colonne.</figcaption></figure>
+      <figure><img src="img/inspector-order.png" width="1000" height="700" loading="lazy" alt="Numeri viola su ogni widget che può ricevere il focus, nell’ordine in cui li visita il tasto Tab."><figcaption><b>Tab order</b>Le tappe del tasto Tab, numerate nell’ordine in cui le visita la tastiera.</figcaption></figure>
+      <figure><img src="img/inspector-repaints.png" width="1000" height="700" loading="lazy" alt="Un rettangolo rosso sul pulsante «Toggle»: l’area ridisegnata dall’ultimo frame."><figcaption><b>Repaints</b>I rettangoli ridisegnati da ogni frame, che poi sfumano. Un widget che si ridisegna troppo salta subito all’occhio.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="window-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="window-title">Una finestra degli strumenti con quattro schede.</h2>
+      <p class="prose">La finestra dell’inspector non prende mai la tastiera di sua iniziativa, e non compare mai nel proprio albero, nel proprio overlay o nel pick. La sua riga del selettore si copia direttamente in uno <a href="testing.html">script di test</a>.</p>
+    </div>
+    <div class="quad">
+      <figure><img src="img/inspector-widgets.png" width="402" height="690" loading="lazy" alt="La scheda «Widgets» con l’albero dei widget e le proprietà del widget selezionato."><figcaption><b>Widgets</b>L’albero del frame corrente dentro i suoi box di layout, e tutto sul widget selezionato.</figcaption></figure>
+      <figure><img src="img/inspector-frame.png" width="402" height="690" loading="lazy" alt="La scheda «Frame» con passate, tempi di costruzione e di rendering, l’area ridisegnata, comandi di disegno, widget e cache dei glifi."><figcaption><b>Frame</b>Passate, tempo di costruzione e di rendering, area ridisegnata, comandi di disegno e cache dei glifi.</figcaption></figure>
+      <figure><img src="img/inspector-colors.png" width="402" height="690" loading="lazy" alt="La scheda «Colors» con ogni token del tema e il suo valore di colore."><figcaption><b>Colors</b>Ogni token del tema con il suo colore, modificabile in una build di sviluppo.</figcaption></figure>
+      <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="La scheda «Appearance» con stile, modalità, accento, lingua, scala, scala del testo, raggio degli angoli, spaziatura, altezza dei controlli e font."><figcaption><b>Appearance</b>Stile, modalità, accento, lingua, scale, metriche e font, mentre l’app gira.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="edit-title">
+  <div class="wrap">
+    <div class="split top">
+      <div>
+        <h2 id="edit-title">Cambia l’aspetto mentre gira.</h2>
+        <p class="prose" style="margin-top:16px">In una build di sviluppo l’inspector modifica l’app in esecuzione attraverso ciò che esiste già: nessuna API da chiamare e nessuna struttura dello stato da seguire. Prova un altro stile, la modalità scura o il contrasto elevato, un accento, una lingua, una scala, angoli più arrotondati o un altro font, e vedi subito il risultato.</p>
+      </div>
+      <ul class="ticks">
+          <li>Ogni modifica è evidenziata, con il suo pulsante di reset e un elenco dei valori vecchi e nuovi.</li>
+          <li>Annulla e ripeti, anche per un intero trascinamento di uno slider come un solo passo.</li>
+          <li>Salva le tue modifiche come file di tema che l’app può caricare.</li>
+          <li>Copia ciò che hai cambiato, come righe di tema e come codice.</li>
+          <li><b>Operate</b> clicca, trascina, digita o imposta un valore sul widget selezionato, come input. I valori della tua app non vengono mai scritti alle sue spalle.</li>
+      </ul>
+    </div>
+    <div class="duo" style="margin-top:clamp(30px,4vw,48px)">
+        <figure><img src="img/inspector-appearance-app.png" width="1000" height="700" loading="lazy" alt="La galleria con un colore d’accento arancione e angoli più arrotondati."></figure>
+        <figure><img src="img/inspector-appearance.png" width="402" height="690" loading="lazy" alt="La scheda «Appearance» con due modifiche: il colore d’accento E8590C e un raggio degli angoli di 8."></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue" aria-labelledby="source-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="source-title">Dal widget al tuo codice.</h2>
+        <p class="prose" style="margin-top:16px">La scheda «Widgets» indica il file e la riga in cui la tua app ha creato il widget selezionato. <b>Open in editor</b> avvia VS Code, CLion o l’editor che indichi, proprio a quella riga. Un widget composto, come una casella numerica o un menu, riporta la tua chiamata, non quella interna della libreria.</p>
+        <p class="prose" style="margin-top:12px">Le build di release lo escludono del tutto, quindi non contengono percorsi di file ed eseguono lo stesso codice che senza questa funzione. L’avvio dell’editor rispetta il manifesto dei permessi della tua app, come qualsiasi altro programma che l’app avvia.</p>
+      </div>
+<pre class="panel"><span class="d"># la scheda Widgets dell’inspector</span>
+Kind      radio
+Label     Green
+Selector  radio:<span class="s">"Green"</span>
+Source    apps/gallery/main.rs:215
+          [ Open in editor ]
+
+<span class="d"># il tuo editor, da impostare una volta</span>
+jfgui_EDITOR=<span class="s">"code -g {file}:{line}"</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="test-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="test-title">Testato come tutto il resto.</h2>
+        <p class="prose" style="margin-top:16px">L’inspector gira headless anche negli <a href="testing.html">script di test .uis</a>: aprilo, fai il pick, seleziona, controlla l’overlay e il selettore, modifica l’aspetto e annulla. Uno script può perfino dimostrare che un inspector chiuso non ha cambiato proprio nulla.</p>
+        <p class="prose" style="margin-top:12px">Con l’<a href="index.html#tools">hot reload</a>, l’inspector conserva scheda, opzioni e selezione a ogni ricompilazione. Se la build fallisce, la vecchia versione resta in esecuzione e l’errore compare in cima all’inspector.</p>
+      </div>
+<pre class="panel"><span class="k">inspect</span> arm
+<span class="k">key</span> f12                         <span class="d"># il tasto rapido lo apre</span>
+<span class="k">inspect</span> pick
+<span class="k">click</span> <span class="s">"Standard"</span>                <span class="d"># seleziona, l’app non vede nulla</span>
+<span class="k">inspect expect</span> selected button:<span class="s">"Standard"</span>
+<span class="k">inspect set</span> radius 8
+<span class="k">inspect expect</span> changes 1
+<span class="k">inspect</span> undo
+<span class="k">key</span> f12                         <span class="d"># di nuovo chiuso</span>
+<span class="k">inspect expect</span> same              <span class="d"># byte per byte come prima</span>
+<span class="k">inspect expect</span> idle              <span class="d"># e nessun lavoro da allora</span></pre>
+    </div>
+    <div class="cta" style="margin-top:clamp(36px,5vw,56px)">
+      <a class="btn primary" href="testing.html">Il linguaggio di test</a>
+      <a class="btn" href="docs/GUIDE.html">Guida per sviluppatori</a>
+    </div>
+  </div>
+</section>

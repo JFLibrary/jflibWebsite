@@ -1,0 +1,207 @@
+title: Scripts de prueba de JFLib (.uis)
+description: El lenguaje de pruebas .uis de la biblioteca GUI JFLib: scripts legibles que hacen clic, escriben, arrastran, tocan y comprueban una app real, sin ventana y de forma determinista, en Windows y Linux.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <code class="flag">cargo jflib test</code>
+    <h1>Pruebas que se leen <em>como instrucciones.</em></h1>
+    <p class="lede">Un script <code>.uis</code> usa tu app como lo haría una persona. Hace clic, escribe, arrastra, desliza y pulsa teclas, y luego comprueba qué ha pasado. Ejecuta la app real sin ventana, con un reloj virtual, así que cada ejecución termina con el mismo resultado y los mismos píxeles, en tu máquina y en CI.</p>
+    <div class="cta">
+      <a class="btn primary" href="#player">Mira un script en acción</a>
+      <a class="btn" href="docs/GUIDE.html">El lenguaje en la guía</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="player" aria-labelledby="player-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="player-title">Una línea, un paso.</h2>
+      <p class="prose">Este script rellena parte de la Galería de funciones. Cada imagen muestra cómo se veía la app justo después de esa línea. Las líneas que empiezan por <code>expect</code> son las comprobaciones. Haz clic en una línea para saltar a ella.</p>
+    </div>
+    <div class="player" data-player>
+      <div class="player-view" data-nozoom>
+        <img src="img/uis-form-1.png" width="1000" height="620" loading="lazy" alt="El campo de texto «Enter a name» tiene el foco.">
+        <img src="img/uis-form-2.png" width="1000" height="620" loading="lazy" alt="El campo de texto ahora contiene «Ada Lovelace».">
+        <img src="img/uis-form-3.png" width="1000" height="620" loading="lazy" alt="La casilla «Option A» está desmarcada.">
+        <img src="img/uis-form-4.png" width="1000" height="620" loading="lazy" alt="El botón de opción «Blue» está elegido.">
+        <img src="img/uis-form-5.png" width="1000" height="620" loading="lazy" alt="El control deslizante se arrastra hasta el 84 por ciento.">
+        <img src="img/uis-form-6.png" width="1000" height="620" loading="lazy" alt="Tab movió el foco al control deslizante vertical, y dos pulsaciones de la flecha arriba lo subieron.">
+        <img class="on" src="img/uis-form-7.png" width="1000" height="620" loading="lazy" alt="El mismo formulario en modo oscuro.">
+      </div>
+      <div class="player-side">
+<ol class="panel player-lines">
+<li data-f="0"><span class="k">click</span> #700</li>
+<li data-f="1"><span class="k">type</span> <span class="s">"Ada Lovelace"</span></li>
+<li data-f="1" class="exp"><span class="k">expect</span> #700 text <span class="s">"Ada Lovelace"</span></li>
+<li data-f="2"><span class="k">click</span> <span class="s">"Option A"</span></li>
+<li data-f="2" class="exp"><span class="k">expect</span> checkbox:<span class="s">"Option A"</span> unchecked</li>
+<li data-f="3"><span class="k">click</span> <span class="s">"Blue"</span></li>
+<li data-f="3" class="exp"><span class="k">expect</span> radio:<span class="s">"Blue"</span> checked</li>
+<li data-f="4"><span class="k">drag</span> 105,446 186,446 12</li>
+<li data-f="4" class="exp"><span class="k">expect</span> #140 value 84</li>
+<li data-f="5"><span class="k">key</span> tab up up</li>
+<li data-f="5" class="exp"><span class="k">expect</span> #141 focused</li>
+<li data-f="5" class="exp"><span class="k">expect</span> #141 value 14</li>
+<li data-f="6"><span class="k">theme</span> dark</li>
+</ol>
+        <div class="player-ctl" hidden>
+          <button class="btn" type="button" data-p="prev" aria-label="Línea anterior">&#8249;</button>
+          <button class="btn" type="button" data-p="play">Pausa</button>
+          <button class="btn" type="button" data-p="next" aria-label="Línea siguiente">&#8250;</button>
+          <span class="player-state" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="head"><h2 id="why-title">Por qué funciona tan bien.</h2></div>
+    <div class="caps caps-ink">
+      <div class="cap"><h3>La app real</h3><p>Sin mocks y sin compilación de prueba. El script le pasa a la app compilada los mismos eventos que le pasaría la plataforma.</p></div>
+      <div class="cap"><h3>Sin ventana</h3><p>La app dibuja en memoria. No se abre ninguna ventana, nada te roba el teclado, y también funciona en un servidor sin escritorio.</p></div>
+      <div class="cap"><h3>Determinista</h3><p>El tiempo es un reloj virtual en fotogramas de 16 ms. Los temporizadores y las animaciones lo siguen, así que una ejecución nunca espera ni falla al azar.</p></div>
+      <div class="cap"><h3>Selectores legibles</h3><p>Nombra un widget por su etiqueta, por tipo y etiqueta, por id o por un punto. Unas reglas claras deciden qué pasa cuando una etiqueta aparece dos veces.</p></div>
+      <div class="cap"><h3>Fallos claros</h3><p><code>FAIL line 9: …</code> indica la línea y lo que se encontró en su lugar. El script continúa, y el código de salida se lo comunica a CI.</p></div>
+      <div class="cap"><h3>Un lenguaje para todo</h3><p>Los mismos scripts funcionan en Windows y Linux, y también controlan el <a href="inspector.html">inspector</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="do-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="do-title">Todo lo que puede hacer una persona.</h2>
+      <p class="prose">Y algunas cosas que una persona no puede: un script puede soltar archivos desde otro programa, suspender la app, pasarle lecturas de sensores o perder la GPU, todo sin un dispositivo real.</p>
+    </div>
+    <div class="examples">
+      <figure class="ex"><figcaption><b>Ratón y teclado</b>Botones, modificadores, zoom con la rueda y combinaciones de teclas, cada tecla en su propio fotograma, tal como los entrega la plataforma.</figcaption>
+<pre class="panel"><span class="k">rclick</span> listitem:<span class="s">"report.pdf"</span>
+<span class="k">click</span> <span class="s">"Rename"</span>
+<span class="k">type</span> <span class="s">"final.pdf\n"</span>
+<span class="k">drag</span> #20 #31 hold 300 shift
+<span class="k">wheel</span> 400,300 120 ctrl
+<span class="k">key</span> ctrl+s</pre></figure>
+      <figure class="ex"><figcaption><b>Táctil y lápiz</b>Dedos con velocidades reales, gestos con dos dedos y presión del lápiz.</figcaption>
+<pre class="panel"><span class="k">tap</span> <span class="s">"Photos"</span>
+<span class="k">longpress</span> #44 800
+<span class="k">swipe</span> 200,600 200,150 250
+<span class="k">pinch</span> 300,300 80 240
+<span class="k">pan2</span> 300,300 0 -120
+<span class="k">drag</span> 100,100 300,180 pen 20 90</pre></figure>
+      <figure class="ex"><figcaption><b>Ventanas y diálogos</b>Ventanas de herramientas, diálogos y ventanas emergentes, cada uno con su propio estado.</figcaption>
+<pre class="panel"><span class="k">click</span> <span class="s">"Save as…"</span>
+<span class="k">expect</span> dialog:<span class="s">"Save as"</span> open
+<span class="k">window</span> any
+<span class="k">click</span> button:<span class="s">"Cancel"</span>
+<span class="k">expect window</span> 20 closed
+<span class="k">shot</span> popups.png desktop</pre></figure>
+      <figure class="ex"><figcaption><b>Arrastrar y soltar</b>Archivos, texto, HTML, URL e imágenes desde otros programas, y lo que tu app entrega.</figcaption>
+<pre class="panel"><span class="k">drop</span> 300,200 photo.png notes.txt
+<span class="k">dragover</span> 300,200 text
+<span class="k">dragleave</span>
+<span class="k">drag</span> #12 1200,300
+<span class="k">dragout expect</span> files 1
+<span class="k">dragout end</span> copy</pre></figure>
+      <figure class="ex"><figcaption><b>Portapapeles</b>Un portapapeles propio para cada ejecución. El tuyo de verdad nunca se toca.</figcaption>
+<pre class="panel"><span class="k">clip text</span> <span class="s">"Hello"</span>
+<span class="k">key</span> ctrl+v
+<span class="k">expect</span> #700 text <span class="s">"Hello"</span>
+<span class="k">key</span> ctrl+a ctrl+c
+<span class="k">clip expect</span> text</pre></figure>
+      <figure class="ex"><figcaption><b>El sistema alrededor de la app</b>Ciclo de vida, ajustes, sensores y ubicación, tal como los entregaría el host.</figcaption>
+<pre class="panel"><span class="k">system</span> suspend
+<span class="k">system</span> resume
+<span class="k">system settings</span> theme
+<span class="k">sensor</span> accel 0 9.81 0
+<span class="k">location</span> 52.52 13.40 12
+<span class="k">location expect</span> fix</pre></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="check-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="check-title">Comprueba lo que importa, hasta el píxel.</h2>
+        <p class="prose" style="margin-top:16px">Las aserciones leen estados, valores, textos y rectángulos de los mismos registros que ven los lectores de pantalla y el inspector. Cuando importan los píxeles, un script compara un punto, un área o toda la ventana con una imagen anterior, byte a byte.</p>
+        <ul class="ticks">
+          <li>Estados: exists, focused, checked, disabled, selected, open, pressed y más.</li>
+          <li>Valores, rangos, textos y rectángulos en píxeles independientes del dispositivo.</li>
+          <li>Tokens del tema, el estilo en uso, los sonidos solicitados y las advertencias impresas.</li>
+          <li><code>--verify-dirty</code> compara cada redibujado parcial con uno completo, para que ningún píxel olvidado pase desapercibido.</li>
+        </ul>
+      </div>
+<pre class="panel"><span class="k">expect</span> button:<span class="s">"Send"</span> disabled
+<span class="k">type</span> <span class="s">"Hi"</span>
+<span class="k">expect</span> button:<span class="s">"Send"</span> enabled
+<span class="k">expect</span> #140 value 40..60
+<span class="k">expect</span> text:<span class="s">"Saved"</span> exists
+<span class="k">expect</span> #9 rect * * * 36
+<span class="k">expect</span> pixel 12 40 #0067C0
+<span class="k">expect token</span> accent_text #FFFFFF
+
+<span class="k">shot</span> before.png
+<span class="k">theme</span> dark
+<span class="k">theme</span> light
+<span class="k">expect same</span> before.png       <span class="d"># byte a byte</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="perf-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="perf-title">Presupuestos de fotograma como pruebas.</h2>
+        <p class="prose" style="margin-top:16px"><code>bench</code> cronometra fotogramas reales mientras las cosas se mueven: una animación, un arrastre, una serie de giros de rueda. Muestra la media, la mediana y el peor fotograma, y con un límite falla cuando la mediana supera el presupuesto. Tres intentos compensan una máquina de compilación ocupada.</p>
+        <p class="prose" style="margin-top:12px">Así es como la prueba de rendimiento de JFNetworker desplaza, amplía y arrastra una red de 500 dispositivos y 800 cables a 1920 × 1080.</p>
+      </div>
+<pre class="panel"><span class="d"># 300 fotogramas de un arrastre, como máximo 16,6 ms cada uno</span>
+<span class="k">bench</span> 300 drag #50 900,500 16600
+
+<span class="d"># desplazamiento suave</span>
+<span class="k">wheel</span> 500,400 -360
+<span class="k">bench</span> 60 anim 16600</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue" aria-labelledby="gif-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="gif-title">Cada animación de este sitio es un script.</h2>
+        <p class="prose" style="margin-top:16px">Los GIF y las capturas de este sitio no se grabaron a mano. Un script lleva cada app al estado adecuado y toma una imagen tras cada paso, sin ventana. Vuelve a ejecutarlo después de un cambio y las imágenes se actualizan solas.</p>
+        <div class="cta" style="margin-top:22px"><a class="btn light" href="features.html">Míralas en la página de funciones</a></div>
+      </div>
+      <figure><picture><source srcset="img/feature-docking-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-docking.gif" width="960" height="640" loading="lazy" alt="Un panel arrastrado fuera de su grupo de pestañas, sobre los marcadores de destino, y acoplado de nuevo."></picture></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="run-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="run-title">Cada app nueva empieza con una prueba que pasa.</h2>
+        <p class="prose" style="margin-top:16px"><code>cargo jflib new</code> crea <code>tests/smoke.uis</code> junto a tu código. <code>cargo jflib test</code> compila la app y ejecuta cada script de <code>tests/</code>. Una primera línea <code>#!args</code> pasa argumentos al programa, y <code>dump</code> imprime el árbol de widgets con ids y posiciones cuando escribes un script nuevo.</p>
+        <p class="prose" style="margin-top:12px">El <a href="inspector.html">inspector</a> muestra el selector de cualquier widget que señales, listo para pegar.</p>
+        <div class="cta" style="margin-top:22px">
+          <a class="btn primary" href="docs/GUIDE.html">Guía para desarrolladores</a>
+          <a class="btn" href="inspector.html">Inspector en vivo</a>
+        </div>
+      </div>
+<pre class="panel"><span class="d"># tests/smoke.uis</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 2"</span> exists
+<span class="k">click</span> <span class="s">"Reset"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 0"</span> exists
+<span class="k">shot</span> target/smoke.png</pre>
+    </div>
+  </div>
+</section>

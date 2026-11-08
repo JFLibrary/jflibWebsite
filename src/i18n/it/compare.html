@@ -1,0 +1,157 @@
+title: JFLib a confronto con egui, gpui e Tauri
+nav: compare
+description: Come si confronta la libreria GUI JFLib con egui, gpui e Tauri: piattaforme, rendering, accessibilità, widget, testo, strumenti, pacchetti e fondamenta.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1>JFLib <em>a confronto.</em></h1>
+    <p class="lede">egui, gpui e Tauri sono buone scelte per molte app Rust. Ecco dove JFLib prende un’altra strada, e dove è ancora indietro. Le informazioni sugli altri vengono dalla loro documentazione e dalle loro release, aggiornate a novembre 2026.</p>
+    <div class="rm-key" aria-label="Legenda">
+      <span><i class="mk y" aria-hidden="true"></i>Integrato</span>
+      <span><i class="mk p" aria-hidden="true"></i>In parte, o da un altro crate</span>
+      <span><i class="mk n" aria-hidden="true"></i>Non disponibile</span>
+      <span><i class="mk s" aria-hidden="true"></i>In arrivo molto presto</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="ideas-title">
+  <div class="wrap">
+    <div class="head"><h2 id="ideas-title">Quattro idee diverse.</h2></div>
+    <div class="ideas">
+      <div class="idea me"><h3>JFLib</h3><p>Un’unica libreria con tutto ciò che serve a un’app, dalla finestra all’installer, costruita su <code>core</code> e <code>alloc</code>. Disegna da sé ogni pixel, uguale su ogni piattaforma, e affida alla GPU output, layer e immagini.</p></div>
+      <div class="idea"><h3>egui</h3><p>Una libreria UI in immediate mode che trasforma i widget in mesh di triangoli. eframe aggiunge le finestre sopra winit e disegna le mesh con wgpu o OpenGL.</p></div>
+      <div class="idea"><h3>gpui</h3><p>Il framework dietro l’editor Zed, che mescola immediate e retained mode su un proprio renderer GPU. La maggior parte dei widget viene dal progetto separato gpui-component.</p></div>
+      <div class="idea"><h3>Tauri</h3><p>Un frontend web nella webview del sistema, con dietro un backend Rust. L’interfaccia è HTML, CSS e JavaScript.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="table-title">
+  <div class="wrap">
+    <div class="head"><h2 id="table-title">Fianco a fianco.</h2></div>
+    <div class="cmp-wrap" tabindex="0" role="region" aria-label="Tabella di confronto, scorri in orizzontale">
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="vh">Argomento</span></th><th scope="col" class="me">JFLib</th><th scope="col">egui / eframe</th><th scope="col">gpui</th><th scope="col">Tauri 2</th></tr></thead>
+        <tbody>
+          <tr class="grp"><th scope="rowgroup" colspan="5">Piattaforme</th></tr>
+          <tr><th scope="row">Windows</th><td class="y me">Nativo</td><td class="y">Sì</td><td class="y">Sì</td><td class="y">Sì</td></tr>
+          <tr><th scope="row">Linux</th><td class="y me">Wayland e X11, con codice di protocollo proprio</td><td class="y">Wayland e X11</td><td class="y">Wayland e X11</td><td class="y">Tramite WebKitGTK</td></tr>
+          <tr><th scope="row">Android</th><td class="y me">APK nativo</td><td class="y">Sì</td><td class="n">Solo un crate della community</td><td class="y">Sì</td></tr>
+          <tr><th scope="row">Browser</th><td class="y me">WebAssembly: scalare, SIMD e thread</td><td class="y">Sì</td><td class="p">Sperimentale</td><td class="n">No</td></tr>
+          <tr><th scope="row">macOS</th><td class="s me">In arrivo molto presto. Oggi tramite il browser</td><td class="y">Sì</td><td class="y">Sì</td><td class="y">Sì</td></tr>
+          <tr><th scope="row">iOS</th><td class="s me">In arrivo molto presto. Oggi tramite il browser</td><td class="n">Non indicato</td><td class="p">Esiste un crate, stato incerto</td><td class="y">Sì, ancora in maturazione</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Disegno</th></tr>
+          <tr><th scope="row">Chi disegna</th><td class="y me">Un renderer proprio, identico al pixel ovunque. Vulkan per output, layer e immagini</td><td class="y">Mesh proprie, disegnate con wgpu o OpenGL</td><td class="y">Un renderer GPU proprio: Metal, DirectX 11, wgpu</td><td class="p">La webview del sistema, diversa per piattaforma</td></tr>
+          <tr><th scope="row">Funziona senza GPU</th><td class="y me">Sì. La GPU viene usata quando c’è</td><td class="p">Richiede una GPU o un driver OpenGL</td><td class="n">Richiede una GPU</td><td class="p">Dipende dalla webview</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Accessibilità</th></tr>
+          <tr><th scope="row">Lettori di schermo</th><td class="y me">UI Automation, AT-SPI2, ARIA nel browser, nodi Android</td><td class="y">AccessKit su Windows e macOS. Linux probabile, non documentato</td><td class="p">AccessKit sul branch main, non nella release su crates.io</td><td class="p">Dalla webview e dal tuo HTML</td></tr>
+          <tr><th scope="row">Contrasto elevato</th><td class="y me">Un tema a contrasto elevato che segue il sistema</td><td class="n">Nessuna modalità integrata</td><td class="n">Nessuna modalità integrata</td><td class="p">Dipende dal tuo CSS</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Widget pronti all’uso</th></tr>
+          <tr><th scope="row">Tabelle virtuali</th><td class="y me">Ordinamento e selezione multipla</td><td class="p">egui_extras</td><td class="p">gpui-component</td><td class="p">Librerie JavaScript</td></tr>
+          <tr><th scope="row">Alberi</th><td class="y me">Anche con caselle di controllo</td><td class="n">Nessun widget dedicato</td><td class="p">gpui-component</td><td class="p">Librerie JavaScript</td></tr>
+          <tr><th scope="row">Editor di testo formattato</th><td class="y me">Con importazione ed esportazione in HTML</td><td class="n">No</td><td class="n">No</td><td class="p">Librerie JavaScript</td></tr>
+          <tr><th scope="row">Editor di codice</th><td class="y me">Evidenziazione, trova e sostituisci, 100.000 righe</td><td class="p">Evidenziazione di base</td><td class="p">gpui-component</td><td class="p">Monaco, CodeMirror</td></tr>
+          <tr><th scope="row">Docking</th><td class="y me">Gruppi di schede e finestre degli strumenti mobili</td><td class="p">egui_dock, egui_tiles</td><td class="p">gpui-component</td><td class="p">Librerie JavaScript</td></tr>
+          <tr><th scope="row">Grafici</th><td class="y me">Sparkline, linee, barre, anelli</td><td class="p">egui_plot</td><td class="p">gpui-component</td><td class="p">Librerie JavaScript</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Aspetto</th></tr>
+          <tr><th scope="row">Stili</th><td class="y me">Sette, tra cui WinUI, macOS, KDE e Classic, intercambiabili a runtime</td><td class="p">Un unico aspetto proprio. Un aspetto nativo non è tra gli obiettivi</td><td class="p">Un aspetto proprio, temi da gpui-component</td><td class="y">Qualsiasi aspetto tu costruisca in CSS</td></tr>
+          <tr><th scope="row">File di tema</th><td class="y me">Un piccolo file INI sopra qualsiasi stile</td><td class="p">Impostazioni di stile nel codice</td><td class="p">gpui-component</td><td class="y">CSS</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Testo</th></tr>
+          <tr><th scope="row">Da destra a sinistra</th><td class="y me">I layout si rispecchiano</td><td class="n">Non funziona ancora</td><td class="p">Cursore e selezione presuppongono testo da sinistra a destra</td><td class="y">Motore del browser</td></tr>
+          <tr><th scope="row">Controllo ortografico</th><td class="y me">Hunspell o il correttore ortografico di Windows</td><td class="n">No</td><td class="n">No</td><td class="p">Dipende dalla webview</td></tr>
+          <tr><th scope="row">Metodi di input</th><td class="y me">Windows, Wayland, X11</td><td class="y">Desktop</td><td class="y">Sì</td><td class="y">Motore del browser</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Strumenti</th></tr>
+          <tr><th scope="row">Test della UI</th><td class="y me"><a href="testing.html">Script .uis</a>, headless, fino al pixel</td><td class="y">egui_kittest</td><td class="y">Contesto di test con input simulato</td><td class="y">WebDriver</td></tr>
+          <tr><th scope="row">Inspector dal vivo</th><td class="y me"><a href="inspector.html">In ogni app</a>, modifica l’aspetto, trova la riga di codice</td><td class="p">Un protocollo di ispezione e hook</td><td class="p">L’inspector di Zed, build di debug, parte di Zed (GPL)</td><td class="y">L’inspector web</td></tr>
+          <tr><th scope="row">Hot reload</th><td class="y me">Ricompila e riesegue il tuo input</td><td class="n">Non integrato</td><td class="p">Una feature sul branch main</td><td class="p">Per il frontend web</td></tr>
+          <tr><th scope="row">Agenti AI</th><td class="y me">JSON-RPC e MCP, disattivati di default</td><td class="p">Il crate egui_mcp</td><td class="n">Nessuno integrato</td><td class="n">Nessuno integrato</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Distribuzione</th></tr>
+          <tr><th scope="row">Pacchetti</th><td class="y me">Setup, MSIX, deb, RPM, AppImage, Flatpak, APK</td><td class="n">Nessuno documentato</td><td class="n">Nessuno</td><td class="y">MSI, NSIS, dmg, deb, RPM, AppImage e altri</td></tr>
+          <tr><th scope="row">Aggiornamenti firmati</th><td class="y me">Con rollback</td><td class="n">Nessuno documentato</td><td class="n">Nessuno</td><td class="y">Plugin Updater</td></tr>
+          <tr><th scope="row">Permessi</th><td class="y me">Un manifesto per file, programmi e URL, applicato a runtime</td><td class="n">Nessuno</td><td class="n">Nessuno</td><td class="p">Le capabilities limitano cosa può chiamare il frontend web</td></tr>
+
+          <tr class="grp"><th scope="rowgroup" colspan="5">Fondamenta</th></tr>
+          <tr><th scope="row"><code>no_std</code></th><td class="y me">Sì. <code>std</code> quando ti serve</td><td class="n">No</td><td class="n">No</td><td class="n">Non applicabile</td></tr>
+          <tr><th scope="row">Cosa aggiungi</th><td class="y me">Un solo crate, <code>jflib</code>, con dentro rete, codec, crittografia, audio e archiviazione</td><td class="p">egui più eframe, oppure il tuo codice per finestre e rendering</td><td class="p">gpui più gpui-component</td><td class="p">Un frontend web e la sua toolchain</td></tr>
+          <tr><th scope="row">Requisiti a runtime</th><td class="y me">Niente su Windows. glibc su Linux</td><td class="p">Una GPU o un driver OpenGL, librerie X11 o Wayland</td><td class="p">DirectX 11, Metal o Vulkan</td><td class="p">WebView2 su Windows, WebKitGTK su Linux</td></tr>
+          <tr><th scope="row">Versione</th><td class="p me">0.1, appena arrivata su crates.io</td><td class="p">0.37, breaking change previsti</td><td class="p">0.2.2 su crates.io, il lavoro più recente non è rilasciato</td><td class="y">2.12, stabile dal 2024</td></tr>
+          <tr><th scope="row">Licenza</th><td class="y me">MIT o Apache 2.0</td><td class="y">MIT o Apache 2.0</td><td class="y">Apache 2.0</td><td class="y">Apache 2.0 o MIT</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="diff-title">
+  <div class="wrap">
+    <div class="head"><h2 id="diff-title">Dove JFLib si distingue.</h2></div>
+    <div class="caps">
+      <div class="cap"><h3>Tutto dalle stesse mani</h3><p>Finestre, widget, testo, immagini, rete, pacchetti e aggiornamenti arrivano da un’unica libreria, testata nel suo insieme. Nessun secondo loop delle finestre, nessuno stack web.</p></div>
+      <div class="cap"><h3>Gli stessi pixel ovunque</h3><p>Ogni widget è disegnato dal renderer di JFLib, così un’app ha lo stesso aspetto su ogni piattaforma e in ogni test. È questo che rende possibili test esatti al pixel.</p></div>
+      <div class="cap"><h3>Accessibile di default</h3><p>Lettori di schermo su quattro piattaforme, contrasto elevato, una scala del testo separata, uso completo da tastiera e layout da destra a sinistra, senza crate aggiuntivi.</p></div>
+      <div class="cap"><h3>Vere app desktop</h3><p>Docking, ribbon, testo formattato, un editor di codice, griglie di dati, tipi di file, icone nella tray e jump list fanno parte della libreria.</p></div>
+      <div class="cap"><h3>Strumenti in ogni app</h3><p>L’<a href="inspector.html">inspector dal vivo</a>, gli <a href="testing.html">script di test</a>, l’hot reload e un’interfaccia per agenti sono in ogni build, e quando sono spenti non costano nulla.</p></div>
+      <div class="cap"><h3>Pronta da distribuire</h3><p><code>cargo jflib package</code> crea installer e pacchetti per Windows e Linux, con firma e aggiornamenti firmati.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="behind-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="behind-title">Dove oggi gli altri sono avanti.</h2>
+      <p class="prose">Un confronto onesto mostra entrambi i lati.</p>
+    </div>
+    <div class="caps caps-ink">
+      <div class="cap"><h3>Piattaforme Apple</h3><p>egui, gpui e Tauri girano in modo nativo su macOS, e Tauri anche su iOS. Il supporto nativo a macOS e iOS per JFLib arriverà molto presto. Fino ad allora le app JFLib ci arrivano tramite il browser.</p></div>
+      <div class="cap"><h3>Maturità e community</h3><p>Tauri è stabile dal 2024, ed egui è usata in molti progetti. JFLib è appena arrivata su crates.io, e per ora ha una community più piccola.</p></div>
+      <div class="cap"><h3>L’ecosistema web</h3><p>Con Tauri hai a disposizione ogni libreria JavaScript e le competenze di ogni sviluppatore web. Le app JFLib si scrivono solo in Rust.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="src-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="src-title">Fonti.</h2>
+      <p class="prose">Verificate l’8 novembre 2026. Qualcosa non è aggiornato? Diccelo su <a href="https://discord.gg/cX3jUxVvTm">Discord</a> o via <a href="mailto:contact@jfreund.org">email</a>.</p>
+    </div>
+    <div class="sources">
+      <div><h3>egui</h3><ul>
+        <li><a href="https://github.com/emilk/egui">README di egui</a> e <a href="https://github.com/emilk/egui/releases">release</a></li>
+        <li><a href="https://github.com/emilk/egui/tree/main/crates/eframe">README di eframe</a></li>
+        <li><a href="https://github.com/emilk/egui/issues/8576">Issue 8576, testo da destra a sinistra</a></li>
+        <li><a href="https://docs.rs/egui_extras/latest/egui_extras/">egui_extras</a>, <a href="https://crates.io/crates/egui_plot">egui_plot</a>, <a href="https://crates.io/crates/egui_dock">egui_dock</a></li>
+        <li><a href="https://github.com/emilk/egui/tree/main/crates/egui_kittest">egui_kittest</a></li>
+      </ul></div>
+      <div><h3>gpui</h3><ul>
+        <li><a href="https://crates.io/crates/gpui">gpui su crates.io</a></li>
+        <li><a href="https://github.com/zed-industries/zed/blob/main/crates/gpui/README.md">README di gpui</a></li>
+        <li><a href="https://github.com/zed-industries/zed/pull/50228">GPUI sul web</a></li>
+        <li><a href="https://github.com/longbridge/gpui-component">gpui-component</a></li>
+        <li><a href="https://zed.dev/docs/linux">Zed su Linux</a></li>
+      </ul></div>
+      <div><h3>Tauri</h3><ul>
+        <li><a href="https://v2.tauri.app/start/">Che cos’è Tauri</a></li>
+        <li><a href="https://v2.tauri.app/reference/webview-versions/">Versioni della webview</a></li>
+        <li><a href="https://v2.tauri.app/distribute/">Distribuzione</a> e <a href="https://v2.tauri.app/plugin/updater/">Updater</a></li>
+        <li><a href="https://v2.tauri.app/develop/tests/webdriver/">Test con WebDriver</a></li>
+        <li><a href="https://v2.tauri.app/blog/tauri-20/">Annuncio di Tauri 2.0</a></li>
+      </ul></div>
+      <div><h3>JFLib</h3><ul>
+        <li><a href="features.html">Tutte le funzionalità</a></li>
+        <li><a href="docs/GUIDE.html">Guida per sviluppatori</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="https://github.com/JFLibrary/JFLib">Codice sorgente</a></li>
+      </ul></div>
+    </div>
+  </div>
+</section>

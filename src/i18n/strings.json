@@ -50,7 +50,11 @@
     "Line {n} of {m}": "Zeile {n} von {m}",
     "Pause": "Pause",
     "Play": "Abspielen",
-    "Menu": "Menü"
+    "Menu": "Menü",
+    "Product page": "Produktseite",
+    "Product page coming soon": "Produktseite folgt bald",
+    "Platforms": "Plattformen",
+    "Browser": "Browser"
   },
   "fr": {
     "JFLib home": "Accueil JFLib",
@@ -83,14 +87,14 @@
     "MIT License": "licence MIT",
     "Apache License 2.0": "licence Apache 2.0",
     "@preview": "Aperçu. Sur les images, Kritzel, jfWord et le Build Manager sont encore en allemand.",
-    "@untranslated": "Cette page n’est pas encore traduite ; elle s’affiche en anglais.",
+    "@untranslated": "Cette page n’est pas encore traduite \u0001 elle s’affiche en anglais.",
     "@hint": "Cette page existe aussi en français.",
     "@hint-go": "Lire en français",
     "Feature Gallery": "Galerie des fonctionnalités",
     "Running in your browser as WebAssembly": "Tourne dans votre navigateur en WebAssembly",
     "Close": "Fermer",
     "Feature Gallery, running live": "Galerie des fonctionnalités, en direct",
-    "The gallery could not be loaded here. This is what it looks like:": "La galerie n’a pas pu être chargée ici. Voici à quoi elle ressemble :",
+    "The gallery could not be loaded here. This is what it looks like:": "La galerie n’a pas pu être chargée ici. Voici à quoi elle ressemble :",
     "A picture of the Feature Gallery.": "Une image de la galerie des fonctionnalités.",
     "Picture viewer": "Visionneuse d’images",
     "Previous picture": "Image précédente",
@@ -99,11 +103,15 @@
     "Zoom in": "Zoomer",
     "Fit to the screen": "Ajuster à l’écran",
     "Fit": "Ajuster",
-    "Enlarge: ": "Agrandir : ",
+    "Enlarge: ": "Agrandir : ",
     "Line {n} of {m}": "Ligne {n} sur {m}",
     "Pause": "Pause",
     "Play": "Lecture",
-    "Menu": "Menu"
+    "Menu": "Menu",
+    "Product page": "Page du produit",
+    "Product page coming soon": "Page du produit bientôt disponible",
+    "Platforms": "Plateformes",
+    "Browser": "Navigateur"
   },
   "it": {
     "JFLib home": "Home di JFLib",
@@ -156,7 +164,11 @@
     "Line {n} of {m}": "Riga {n} di {m}",
     "Pause": "Pausa",
     "Play": "Riproduci",
-    "Menu": "Menu"
+    "Menu": "Menu",
+    "Product page": "Pagina del prodotto",
+    "Product page coming soon": "Pagina del prodotto in arrivo",
+    "Platforms": "Piattaforme",
+    "Browser": "Browser"
   },
   "es": {
     "JFLib home": "Inicio de JFLib",
@@ -209,6 +221,10 @@
     "Line {n} of {m}": "Línea {n} de {m}",
     "Pause": "Pausa",
     "Play": "Reproducir",
-    "Menu": "Menú"
+    "Menu": "Menú",
+    "Product page": "Página del producto",
+    "Product page coming soon": "Página del producto muy pronto",
+    "Platforms": "Plataformas",
+    "Browser": "Navegador"
   }
 }

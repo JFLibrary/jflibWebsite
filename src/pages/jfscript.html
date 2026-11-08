@@ -18,7 +18,7 @@ description: JFScript, the scripting language of the JFLib project: bytecode, a 
         <p class="prose" style="margin-top:16px">If you have written JavaScript, Lua or Python, you can read JFScript. It has functions and closures, lists and maps, <code>try</code> and <code>catch</code>, and modules through <code>import</code>. Maps keep their order, integers stay integers, and text counts characters, not bytes.</p>
         <p class="prose" style="margin-top:12px">A standard library comes with every script: text, lists, maps, bytes, math and JSON.</p>
       </div>
-<pre class="panel"><span class="d">// a request path and a header</span>
+<pre class="panel"><span class="d">// the parts of a request path</span>
 <span class="k">let</span> parts = <span class="s">"/users/42/posts"</span>.split(<span class="s">"/"</span>)
   .filter(<span class="k">fn</span>(p) { <span class="k">return</span> len(p) > 0 })
 <span class="k">let</span> id = int.parse(parts[1]) ?? 0      <span class="d">// 42</span>
@@ -47,7 +47,7 @@ print(<span class="s">"{:>4}|{:.2}"</span>.format(id, 0.5))    <span class="d">/
       <div class="cap"><h3>Sandboxed</h3><p>Every instruction costs fuel. Memory, stack and call depth have hard limits, so an endless loop or a huge list simply ends the run.</p></div>
       <div class="cap"><h3>Pausable</h3><p>Run a script in slices of any size and get the same result as in one go. A whole VM can be cloned in the middle of a run.</p></div>
       <div class="cap"><h3>Your names only</h3><p>A script reaches only the functions the host gives it. Give the compiler your list of names, and a misspelt one is an error before the script runs, with a suggestion.</p></div>
-      <div class="cap"><h3>Exact math</h3><p>The math functions are fdlibm on software floats: errors below one ulp, exact where the result is exact.</p></div>
+      <div class="cap"><h3>Exact math</h3><p>The math functions are fdlibm on software floats: errors below one ulp, and exact wherever the result can be represented exactly.</p></div>
       <div class="cap"><h3>Editor support built in</h3><p>Completion, hover, signatures, go to definition, references, rename, folding, an outline and a formatter, also on half-typed code.</p></div>
     </div>
   </div>

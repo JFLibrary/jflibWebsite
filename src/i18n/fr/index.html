@@ -1,0 +1,413 @@
+title: JFLib
+description: Une bibliothèque d’interfaces graphiques complète en Rust, avec son propre moteur de rendu, des styles interchangeables et un seul code pour Windows, Linux, Android et le navigateur.
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 id="hero-title">Une <em>bibliothèque GUI</em> complète en Rust.</h1>
+      <p class="lede">Widgets, texte, graphisme, son, réseau et empaquetage dans une seule bibliothèque <code>no_std</code>, dotée de son propre moteur de rendu. Le même code tourne sous Windows, Linux, Android et dans le navigateur.</p>
+      <div class="cta">
+        <button class="btn primary big" type="button" data-demo>Essayer la galerie des fonctionnalités dans votre navigateur</button>
+        <a class="btn big" href="features.html">Voir toutes les fonctionnalités</a>
+      </div>
+      <p class="hint">Démarre dans cette page. Rien à installer.</p>
+    </div>
+    <div class="stage">
+      <div class="stage-win">
+        <svg class="shape a" viewBox="0 0 100 100" aria-hidden="true"><use href="#square"/></svg>
+        <svg class="shape b" viewBox="0 0 100 100" aria-hidden="true"><use href="#circle"/></svg>
+        <svg class="shape c" viewBox="0 0 100 100" aria-hidden="true"><use href="#star"/></svg>
+        <figure class="win">
+          <div class="tb" aria-hidden="true">
+            <span class="tb-title">Feature Gallery · <span id="style-name">WinUI</span></span>
+            <span class="tb-ctl"><span class="c-min">–</span><span class="c-max">□</span><span class="c-close">✕</span></span>
+          </div>
+          <div class="shots" id="shots">
+            <img class="on" data-ui="winui" src="img/gallery-winui.png" width="1000" height="700" alt="La galerie de widgets JFLib dans le style WinUI : boutons, cases à cocher, curseurs, champs de texte et une carte.">
+            <img data-ui="macos" src="img/gallery-macos.png" width="1000" height="700" alt="La même galerie dans le style macOS.">
+            <img data-ui="kde" src="img/gallery-kde.png" width="1000" height="700" alt="La même galerie dans le style KDE.">
+            <img data-ui="classic" src="img/gallery-classic.png" width="1000" height="700" alt="La même galerie dans le style Classic, avec des contrôles gris en relief.">
+            <img data-ui="jfoffice" src="img/gallery-jfoffice.png" width="1000" height="700" alt="La même galerie dans le style jfOffice.">
+            <img data-ui="backupcraft" src="img/gallery-backupcraft.png" width="1000" height="700" alt="La même galerie dans le style BackupCraft, avec une couleur d’accentuation bleu pétrole.">
+            <img data-ui="winui-dark" src="img/gallery-winui-dark.png" width="1000" height="700" alt="La même galerie dans le thème WinUI sombre.">
+          </div>
+        </figure>
+        <figure class="phone"><img src="img/pocket.png" width="780" height="1688" alt="La Pocket Gallery : les mêmes widgets Rust, disposés pour un téléphone."></figure>
+      </div>
+      <div class="pick" role="radiogroup" aria-label="Style de la fenêtre ci-dessus">
+        <span class="pick-label">Même application, autre style</span>
+        <input type="radio" name="ui" id="ui-winui" value="winui" data-label="WinUI" checked><label for="ui-winui">WinUI</label>
+        <input type="radio" name="ui" id="ui-macos" value="macos" data-label="macOS"><label for="ui-macos">macOS</label>
+        <input type="radio" name="ui" id="ui-kde" value="kde" data-label="KDE"><label for="ui-kde">KDE</label>
+        <input type="radio" name="ui" id="ui-classic" value="classic" data-label="Classic"><label for="ui-classic">Classic</label>
+        <input type="radio" name="ui" id="ui-jfoffice" value="jfoffice" data-label="jfOffice"><label for="ui-jfoffice">jfOffice</label>
+        <input type="radio" name="ui" id="ui-backupcraft" value="backupcraft" data-label="BackupCraft"><label for="ui-backupcraft">BackupCraft</label>
+        <input type="radio" name="ui" id="ui-winui-dark" value="winui-dark" data-label="WinUI dark"><label for="ui-winui-dark">Sombre</label>
+      </div>
+    </div>
+  </div>
+  <div class="status">
+    <div class="wrap">
+      <span>Prêt</span><span><b>50</b> crates</span><span><b>7</b> styles</span><span><b>9</b> langues</span><span>MIT ou Apache 2.0</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" id="inside" aria-labelledby="inside-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="inside-title">Du pixel à l’installeur, dans une seule bibliothèque.</h2>
+      <p class="prose">Une application décrit son interface dans une seule fonction et garde son état dans une simple struct Rust. JFLib s’occupe de la mise en page, des saisies, du focus et du rendu. Chaque bloc ci-dessous est une vraie crate du dépôt, avec une API sûre pour votre application.</p>
+    </div>
+    <div class="stack">
+      <div class="layer app"><div><b>Votre application</b><small>L’état dans une struct, l’interface dans <code>App::frame</code></small></div><div class="tiles"><span>un petit programme Rust</span></div></div>
+      <div class="layer l1"><div><b>Apparence</b><small>Choisie à la compilation</small></div><div class="tiles"><span>winui</span><span>macos</span><span>kde</span><span>classic</span><span>jfoffice</span><span>backupcraft</span><span>netlab</span></div></div>
+      <div class="layer l1"><div><b>Interface</b><small>Widgets, mise en page, saisie, focus</small></div><div class="tiles"><span>ui</span></div></div>
+      <div class="layer l2"><div><b>Texte et documents</b><small>Mise en forme, orthographe, pages</small></div><div class="tiles"><span>text</span><span>text_shape</span><span>spell</span><span>doc_core</span><span>doc_io</span><span>doc_layout</span><span>doc_view</span></div></div>
+      <div class="layer l3"><div><b>Graphisme</b><small>Rendu, effets, GPU</small></div><div class="tiles"><span>gfx</span><span>fx</span><span>simd</span><span>gpu</span><span>shader</span><span>wgsl</span></div></div>
+      <div class="layer l3"><div><b>Images</b><small>Codecs intégrés</small></div><div class="tiles"><span>img_core</span><span>img_all</span><span>img_png</span><span>img_jpeg</span><span>img_webp</span><span>img_tiff</span><span>img_avif</span><span>img_av1</span><span>img_jxl</span><span>img_jxl_enc</span><span>img_jxr</span><span>img_heif</span><span>img_hevc</span><span>img_gif</span><span>img_bmp</span><span>img_tga</span><span>img_dds</span><span>img_svg</span><span>img_pdn</span></div></div>
+      <div class="layer l4"><div><b>Données et réseau</b><small>Fichiers, crypto, protocoles, mises à jour</small></div><div class="tiles"><span>netio</span><span>netpkt</span><span>eapm</span><span>crypto</span><span>compress</span><span>archive</span><span>cas</span><span>datastore</span><span>datetime</span><span>update</span></div></div>
+      <div class="layer l4"><div><b>Automatisation</b><small>Agents, scripts, plugins</small></div><div class="tiles"><span>agent_core</span><span>agent_io</span><span>script</span><span>plugin</span></div></div>
+      <div class="layer l5"><div><b>Plateforme</b><small>Windows, Linux, Android, navigateur</small></div><div class="tiles"><span>plat</span><span>rt</span><span>base</span></div></div>
+      <div class="targets" aria-label="Cibles"><span>Windows</span><span>Linux</span><span>Android</span><span>Navigateur</span></div>
+    </div>
+    <p class="stack-note"><code>unsafe</code> reste cantonné aux couches du runtime, de la plateforme, du SIMD et des plugins.</p>
+  </div>
+</section>
+
+<section class="sec band b-indigo styles" aria-labelledby="styles-title">
+  <div class="deco" aria-hidden="true"><svg viewBox="0 0 100 100" style="width:min(46vw,620px);right:-8vw;top:-12%;color:var(--deco-light)"><use href="#star"/></svg></div>
+  <div class="wrap">
+    <div class="styles-grid">
+      <div>
+        <code class="flag">--style winui,macos,kde,classic,jfoffice,backupcraft</code>
+        <h2 id="styles-title">Changez de style. Gardez l’application.</h2>
+      </div>
+      <p class="prose">Les widgets sont dessinés par le style choisi : une même interface peut ressembler à Windows, macOS, KDE ou Office sans toucher à votre logique. Clair ou sombre, couleurs d’accentuation et mise à l’échelle changent pendant que l’application tourne. Un petit fichier INI pose vos propres couleurs, arrondis et espacements par-dessus n’importe quel style.</p>
+    </div>
+    <div class="compare" id="cmp-style" style="--x:50%">
+      <img src="img/kritzel-winui.png" width="1280" height="800" loading="lazy" alt="Kritzel, une application de dessin, dans le style WinUI.">
+      <img class="over" src="img/kritzel-classic.png" width="1280" height="800" loading="lazy" alt="La même fenêtre de Kritzel dans le style Classic.">
+      <span class="tag l">Classic</span><span class="tag r">WinUI</span>
+      <input type="range" id="cmp-style-range" min="0" max="100" value="50" aria-label="Comparer Kritzel dans les styles Classic et WinUI">
+      <span class="bar" aria-hidden="true"><span class="knob">↔</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="sec after-overlap" aria-labelledby="plat-title">
+  <div class="wrap plat">
+    <div class="devices media">
+      <img class="shot" src="img/backupcraft-dark.png" width="1280" height="800" loading="lazy" alt="BackupCraft sous Windows : une liste de tâches de sauvegarde avec des badges d’état et un volet de navigation, dans un thème sombre, avec des données de démonstration.">
+      <figure class="phone"><img src="img/pocket.png" width="780" height="1688" loading="lazy" alt="La Pocket Gallery sur un téléphone."></figure>
+    </div>
+    <div>
+      <code class="flag" style="color:var(--muted)">--target win | linux | android | web</code>
+      <h2 id="plat-title">Partout les mêmes widgets.</h2>
+      <p class="prose" style="margin-top:16px">Les fenêtres natives, l’hôte navigateur et l’adaptateur Android partagent les mêmes widgets Rust et le même moteur de rendu.</p>
+      <ul class="plat-list">
+        <li><b>Windows</b><span>Application native x86-64 avec intégration au bureau</span></li>
+        <li><b>Linux</b><span>Application native x86-64, Wayland et X11, choix au démarrage</span></li>
+        <li><b>Android</b><span>APK natif pour Android 8 et versions ultérieures, pour l’instant la Pocket Gallery</span></li>
+        <li><b>Navigateur</b><span>WebAssembly, testé sur Chromium et Firefox</span></li>
+        <li><b>macOS, iOS</b><span>Via le navigateur pour l’instant, pas encore de build natif</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-blue web" aria-labelledby="web-title">
+  <div class="wrap web-grid">
+    <div>
+      <code class="flag">--target web</code>
+      <h2 id="web-title">Des applications entières dans un onglet du navigateur.</h2>
+      <p class="prose" style="margin-top:16px">Votre application est compilée en WebAssembly et garde ses widgets, son moteur de rendu et sa prise en charge des lecteurs d’écran. L’hôte choisit une variante scalaire, SIMD ou multithread selon ce que le navigateur sait faire.</p>
+      <div class="chips" aria-label="Applications qui tournent dans le navigateur"><span>Galerie</span><span>Kritzel</span><span>PaintCraft</span><span>jfWord</span></div>
+      <div class="cta"><button class="btn dark big" type="button" data-demo>Essayer la galerie des fonctionnalités dans votre navigateur</button></div>
+    </div>
+    <div class="media">
+      <figure class="browser">
+        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>Feature Gallery</span></div>
+        <img src="img/browser-gallery.png" width="1000" height="560" loading="lazy" alt="La galerie des fonctionnalités dans un onglet du navigateur, avec des boutons, des cases à cocher et des curseurs.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-orange nostd" aria-labelledby="nostd-title">
+  <div class="wrap">
+    <code class="flag">core + alloc</code>
+    <h2 id="nostd-title">#![no_std]</h2>
+    <div class="nostd-grid">
+      <div>
+        <p class="nostd-sub">Aucun framework GUI en dessous. Tout d’un seul tenant.</p>
+        <p class="prose">Le moteur de rendu, les widgets, les codecs d’image, le réseau et la couche plateforme vivent tous dans cette bibliothèque, au-dessus de <code>core</code> et <code>alloc</code> de Rust. Vous n’assemblez pas une crate de fenêtrage, une boucle d’événements et une crate d’interface, comme le font les applications egui avec eframe : une seule dépendance, <code>jflib</code>, forme toute la pile. Écrivez aussi votre application en <code>no_std</code>. Si elle a besoin d’une crate qui utilise <code>std</code>, une seule feature active std, et n’importe quelle crate peut être liée. Évitez seulement d’ajouter une deuxième boucle de fenêtre ou de faire tourner un runtime async sur le thread de l’interface : JFLib a déjà les deux.</p>
+      </div>
+      <div>
+        <p class="bars-head">Une application, un fichier</p>
+        <ul class="bars">
+          <li><b>template</b><span class="t" style="--w:32.6%">3,81 Mo</span></li>
+          <li><b>gallery</b><span class="t" style="--w:36.2%">4,23 Mo</span></li>
+          <li><b>Kritzel</b><span class="t" style="--w:37.4%">4,37 Mo</span></li>
+          <li><b>PaintCraft</b><span class="t" style="--w:74.9%">8,75 Mo</span></li>
+          <li><b>jfWord</b><span class="t" style="--w:100%">11,68 Mo</span></li>
+        </ul>
+        <p class="bars-note soft">Builds release pour Windows x86-64, mesurés le 2 novembre 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="tools" aria-labelledby="tools-title">
+  <div class="wrap">
+    <div class="head"><h2 id="tools-title">Rapide à modifier. Facile à vérifier.</h2></div>
+
+    <div class="tool">
+      <div>
+        <code class="flag">cargo jflib watch</code>
+        <h3>Enregistrez, et reprenez là où vous étiez.</h3>
+        <p>Le rechargement à chaud recompile l’application et la ramène là où elle en était, avec votre modification. Les saisies de votre session sont rejouées dans le nouveau code : les widgets restent du Rust compilé, et votre application n’a besoin d’aucune structure d’état particulière.</p>
+      </div>
+      <div class="media">
+        <pre class="panel"><span class="d">apps/hello/src/main.rs</span>
+<span class="r">- if ui.accent_button(100, "Click me") &amp; EV_ACT != 0 {</span>
+<span class="a">+ if ui.accent_button(100, "Add one") &amp; EV_ACT != 0 {</span></pre>
+        <div class="flow" aria-label="Ce qui se passe après l’enregistrement"><span>Enregistrer</span><span>Compiler</span><span>Rejouer les saisies</span><span>Même endroit, nouveau code</span></div>
+      </div>
+    </div>
+
+    <div class="tool rev">
+      <div>
+        <code class="flag">--inspect · Ctrl+Shift+I · F12</code>
+        <h3>Pointez n’importe quel widget d’une application en marche.</h3>
+        <p>La surcouche nomme le widget sous le pointeur avec son id, son libellé, sa taille et son état. Une fenêtre d’outils ajoute l’arbre des widgets, les propriétés, un sélecteur pour les scripts et des statistiques par image. Désactivé, l’inspecteur ne coûte rien.</p>
+        <p class="more"><a href="inspector.html">L’inspecteur en détail</a></p>
+      </div>
+      <div class="media">
+        <picture><source srcset="img/feature-inspector-still.png" media="(prefers-reduced-motion: reduce)"><img class="shot" src="img/feature-inspector.gif" width="900" height="520" loading="lazy" alt="L’inspecteur en direct nomme chaque widget sous le pointeur avec son id, son libellé, sa taille et son état."></picture>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <code class="flag">--script tests/smoke.uis</code>
+        <h3>Des tests qui se lisent comme des instructions.</h3>
+        <p>Un script <code>.uis</code> clique, tape du texte, change de thème, vérifie le résultat et enregistre une capture d’écran, sur la vraie application, sous Windows et Linux.</p>
+        <p class="more"><a href="testing.html">En savoir plus sur le langage de test</a></p>
+      </div>
+      <div class="media script-scene">
+        <pre class="panel"><span class="d"># un test de fumée</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">click</span> <span class="s">"Click me"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 2"</span> exists
+<span class="k">click</span> <span class="s">"Reset"</span>
+<span class="k">expect</span> text:<span class="s">"Clicks: 0"</span> exists
+<span class="k">shot</span> build/template.png</pre>
+        <picture><source srcset="img/uis-test-still.png" media="(prefers-reduced-motion: reduce)"><img class="result" src="img/uis-test.gif" width="480" height="300" loading="lazy" alt="Le script clique dans la vraie application : le compteur passe à deux, puis revient à zéro."></picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-green" aria-labelledby="a11y-title">
+  <div class="deco" aria-hidden="true"><svg viewBox="0 0 100 100" style="width:min(42vw,560px);left:-10vw;bottom:-22%;color:var(--deco-dark)"><use href="#circle"/></svg></div>
+  <div class="wrap">
+    <div class="head">
+      <code class="flag" style="margin-bottom:0">--contrast high · --text-scale 150</code>
+      <h2 id="a11y-title">Fonctionne avec un lecteur d’écran, au clavier et en grands caractères.</h2>
+    </div>
+    <div class="a11y-grid">
+      <div class="compare" id="cmp-a11y" style="--x:50%">
+        <img src="img/feature-charts.png" width="1440" height="960" loading="lazy" alt="Une vue de données avec des graphiques, une grille et un assistant, dans le thème normal.">
+        <img class="over" src="img/feature-high-contrast.png" width="1440" height="960" loading="lazy" alt="La même vue de données dans le thème à contraste élevé.">
+        <span class="tag l">Contraste élevé</span><span class="tag r">Normal</span>
+        <input type="range" id="cmp-a11y-range" min="0" max="100" value="50" aria-label="Comparer la vue de données en contraste élevé et en thème normal">
+        <span class="bar" aria-hidden="true"><span class="knob">↔</span></span>
+      </div>
+      <div class="a11y-side">
+        <ul class="a11y-list">
+          <li><b>Lecteurs d’écran</b><span class="soft">UI Automation, AT-SPI2, un arbre ARIA dans le navigateur et les nœuds d’accessibilité d’Android.</span></li>
+          <li><b>Paramètres système</b><span class="soft">Contraste élevé, couleur d’accentuation, animations réduites et une taille de texte distincte de l’échelle de l’interface.</span></li>
+          <li><b>Clavier</b><span class="soft">Utilisation complète avec des groupes de focus, F6 pour passer d’un volet à l’autre et la touche Menu partout.</span></li>
+          <li><b>Loupes</b><span class="soft">La position du curseur de texte est transmise, pour qu’une loupe d’écran puisse la suivre.</span></li>
+        </ul>
+        <figure>
+          <img class="shot" src="img/feature-text-scale.png" width="1000" height="700" loading="lazy" alt="La galerie de widgets avec le texte à 150 pour cent, tandis que les icônes gardent leur taille.">
+          <figcaption class="soft">Texte à 150 %. Les icônes gardent leur taille.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="gpu-title">
+  <div class="wrap gpu-grid">
+    <div>
+      <code class="flag">lib/gpu · lib/wgsl</code>
+      <h2 id="gpu-title">Un accès direct à la carte graphique.</h2>
+      <p class="prose" style="margin-top:16px">Pour les programmes qui ont besoin de plus qu’une interface : compute shaders, rendu avec test de profondeur, dessin indirect, horodatages et swapchains de fenêtre, derrière une API explicite dans l’esprit de Vulkan et WebGPU.</p>
+      <ul class="matrix" aria-label="Prise en charge du GPU par plateforme">
+        <li><span>Windows</span><code>Vulkan</code><span class="now">Disponible</span></li>
+        <li><span>Linux</span><code>Vulkan</code><span class="now">Disponible</span></li>
+        <li><span>Android</span><code>Vulkan</code><span class="now">Disponible</span></li>
+        <li><span>Navigateur</span><code>WebGPU</code><span class="next">Prévu</span></li>
+        <li><span>Apple</span><code>Metal</code><span class="next">Plus tard</span></li>
+      </ul>
+    </div>
+    <div>
+      <figure class="gpu-shot">
+        <img class="shot" src="img/gpu-scene.jpg" width="1280" height="800" loading="lazy" alt="Des milliers de cubes colorés en mouvement, rendus par la couche GPU.">
+        <figcaption class="soft">La scène de test GPU de JFLib, avec 200 000 cubes en mouvement.</figcaption>
+      </figure>
+      <ol class="pipe">
+        <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><div><b>Shader WGSL</b><span>Le code source de votre shader</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><div><b><code>wgsl</code></b><span>Le vérifie et le compile en SPIR-V, dans la bibliothèque</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><div><b><code>gpu</code></b><span>Périphériques, files d’attente, pipelines et tampons de commandes, avec le back-end choisi à la compilation</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--on-ink)" aria-hidden="true"><use href="#square"/></svg><div><b>Votre fenêtre</b><span>Les widgets sont toujours rastérisés sur le CPU. Sous Windows, Linux et Android, le GPU prend en charge la sortie, les calques, les images et les canevas.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="agents" aria-labelledby="agents-title">
+  <div class="wrap">
+    <div class="head">
+      <code class="flag" style="margin-bottom:0;color:var(--muted)">--agent-mcp</code>
+      <h2 id="agents-title">Conçue pour être utilisée par des agents IA.</h2>
+      <p class="prose">JFLib est écrite d’abord pour les agents : toute la base de code est donc optimisée pour l’efficacité matérielle. Un agent peut compiler une application, la lancer et vérifier le résultat lui-même.</p>
+    </div>
+    <div class="loop">
+      <div class="step">
+        <svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg>
+        <div><h3>Voir</h3><p style="margin-top:6px">Des captures d’écran PNG sans fenêtre visible, et des dumps de l’arbre des widgets.</p></div>
+<pre class="panel">--shot target/app.png
+--size 1000x800</pre>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg>
+        <div><h3>Agir</h3><p style="margin-top:6px">Des scripts, ou JSON-RPC et MCP via l’entrée et la sortie standard.</p></div>
+<pre class="panel">--script tests/smoke.uis
+--agent-json
+--agent-mcp</pre>
+      </div>
+      <div class="step">
+        <svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg>
+        <div><h3>Vérifier</h3><p style="margin-top:6px">Chaque nouvelle application démarre avec un test qui passe déjà.</p></div>
+<pre class="panel">expect text:"Clicks: 2" exists
+cargo jflib test</pre>
+      </div>
+    </div>
+    <p class="loop-note">Aucun modèle de langage ne tourne dans votre application. Le point d’accès pour agents reste fermé tant que l’application n’est pas lancée avec <code>--agent</code>, <code>--agent-json</code> ou <code>--agent-mcp</code>.</p>
+  </div>
+</section>
+
+<section class="sec s-surface" id="parts" aria-labelledby="parts-title">
+  <div class="wrap">
+    <div class="head"><h2 id="parts-title">Toutes les pièces d’une vraie application.</h2></div>
+    <p class="wall"><span>Boutons<i class="q"></i></span> <span>Cases à cocher<i class="o"></i></span> <span>Interrupteurs<i class="x"></i></span> <span>Champs de texte<i class="q"></i></span> <span>Curseurs<i class="o"></i></span> <span>Listes<i class="x"></i></span> <span>Onglets<i class="q"></i></span> <span>Menus<i class="o"></i></span> <span>Boîtes de dialogue<i class="x"></i></span> <span>Zones de défilement<i class="q"></i></span> <span>Barres d’outils<i class="o"></i></span> <span>Rubans Office<i class="x"></i></span> <span>Grille de disposition<i class="q"></i></span> <span>Panneaux ancrables<i class="o"></i></span> <span>Fenêtres d’outils<i class="x"></i></span> <span>Popups<i class="q"></i></span> <span>Infobulles<i class="o"></i></span> <span>Grilles virtuelles<i class="x"></i></span> <span>Arborescences<i class="q"></i></span> <span>Volets de navigation<i class="o"></i></span> <span>Barres de commandes<i class="x"></i></span> <span>Séparateurs<i class="q"></i></span> <span>Assistants<i class="o"></i></span> <span>Graphiques<i class="x"></i></span> <span>Toasts<i class="q"></i></span> <span>Champs de date et d’heure<i class="o"></i></span> <span>Canevas de diagramme<i class="x"></i></span> <span>Terminal<i class="q"></i></span> <span>Éditeur de texte enrichi<i class="o"></i></span> <span>Éditeur de code<i class="x"></i></span> <span>Visionneuse d’images<i class="q"></i></span> <span>Dialogue des polices</span></p>
+
+    <div class="mosaic">
+      <figure class="tile w7 r-tall"><div class="pic"><img src="img/feature-charts.png" width="1440" height="960" loading="lazy" alt="Des cartes KPI avec sparklines, un graphique à barres empilées, un graphique en anneau, une grille triable, un assistant et un toast."></div><figcaption><b>Graphiques et vues de données</b>Cartes KPI, sparklines, barres empilées, anneaux, une grille triable, des assistants et des toasts.</figcaption></figure>
+      <figure class="tile w5 r-tall"><div class="pic"><picture><source srcset="img/feature-diagram-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-diagram.gif" width="1100" height="760" loading="lazy" alt="Un nœud glissé à travers un diagramme : ses liaisons suivent et la minicarte se met à jour."></picture></div><figcaption><b>Canevas de diagramme</b>Nœuds, ports, trois sortes de liaisons, aimantation à la grille et une minicarte.</figcaption></figure>
+      <figure class="tile w5 r-tall"><div class="pic"><img src="img/feature-code-editor.png" width="1000" height="680" loading="lazy" alt="L’éditeur de code affichant du Rust avec coloration syntaxique, dans le thème sombre."></div><figcaption><b>Éditeur de code</b>Rust, JSON, INI, TOML et Markdown. Reste rapide avec 100 000 lignes.</figcaption></figure>
+      <figure class="tile w7 r-tall"><div class="pic"><img src="img/feature-richtext.png" width="1000" height="565" loading="lazy" alt="L’éditeur de texte enrichi avec des titres, des formats de caractère, des listes, une citation et des alignements."></div><figcaption><b>Éditeur de texte enrichi</b>Titres, formats de caractère, listes, citations et alignements, avec import et export HTML.</figcaption></figure>
+      <figure class="tile w12 r-wide"><div class="pic"><img src="img/jfword-dark.png" width="1424" height="884" loading="lazy" alt="Un ruban Office de jfWord, avec des groupes pour la police, le paragraphe et les styles."></div><figcaption><b>Rubans Office</b>Onglets, groupes et galeries, comme dans jfWord.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><picture><source srcset="img/feature-docking-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-docking.gif" width="960" height="640" loading="lazy" alt="Un panneau glissé au-dessus des repères d’ancrage et déposé dans un groupe d’onglets."></picture></div><figcaption><b>Ancrage</b>Groupes d’onglets, repères de dépôt, fenêtres d’outils flottantes et dispositions enregistrées.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><picture><source srcset="img/feature-dragdrop-still.png" media="(prefers-reduced-motion: reduce)"><img src="img/feature-dragdrop.gif" width="720" height="440" loading="lazy" alt="Un élément glissé d’une étagère vers un panier qui s’illumine."></picture></div><figcaption><b>Glisser-déposer</b>Entre widgets, et depuis ou vers d’autres programmes.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-svg.png" width="1040" height="820" loading="lazy" alt="Des images de test SVG avec des formes, des tracés, des contours, des dégradés, des transformations et des masques de découpe."></div><figcaption><b>SVG</b>Le rastériseur propre à JFLib, net à toutes les tailles.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-spellcheck.png" width="640" height="436" loading="lazy" alt="Un mot mal orthographié avec des suggestions dans son menu contextuel."></div><figcaption><b>Correction orthographique</b>Dictionnaires Hunspell ou correcteur orthographique de Windows.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/feature-font-dialog.png" width="602" height="632" loading="lazy" alt="La boîte de dialogue des polices avec un champ de recherche, des styles, des tailles et un aperçu."></div><figcaption><b>Dialogue des polices</b>Cherche parmi les polices installées et affiche un aperçu du choix.</figcaption></figure>
+      <figure class="tile w4 r-mid"><div class="pic"><img src="img/terminal.png" width="670" height="465" loading="lazy" alt="Le widget terminal avec une invite de routeur."></div><figcaption><b>Terminal</b>Un widget terminal, dessiné par chaque style.</figcaption></figure>
+    </div>
+
+    <div class="caps">
+      <div class="cap"><h3>Texte et polices</h3><p>Mise en forme OpenType, texte bidirectionnel, polices de secours, césure, lissage sous-pixel et méthodes de saisie sous Windows, Wayland et X11.</p></div>
+      <div class="cap"><h3>Langues</h3><p>Règles de pluriel, formats régionaux, tri et mises en page en miroir.</p><p class="langs"><span lang="de">Deutsch</span><span>English</span><span lang="fr">Français</span><span lang="es">Español</span><span lang="it">Italiano</span><span lang="nl">Nederlands</span><span lang="pl">Polski</span><span lang="ar" dir="rtl">العربية</span><span lang="he" dir="rtl">עברית</span></p></div>
+      <div class="cap"><h3>Images</h3><p>Codecs intégrés, dont PNG, JPEG, WebP, TIFF, AVIF et JPEG XL, une visionneuse d’images avec zoom et déplacement, et des icônes SVG.</p></div>
+      <div class="cap"><h3>Son</h3><p>Flux de sortie avec latence cible via WASAPI, PipeWire, WebAudio et AAudio, sons WAV et Ogg Vorbis mixés et sons propres au système.</p></div>
+      <div class="cap"><h3>Intégration au bureau</h3><p>Notifications, icône dans la zone de notification, progression dans la barre des tâches, listes de raccourcis, types de fichiers, raccourcis globaux, pipette à l’écran et glisser-déposer avec d’autres programmes.</p></div>
+      <div class="cap"><h3>Fichiers et permissions</h3><p>Un espace de noms de fichiers unique avec <code>app://</code>, <code>config://</code> et <code>mem://</code>, des ressources intégrées au programme, un manifeste <code>PERMISSIONS</code> appliqué à l’exécution et le gestionnaire de secrets du système.</p></div>
+      <div class="cap"><h3>Mises à jour et paquets</h3><p>Mises à jour signées avec retour en arrière, signature de code, et paquets allant d’un installeur Windows et du <code>.deb</code> à AppImage, Flatpak, MSIX et RPM.</p></div>
+      <div class="cap"><h3>Réseau et sécurité</h3><p>HTTP, TLS 1.3, SMTP, un client SSH et DNS, une cryptographie moderne, LZ4 et zstd, une base de données à journal et des dépôts chiffrés.</p></div>
+      <div class="cap"><h3>Framework d’application</h3><p>Journalisation, hooks de cycle de vie, paramètres typés avec une page de paramètres générée, état des fenêtres enregistré et tâches asynchrones dans la boucle d’événements.</p></div>
+    </div>
+    <div class="cta more"><a class="btn primary big" href="features.html">Voir toutes les fonctionnalités</a></div>
+  </div>
+</section>
+
+<section class="sec band b-indigo" id="apps" aria-labelledby="apps-title">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="apps-title">Des applications créées avec JFLib.</h2>
+      <p class="prose">Chaque application a sa propre page du produit. Les liens suivront quand ces pages seront en ligne.</p>
+      <div class="cta"><a class="btn light" href="apps.html">Toutes les applications</a></div>
+    </div>
+    <div class="rail" tabindex="0" aria-label="Applications, défilement horizontal">
+{{apps-rail}}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="start" aria-labelledby="start-title">
+  <div class="wrap">
+    <div class="head">
+      <code class="flag" style="margin-bottom:0;color:var(--muted)">cargo jflib new hello</code>
+      <h2 id="start-title">Une application complète tient sur un écran.</h2>
+    </div>
+    <div class="start-grid">
+<pre class="panel"><code id="rust-sample">// src/lib.rs
+#![no_std]
+#![deny(unsafe_code)]
+
+extern crate alloc;
+use jflib::{style, ui};
+use ui::*;
+
+const DESC: AppDesc = AppDesc {
+    title: "Hello JFLIB",
+    flags: AF_RESIZABLE,
+    w: 480,
+    h: 300,
+    min_w: 320,
+    min_h: 240,
+    ..AppDesc::NONE
+};
+
+#[derive(Default)]
+struct Counter {
+    clicks: u32,
+}
+
+impl App for Counter {
+    fn frame(&amp;mut self, ui: &amp;mut Ui) {
+        ui.box_begin(0, BOX_V | pad(24), 12);
+        ui.text(TS_TITLE, "Hello JFLIB!");
+        ui.text(TS_BODY, &amp;alloc::format!("Clicks: {}", self.clicks));
+        if ui.accent_button(100, "Click me") &amp; EV_ACT != 0 {
+            self.clicks += 1;
+        }
+        if ui.button(101, "Reset") &amp; EV_ACT != 0 {
+            self.clicks = 0;
+        }
+        ui.box_end();
+    }
+}
+
+ui::main!(ui::launch(&amp;DESC, Counter::default(), &amp;style::STYLE));</code></pre>
+      <div class="start-side">
+        <div class="result-frame"><img src="img/example-counter.png" width="480" height="300" loading="lazy" alt="Une fenêtre avec un compteur de clics, un bouton accentué et un bouton de remise à zéro."></div>
+<pre class="panel cmds"><span class="k">cargo</span> install cargo-jflib
+<span class="k">cargo</span> jflib new hello
+<span class="k">cd</span> hello
+<span class="k">cargo</span> run
+<span class="k">cargo</span> jflib test</pre>
+        <p class="req">Il vous faut Rust, installé via rustup. La nouvelle application est un projet Cargo normal avec une seule dépendance, <code>jflib</code>, et arrive avec ses permissions, ses données de paquet et un test de fumée.</p>
+        <div class="cta">
+          <a class="btn primary" href="docs/GUIDE.html">Guide du développeur</a>
+          <a class="btn" href="docs/API.html">Référence de l’API</a>
+          <a class="btn" href="https://github.com/JFLibrary/JFLib">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

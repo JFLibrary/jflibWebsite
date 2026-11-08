@@ -1,0 +1,118 @@
+title: JFScript
+description: JFScript, le langage de script du projet JFLib : bytecode, bac à sable aux limites strictes et le même résultat sur chaque machine. Encore en développement.
+---
+<section class="page-hero">
+  <div class="wrap">
+    <span class="dev-badge">En développement</span>
+    <h1>JFScript. <em>Des scripts fiables.</em></h1>
+    <p class="lede">Un petit langage de script pour les applications créées avec JFLib. Les scripts sont compilés en bytecode et s’exécutent dans un bac à sable aux limites strictes. Ils donnent le même résultat, au bit près, sur chaque machine, et peuvent s’interrompre n’importe où pour reprendre plus tard. Aujourd’hui, JFScript fait tourner les serveurs simulés de JFNetworker.</p>
+    <p class="dev-note">JFScript est encore en développement. Le langage, sa bibliothèque et l’API Rust peuvent changer avant sa sortie en tant que projet indépendant.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="look-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="look-title">Familier au premier coup d’œil.</h2>
+        <p class="prose" style="margin-top:16px">Si vous avez déjà écrit du JavaScript, du Lua ou du Python, vous savez lire JFScript. Il a des fonctions et des closures, des listes et des maps, <code>try</code> et <code>catch</code>, et des modules via <code>import</code>. Les maps gardent leur ordre, les entiers restent des entiers, et le texte compte des caractères, pas des octets.</p>
+        <p class="prose" style="margin-top:12px">Une bibliothèque standard accompagne chaque script : texte, listes, maps, octets, maths et JSON.</p>
+      </div>
+<pre class="panel"><span class="d">// les parties d’un chemin de requête</span>
+<span class="k">let</span> parts = <span class="s">"/users/42/posts"</span>.split(<span class="s">"/"</span>)
+  .filter(<span class="k">fn</span>(p) { <span class="k">return</span> len(p) > 0 })
+<span class="k">let</span> id = int.parse(parts[1]) ?? 0      <span class="d">// 42</span>
+
+<span class="d">// des enregistrements, triés de façon stable</span>
+<span class="k">let</span> jobs = [{n: <span class="s">"b"</span>, prio: 2}, {n: <span class="s">"a"</span>, prio: 1}]
+jobs.sort(<span class="k">fn</span>(x, y) { <span class="k">return</span> x.prio - y.prio })
+print(jobs.map(<span class="k">fn</span>(j) { <span class="k">return</span> j.n }).join(<span class="s">", "</span>))
+
+<span class="d">// JSON garde l’ordre des maps</span>
+<span class="k">let</span> t = json.encode({id: 7, load: 0.5})
+print(<span class="s">"{:>4}|{:.2}"</span>.format(id, 0.5))    <span class="d">//   42|0.50</span>
+
+<span class="d">// les mêmes bits sur chaque machine</span>
+<span class="k">let</span> load = 100 + 50 * math.sin(2 * math.pi * 3 / 24)
+<span class="k">let</span> shard = <span class="s">"user:42"</span>.hash() % 8</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec band b-ink" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="head"><h2 id="why-title">Ce qui le distingue.</h2></div>
+    <div class="caps caps-ink">
+      <div class="cap"><h3>Déterministe</h3><p>Pas d’horloge, pas d’aléatoire, et des nombres à virgule flottante calculés en logiciel. Un script donne les mêmes bits sous Windows, Linux, Android et dans le navigateur.</p></div>
+      <div class="cap"><h3>En bac à sable</h3><p>Chaque instruction coûte du carburant. Mémoire, pile et profondeur d’appel ont des limites strictes : une boucle infinie ou une liste énorme met simplement fin à l’exécution.</p></div>
+      <div class="cap"><h3>Interruptible</h3><p>Exécutez un script par tranches de n’importe quelle taille, et obtenez le même résultat qu’en une seule fois. Une VM entière peut être clonée en pleine exécution.</p></div>
+      <div class="cap"><h3>Uniquement vos noms</h3><p>Un script n’atteint que les fonctions que l’hôte lui donne. Donnez au compilateur votre liste de noms, et un nom mal orthographié devient une erreur avant l’exécution du script, avec une suggestion.</p></div>
+      <div class="cap"><h3>Des maths exactes</h3><p>Les fonctions mathématiques sont celles de fdlibm sur des flottants logiciels : erreurs inférieures à un ulp, et exactes partout où le résultat peut être représenté exactement.</p></div>
+      <div class="cap"><h3>Prise en charge des éditeurs intégrée</h3><p>Complétion, infos au survol, signatures, aller à la définition, références, renommage, repliement, plan et formateur, même sur du code à moitié tapé.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="embed-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="embed-title">Intégré en quelques lignes de Rust.</h2>
+        <p class="prose" style="margin-top:16px">Compilez le source, créez une VM avec ses limites et exécutez-la avec autant de carburant que vous voulez par tranche. Votre hôte répond aux fonctions que le script appelle par leur nom. Les valeurs qui vivent plus longtemps qu’une exécution sont épinglées, et une valeur périmée provoque une erreur au lieu d’un plantage.</p>
+        <p class="prose" style="margin-top:12px">JFNetworker convertit le carburant en temps CPU simulé : dans un laboratoire, un script de serveur coûte du temps comme du vrai code sur une vraie machine.</p>
+      </div>
+<pre class="panel"><span class="k">let</span> prog = script::compile_named(<span class="s">"server.jfs"</span>, src)?;
+<span class="k">let mut</span> vm = Vm::new(&amp;prog, Limits::default());
+<span class="k">loop</span> {
+    <span class="k">match</span> vm.run(&amp;<span class="k">mut</span> host, 10_000) {   <span class="d">// carburant par tranche</span>
+        Status::Done(_) =&gt; <span class="k">break</span>,
+        Status::Yielded =&gt; <span class="k">continue</span>,
+        Status::Error(e) =&gt; { log(&amp;e.to_string()); <span class="k">break</span> }
+    }
+}
+<span class="k">let</span> req = vm.new_str(<span class="s">"GET /"</span>)?;
+vm.call(<span class="s">"on_request"</span>, &amp;[req])?;</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec s-surface" aria-labelledby="jfs-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 id="jfs-title">Un lanceur pour la ligne de commande.</h2>
+        <p class="prose" style="margin-top:16px"><code>jfs</code> exécute un script comme <code>python file.py</code> exécute un fichier Python. Il vérifie des scripts sans les exécuter, lance les fonctions <code>test_*</code> des fichiers de test, parcourt le code pas à pas dans un débogueur en console et fait tourner les minuteries sur une horloge virtuelle, avec une graine aléatoire fixe.</p>
+        <p class="prose" style="margin-top:12px">Un script qui n’utilise que la bibliothèque standard, <code>print</code>, <code>log</code> et les minuteries tourne de la même façon dans <code>jfs</code> et dans JFNetworker.</p>
+      </div>
+<pre class="panel">jfs hello.jfs Anna Ben
+jfs -e <span class="s">"print([3, 1, 2].sort())"</span>
+jfs --check hello.jfs
+jfs --test tests/*.jfs
+jfs --debug app.jfs
+jfs --virtual-time --seed 7 sim.jfs</pre>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="mod-title">
+  <div class="wrap">
+    <div class="split rev">
+      <div>
+        <h2 id="mod-title">Des modules sans magie.</h2>
+        <p class="prose" style="margin-top:16px"><code>import</code> est une simple fonction. Elle renvoie les noms de premier niveau d’un autre fichier sous forme de map, sans les noms privés qui commencent par un tiret bas. Chaque fichier s’exécute une fois par VM, et ses fonctions continuent de voir leurs propres variables globales.</p>
+        <div class="cta" style="margin-top:22px">
+          <a class="btn primary" href="apps.html">JFNetworker sur la page Applications</a>
+          <a class="btn" href="https://discord.gg/cX3jUxVvTm">Suivre le projet sur Discord</a>
+        </div>
+      </div>
+<pre class="panel"><span class="d">// lib/util.jfs</span>
+<span class="k">let</span> _calls = 0                 <span class="d">// privé</span>
+<span class="k">fn</span> shout(s) { _calls += 1; <span class="k">return</span> s.upper() + <span class="s">"!"</span> }
+<span class="k">fn</span> calls() { <span class="k">return</span> _calls }
+
+<span class="d">// main.jfs</span>
+<span class="k">let</span> util = import(<span class="s">"lib/util.jfs"</span>)
+print(util.shout(<span class="s">"hello"</span>), util.calls())   <span class="d">// HELLO! 1</span></pre>
+    </div>
+  </div>
+</section>
