@@ -14,6 +14,7 @@ built there in English with a note. src/i18n/strings.json translates the layout 
 and the texts of site.js.
 """
 import argparse
+import hashlib
 import html
 import json
 import os
@@ -34,7 +35,7 @@ LANGS = (("en", "English"), ("de", "Deutsch"), ("fr", "Français"), ("it", "Ital
 JS_KEYS = ("Feature Gallery", "Running in your browser as WebAssembly", "Close", "Feature Gallery, running live",
            "The gallery could not be loaded here. This is what it looks like:", "A picture of the Feature Gallery.",
            "Picture viewer", "Previous picture", "Next picture", "Zoom out", "Zoom in", "Fit to the screen", "Fit",
-           "Enlarge: ", "Line {n} of {m}", "Pause", "Play")
+           "Enlarge: ", "Line {n} of {m}", "Pause", "Play", "Copied")
 NAV = ("features", "apps", "compare", "roadmap")
 
 
@@ -168,6 +169,10 @@ def build(out, docs, gallery, preview):
         shutil.rmtree(out)
     out.mkdir(parents=True)
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
+    # a stamp per version, so a browser holding an older style or script loads the new one
+    for name in ("site.css", "site.js"):
+        stamp = hashlib.sha256((SRC / name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:10]
+        layout = layout.replace(f'"{name}"', f'"{name}?v={stamp}"')
     apps = json.loads((ROOT / "apps.json").read_text(encoding="utf-8"))
     config = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
     strings = json.loads((SRC / "i18n" / "strings.json").read_text(encoding="utf-8"))

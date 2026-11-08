@@ -99,8 +99,18 @@ code,pre,.flag,.status span,.gif,.tag,.tiles span,.bars b,.bars .t,.foot .draft,
 .hero .lede{margin-top:22px;font-size:clamp(1.0625rem,1.5vw,1.25rem);line-height:1.5;max-width:40ch}
 .hero .cta{margin-top:28px}
 .hero .hint{margin-top:12px;color:var(--muted);font-size:.9375rem}
-.hero .own{margin-top:30px;font-weight:600;font-size:.9375rem}
-.hero .hero-cmds{margin-top:10px;width:fit-content;max-width:100%;padding:12px 18px}
+/* an own app: the Cargo commands docked above the status bar, like a terminal in an IDE */
+.get{position:relative;color:var(--code-fg);background:var(--code-bg);border-top:1px solid transparent}
+.get .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:13px}
+.get-label{font-weight:600;font-size:.9375rem}
+.get-cmds{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.get-cmds code{display:block;padding:4px 11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:6px;font:400 .875rem/1.5 var(--mono);white-space:nowrap;font-variant-ligatures:none}
+.get .k{color:var(--code-kw)}
+.get-copy{margin-left:auto;min-width:6.5em;padding:5px 12px;font:600 .8125rem/1.4 var(--body);color:var(--code-fg);background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:6px;cursor:pointer}
+.get-copy:hover{background:rgba(255,255,255,.08)}
+.get-copy:focus-visible{outline:2px solid var(--code-kw);outline-offset:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .get{background:#0C0D12;border-top-color:var(--line)}}
+:root[data-theme="dark"] .get{background:#0C0D12;border-top-color:var(--line)}
 .stage{position:relative;min-width:0}
 .stage-win{position:relative}
 .shape{position:absolute;z-index:0}

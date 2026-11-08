@@ -115,6 +115,25 @@
     document.querySelector(".pick").addEventListener("pointerdown", stopCycle);
   }
 
+  // the Cargo commands in the hero: one button copies all four lines
+  var copy = document.querySelector(".get-copy");
+  if (copy && navigator.clipboard && window.isSecureContext) {
+    var copyLabel = copy.textContent, copyTimer = 0;
+    var said = document.createElement("span");
+    said.className = "vh";
+    said.setAttribute("role", "status");
+    copy.after(said);
+    copy.hidden = false;
+    copy.addEventListener("click", function () {
+      var lines = [].map.call(document.querySelectorAll(".get-cmds li"), function (li) { return li.textContent; });
+      navigator.clipboard.writeText(lines.join("\n")).then(function () {
+        copy.textContent = said.textContent = t("Copied");
+        clearTimeout(copyTimer);
+        copyTimer = setTimeout(function () { copy.textContent = copyLabel; said.textContent = ""; }, 1600);
+      });
+    });
+  }
+
   // before and after sliders
   [].forEach.call(document.querySelectorAll(".compare"), function (c) {
     var input = c.querySelector("input");
