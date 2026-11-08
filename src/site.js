@@ -116,8 +116,9 @@
   }
 
   // the Cargo commands in the hero: one button copies all four lines
+  var cmds = document.querySelector(".get-cmds");
   var copy = document.querySelector(".get-copy");
-  if (copy && navigator.clipboard && window.isSecureContext) {
+  if (copy && cmds && navigator.clipboard && window.isSecureContext) {
     var copyLabel = copy.textContent, copyTimer = 0;
     var said = document.createElement("span");
     said.className = "vh";
@@ -125,8 +126,7 @@
     copy.after(said);
     copy.hidden = false;
     copy.addEventListener("click", function () {
-      var lines = [].map.call(document.querySelectorAll(".get-cmds li"), function (li) { return li.textContent; });
-      navigator.clipboard.writeText(lines.join("\n")).then(function () {
+      navigator.clipboard.writeText(cmds.textContent.trim()).then(function () {
         copy.textContent = said.textContent = t("Copied");
         clearTimeout(copyTimer);
         copyTimer = setTimeout(function () { copy.textContent = copyLabel; said.textContent = ""; }, 1600);
