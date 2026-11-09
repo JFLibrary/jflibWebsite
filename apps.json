@@ -25,10 +25,10 @@
     "link": null
   },
   {
-    "name": "PaintCraft",
+    "name": "JFPainter",
     "text": "An image editor with layers, history, effects, many image formats and native plugins.",
     "image": "paintcraft.png", "width": 1280, "height": 800,
-    "alt": "PaintCraft with the JFLib sample drawing open.",
+    "alt": "JFPainter with the JFLib sample drawing open.",
     "platforms": ["Windows", "Linux", "Web"],
     "link": null
   },

@@ -12,9 +12,9 @@
     "alt": "jfWord mit Menüband, Navigationsbereich und einem Dokument.",
     "note": "In aktiver Entwicklung."
   },
-  "PaintCraft": {
+  "JFPainter": {
     "text": "Eine Bildbearbeitung mit Ebenen, Verlauf, Effekten, vielen Bildformaten und nativen Plugins.",
-    "alt": "PaintCraft mit der geöffneten JFLib-Beispielzeichnung."
+    "alt": "JFPainter mit der geöffneten JFLib-Beispielzeichnung."
   },
   "Kritzel": {
     "text": "Eine Zeichen-App mit Pinseln, Formen, Text, Auswahlen und Ebenen.",

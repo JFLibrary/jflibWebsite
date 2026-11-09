@@ -12,9 +12,9 @@
     "alt": "jfWord con su cinta de opciones, un panel de navegación y un documento.",
     "note": "En desarrollo activo."
   },
-  "PaintCraft": {
+  "JFPainter": {
     "text": "Un editor de imágenes con capas, historial, efectos, muchos formatos de imagen y plugins nativos.",
-    "alt": "PaintCraft con el dibujo de ejemplo de JFLib abierto."
+    "alt": "JFPainter con el dibujo de ejemplo de JFLib abierto."
   },
   "Kritzel": {
     "text": "Una app de dibujo con pinceles, formas, texto, selecciones y capas.",
