@@ -1,6 +1,6 @@
 title: Roadmap di JFLib
 nav: roadmap
-description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, macOS e iOS nativi e un motore 3D.
+description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Linux su ARM, macOS e iOS nativi e un motore 3D.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -26,6 +26,22 @@ description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, macOS e iOS 
       <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>Lo stesso livello su WebGPU, con shader in WGSL.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Motore 3D e CAD</b><span>Il nucleo di un motore 3D e un renderer 2D per il CAD.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Per un port nativo sui sistemi Apple.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="arm" aria-labelledby="arm-title">
+  <div class="wrap">
+    <span class="state">In corso</span>
+    <h2 id="arm-title">Windows e Linux su ARM</h2>
+    <p class="prose" style="margin-top:16px">Ogni app che oggi gira su Windows e Linux girerà anche in modo nativo su ARM a 64 bit: sui portatili Windows con chip ARM e su schede e server Linux. Le app si compilano sempre su un PC x86, e le build x86-64 restano esattamente come sono. Android gira già su ARM.</p>
+    <ol class="road light">
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Base di build</b><span>ARM64 come secondo target, compilato sullo stesso PC x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD con NEON</b><span>Il codice vettoriale su ARM, con esattamente i risultati di x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Emulazione</b><span>Le app x86-64 di oggi girano già su Windows su ARM: passano 84 script di test su 85.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Runtime</b><span>Memoria, thread, matematica e chiamate di sistema su Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux su ARM</b><span>Il livello di piattaforma, plugin e moduli come codice ARM64 nativo.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows su ARM</b><span>App ARM64 native per Windows, senza emulazione.</span></li>
     </ol>
   </div>
 </section>

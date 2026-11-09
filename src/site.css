@@ -460,6 +460,9 @@ picture{display:contents}
 .road svg{position:relative;display:block;width:32px;height:32px;margin-bottom:14px}
 .road b{display:block;font:800 1.0938rem/1.2 var(--display)}
 .road span{display:block;margin-top:5px;color:var(--soft-ink);font-size:.9375rem;line-height:1.4}
+/* the same road on the page's own background */
+.road.light li::before{background:var(--line)}
+.road.light span{color:var(--muted)}
 .bignums{display:grid;gap:22px}
 .bignum b{display:block;font:600 clamp(3rem,8.5vw,6.6rem)/1 var(--mono);letter-spacing:-.045em;font-variant-ligatures:none}
 .bignum span{display:block;margin-top:8px;font-size:1rem;line-height:1.4}

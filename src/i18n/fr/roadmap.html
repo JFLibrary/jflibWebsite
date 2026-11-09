@@ -1,6 +1,6 @@
 title: Feuille de route de JFLib
 nav: roadmap
-description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU, macOS et iOS natifs, et un moteur 3D.
+description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU, Windows et Linux sur ARM, macOS et iOS natifs, et un moteur 3D.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -26,6 +26,22 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
       <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Navigateur</b><span>La même couche sur WebGPU, avec des shaders en WGSL.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Moteur 3D et CAO</b><span>Un cœur de moteur 3D et un moteur de rendu 2D pour la CAO.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Pour un portage natif sur les systèmes d’Apple.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="arm" aria-labelledby="arm-title">
+  <div class="wrap">
+    <span class="state">En cours</span>
+    <h2 id="arm-title">Windows et Linux sur ARM</h2>
+    <p class="prose" style="margin-top:16px">Chaque application qui fonctionne aujourd’hui sous Windows et Linux fonctionnera aussi nativement sur ARM 64 bits : sur les portables Windows à puce ARM, et sur les cartes et serveurs Linux. Les applications sont toujours compilées sur un PC x86, et les builds x86-64 restent exactement tels qu’ils sont. Android tourne déjà sur ARM.</p>
+    <ol class="road light">
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Base de compilation</b><span>ARM64 comme deuxième cible, compilé sur le même PC x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD avec NEON</b><span>Le code vectoriel sur ARM, avec exactement les résultats de x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Émulation</b><span>Les applications x86-64 actuelles tournent déjà sous Windows sur ARM : 84 scripts de test sur 85 passent.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Runtime</b><span>Mémoire, threads, calcul et appels système sur Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux sur ARM</b><span>La couche plateforme, les plugins et les modules en code ARM64 natif.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows sur ARM</b><span>Des applications ARM64 natives pour Windows, sans émulation.</span></li>
     </ol>
   </div>
 </section>
