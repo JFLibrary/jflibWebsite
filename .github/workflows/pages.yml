@@ -58,7 +58,7 @@ jobs:
           cp -r build/web/gallery "$GITHUB_WORKSPACE/_parts/gallery"
 
       - name: Build and check the site
-        run: python3 build.py --docs _parts/docs --gallery _parts/gallery --preview --check
+        run: python3 build.py --docs _parts/docs --gallery _parts/gallery --check
 
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3

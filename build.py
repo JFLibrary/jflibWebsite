@@ -2,11 +2,12 @@
 """Builds jflib.org into _site/ with the Python standard library only.
 
     python build.py                                        # the pages alone, for working on them
-    python build.py --docs DIR --gallery DIR --preview     # what the workflow publishes for now
+    python build.py --docs DIR --gallery DIR               # what the workflow publishes
     python build.py --check ...                            # build, then check the result
 
 --docs is the output of `python build_rs.py site` in JFLib, --gallery its build/web/gallery with
-the scalar and SIMD variants. --preview keeps search engines away and shows the preview note.
+the scalar and SIMD variants. --preview keeps search engines away and shows the preview note;
+without it robots.txt is open and points to sitemap.xml with every page in its own language.
 
 Languages: English pages are src/pages/*.html and go to the root. A translation is
 src/i18n/LANG/PAGE.html in the same format and goes to LANG/PAGE.html; a page without one is
@@ -28,7 +29,7 @@ ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
 VOID = frozenset("area base br col embed hr img input link meta source track wbr use".split())
 PREVIEW_NOTE = "Preview. Kritzel, jfWord and the Build Manager are still shown in German."
-ROBOTS_OPEN = "User-agent: *\nAllow: /\n"
+ROBOTS_OPEN = "User-agent: *\nAllow: /\n\nSitemap: https://jflib.org/sitemap.xml\n"
 ROBOTS_CLOSED = "User-agent: *\nDisallow: /\n"
 SITE_URL = "https://jflib.org/"
 LANGS = (("en", "English"), ("de", "Deutsch"), ("fr", "Français"), ("it", "Italiano"), ("es", "Español"))
@@ -164,6 +165,11 @@ def gallery_copy(src, out):
     (out / "index.html").write_text(page, encoding="utf-8")
 
 
+def page_url(lang, name):
+    """The address search engines should know a page by: its folder for index.html."""
+    return SITE_URL + ("" if lang == "en" else lang + "/") + ("" if name == "index.html" else name)
+
+
 def build(out, docs, gallery, preview):
     if out.exists():
         shutil.rmtree(out)
@@ -179,6 +185,7 @@ def build(out, docs, gallery, preview):
     robots = '<meta name="robots" content="noindex">\n' if preview else ""
     pages = sorted((SRC / "pages").glob("*.html"))
     translated = {code: {p.name for p in (SRC / "i18n" / code).glob("*.html")} for code, _ in LANGS[1:]}
+    urls = []
     for code in translated:
         for name in translated[code]:
             if not (SRC / "pages" / name).is_file():
@@ -200,11 +207,13 @@ def build(out, docs, gallery, preview):
                         .replace("{{apps-list}}", apps_list(apps_in(apps, lang) if own else apps, t))
                         .replace("{{contact}}", contact_line(config, preview)))
             done = ["en"] + [c for c, _ in LANGS[1:] if path.name in translated[c]]
-            alternates = ""
+            # an English copy in a language folder stays out of search results, the page itself is there
+            alternates = '<link rel="canonical" href="%s">\n' % page_url(lang, path.name) if own else ""
             if len(done) > 1:
-                alternates = "".join('<link rel="alternate" hreflang="%s" href="%s%s%s">\n' % (
-                    c, SITE_URL, "" if c == "en" else c + "/", path.name) for c in done)
-                alternates += '<link rel="alternate" hreflang="x-default" href="%s%s">\n' % (SITE_URL, path.name)
+                alternates += "".join('<link rel="alternate" hreflang="%s" href="%s">\n' % (c, page_url(c, path.name)) for c in done)
+                alternates += '<link rel="alternate" hreflang="x-default" href="%s">\n' % page_url("en", path.name)
+            if own:
+                urls.append(page_url(lang, path.name))
             js = {k: t(k) for k in JS_KEYS} if lang != "en" else {}
             if lang == "en":
                 hints = {c: [strings[c]["@hint"], strings[c]["@hint-go"], c + "/" + path.name, strings[c]["Close"]] for c in done[1:]}
@@ -217,7 +226,7 @@ def build(out, docs, gallery, preview):
             text = (text.replace("{{lang-menu}}", lang_menu(path.name, lang, base, done))
                         .replace("{{title}}", html.escape(fields["title"]))
                         .replace("{{description}}", html.escape(fields["description"], quote=True))
-                        .replace("{{robots}}", robots)
+                        .replace("{{robots}}", robots if own else '<meta name="robots" content="noindex">\n')
                         .replace("{{alternates}}", alternates)
                         .replace("{{lang}}", lang if own else "en")
                         .replace("{{base}}", base)
@@ -235,6 +244,10 @@ def build(out, docs, gallery, preview):
     shutil.copytree(SRC / "img", out / "img")
     shutil.copytree(SRC / "fonts", out / "fonts")
     (out / "robots.txt").write_text(ROBOTS_CLOSED if preview else ROBOTS_OPEN, encoding="utf-8", newline="\n")
+    (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                     + "".join("  <url><loc>%s</loc></url>\n" % html.escape(u) for u in urls)
+                                     + "</urlset>\n", encoding="utf-8", newline="\n")
     if docs:
         shutil.copytree(docs, out / "docs", ignore=shutil.ignore_patterns(".jflib-site"))
     if gallery:

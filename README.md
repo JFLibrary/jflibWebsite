@@ -27,12 +27,13 @@ checkout at the commit in `jflib.lock` and pass them in:
 python build_rs.py site --out DOCS
 python build_rs.py app gallery --target web --web-mode scalar
 python build_rs.py app gallery --target web --web-mode simd
-python build.py --docs DOCS --gallery JFLIB/build/web/gallery --preview --check
+python build.py --docs DOCS --gallery JFLIB/build/web/gallery --check
 ```
 
 To move the site to a newer JFLib, put the new commit into `jflib.lock`. The workflow then builds
 docs and gallery once and keeps them under that commit. The threaded gallery variant is left out,
 because it needs server headers GitHub Pages cannot send.
 
-`--preview` asks search engines to stay away and shows a note in the footer. The workflow uses it
-until the site is launched.
+`--preview` asks search engines to stay away and shows a note in the footer. The site is launched
+since 2026-11-09, so the workflow builds without it: robots.txt is open and names `sitemap.xml`,
+every page has a canonical link and its language versions.
