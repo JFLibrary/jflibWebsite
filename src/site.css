@@ -112,7 +112,12 @@ code,pre,.flag,.status span,.gif,.tag,.tiles span,.bars b,.bars .t,.foot .draft,
 /* the live gallery starts under the window it shows */
 .try{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:22px;position:relative;z-index:3}
 .hero .try .hint{margin-top:0}
-.stage{position:relative;min-width:0}
+/* the stage's width, not the button's, decides whether the hint stands beside the button: the
+   button's font changes with the style (Classic: Tahoma, wider), and a row that wrapped in one
+   style only made the whole page jump when the style changed.  Beside it, the hint wraps in its
+   own column; two lines of it are lower than the button, so the row keeps its height. */
+.stage{position:relative;min-width:0;container-type:inline-size}
+@container (min-width:640px){.try{flex-wrap:nowrap}.hero .try .hint{flex:1 1 0;min-width:0}}
 .stage-win{position:relative}
 .shape{position:absolute;z-index:0}
 .shape.a{top:-7%;left:-7%;width:37%;color:var(--square)}
