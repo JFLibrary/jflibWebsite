@@ -1,11 +1,11 @@
 title: JFLib
-description: A complete GUI library in Rust with its own renderer, interchangeable styles, and one code base for Windows, Linux, Android and the browser.
+description: A complete GUI library in Rust with its own renderer, interchangeable styles, and one code base for Windows, Linux, macOS, Android, iOS and the browser.
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
     <div>
       <h1 id="hero-title">A complete <em>GUI library</em> in Rust.</h1>
-      <p class="lede">Widgets, text, graphics, sound, networking and packaging in one <code>no_std</code> library with its own renderer. The same code runs on Windows, Linux, Android and in the browser.</p>
+      <p class="lede">Widgets, text, graphics, sound, networking and packaging in one <code>no_std</code> library with its own renderer. The same code runs on Windows, Linux, macOS, Android, iOS and in the browser.</p>
       <div class="get">
         <div class="get-head"><span>Your own app, with Rust and Cargo</span><button class="get-copy" type="button" hidden>Copy</button></div>
 <pre class="get-cmds"><span class="k">cargo</span> install cargo-jflib
@@ -77,7 +77,7 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <div class="layer l3"><div><b>Images</b><small>Built-in codecs</small></div><div class="tiles"><span>img_core</span><span>img_all</span><span>img_png</span><span>img_jpeg</span><span>img_webp</span><span>img_tiff</span><span>img_avif</span><span>img_av1</span><span>img_jxl</span><span>img_jxl_enc</span><span>img_jxr</span><span>img_heif</span><span>img_hevc</span><span>img_gif</span><span>img_bmp</span><span>img_tga</span><span>img_dds</span><span>img_svg</span><span>img_pdn</span></div></div>
       <div class="layer l4"><div><b>Data and network</b><small>Files, crypto, protocols, updates</small></div><div class="tiles"><span>netio</span><span>netpkt</span><span>eapm</span><span>crypto</span><span>compress</span><span>archive</span><span>cas</span><span>datastore</span><span>datetime</span><span>update</span></div></div>
       <div class="layer l4"><div><b>Automation</b><small>Agents, scripts, plugins</small></div><div class="tiles"><span>agent_core</span><span>agent_io</span><span>script</span><span>plugin</span></div></div>
-      <div class="layer l5"><div><b>Platform</b><small>Windows, Linux, Android, browser</small></div><div class="tiles"><span>plat</span><span>rt</span><span>base</span></div></div>
+      <div class="layer l5"><div><b>Platform</b><small>Windows, Linux, macOS, Android, iOS, browser</small></div><div class="tiles"><span>plat</span><span>rt</span><span>base</span></div></div>
       <div class="targets" aria-label="Targets"><span>Windows</span><span>Linux</span><span>Android</span><span>Browser</span></div>
     </div>
     <p class="stack-note"><code>unsafe</code> stays inside the runtime, platform, SIMD and plugin layers.</p>
@@ -111,15 +111,16 @@ description: A complete GUI library in Rust with its own renderer, interchangeab
       <figure class="phone"><img src="img/pocket.png" width="780" height="1688" loading="lazy" alt="The Pocket Gallery on a phone."></figure>
     </div>
     <div>
-      <code class="flag" style="color:var(--muted)">--target win | linux | android | web</code>
+      <code class="flag" style="color:var(--muted)">--target win | linux | mac | android | ios | web</code>
       <h2 id="plat-title">The same widgets everywhere.</h2>
-      <p class="prose" style="margin-top:16px">Native windows, the browser host and the Android adapter share the same Rust widgets and the same renderer.</p>
+      <p class="prose" style="margin-top:16px">Native windows, the browser host and the Android and iPhone hosts share the same Rust widgets and the same renderer.</p>
       <ul class="plat-list">
         <li><b>Windows</b><span>Native x86-64 app with desktop integration</span></li>
         <li><b>Linux</b><span>Native x86-64 app, Wayland and X11, picked at startup</span></li>
         <li><b>Android</b><span>Native APK for Android 8 and later, Pocket Gallery so far</span></li>
         <li><b>Browser</b><span>WebAssembly, tested on Chromium and Firefox</span></li>
-        <li><b>macOS, iOS</b><span>Through the browser for now, no native build yet</span></li>
+        <li><b>macOS</b><span>Native app for Apple silicon (macOS 13+): AppKit windows, menu bar, Dock, notifications; signed and notarized .dmg with self-updates</span></li>
+        <li><b>iOS</b><span>Native iPhone app (iOS 16+): touch, Apple Pencil, keyboards, sensors, files</span></li>
       </ul>
     </div>
   </div>

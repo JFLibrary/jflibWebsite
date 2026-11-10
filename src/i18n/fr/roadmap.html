@@ -1,6 +1,6 @@
 title: Feuille de route de JFLib
 nav: roadmap
-description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU, Windows et Linux sur ARM, macOS et iOS natifs, et un moteur 3D.
+description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU, Windows et Linux sur ARM, et un moteur 3D. macOS et iOS natifs sont terminés.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -25,7 +25,7 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface sur le GPU</b><span>Sortie avec vsync, calques et canevas que l’on peut déplacer et zoomer, sous Windows, Linux et Android.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Navigateur</b><span>La même couche sur WebGPU, avec des shaders en WGSL.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Moteur 3D et CAO</b><span>Un cœur de moteur 3D et un moteur de rendu 2D pour la CAO.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Pour un portage natif sur les systèmes d’Apple.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>La couche GPU sur Mac et iPhone, qui dessinent sur le CPU d’ici là.</span></li>
     </ol>
   </div>
 </section>
@@ -49,13 +49,19 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
 <section class="sec band b-blue" id="macos" aria-labelledby="macos-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Prochaine étape</span>
-      <h2 id="macos-title">macOS natif</h2>
-      <p class="prose">Le support natif de macOS est la prochaine étape et arrive très bientôt. Il n’existe pas encore de build natif : d’ici là, les applications JFLib accèdent à macOS via le navigateur. L’objectif est une vraie application native avec des fenêtres Cocoa et l’intégration au bureau, et Metal pour la couche GPU. Une version native pour iOS est aussi sur la liste.</p>
+      <span class="state">Terminé</span>
+      <h2 id="macos-title">macOS et iOS natifs</h2>
+      <p class="prose">Depuis novembre 2026, les applications JFLib tournent nativement sur les Mac à puce Apple et sur l’iPhone, avec les mêmes widgets Rust et le même moteur de rendu. Elles sont compilées sur un Mac.</p>
+      <ul class="rm-list soft">
+        <li>macOS 13 et ultérieur : fenêtres AppKit, barre des menus, Dock, notifications et services système</li>
+        <li>Un .dmg signé et notarisé, et des mises à jour de l’application entière</li>
+        <li>iOS 16 et ultérieur : tactile, Apple Pencil, claviers, capteurs, fichiers et presse-papiers</li>
+        <li>Ensuite : Metal pour la couche GPU, et VoiceOver</li>
+      </ul>
     </div>
     <figure>
       <img class="shot" src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="La galerie de widgets dans le style macOS de JFLib.">
-      <figcaption class="soft">Le style macOS existe déjà. Ici, il tourne sous Windows.</figcaption>
+      <figcaption class="soft">La galerie de widgets dans le style macOS.</figcaption>
     </figure>
   </div>
 </section>
@@ -86,7 +92,7 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
   <div class="wrap">
     <div class="head"><h2 id="more-title">Aussi sur la liste.</h2></div>
     <div class="caps">
-      <div class="cap"><h3>iOS natif</h3><p>Aujourd’hui, iOS est accessible via le navigateur, comme macOS.</p></div>
+      <div class="cap"><h3>VoiceOver</h3><p>La prise en charge du lecteur d’écran sur Mac et iPhone, comme Windows, Linux et Android l’ont déjà.</p></div>
       <div class="cap"><h3>Safari dans le plan de test</h3><p>Les tests de navigateur couvrent pour l’instant Chromium et Firefox.</p></div>
       <div class="cap"><h3>Briques pour les jeux</h3><p>Animation, grands mondes, physique et outils, au-dessus du moteur 3D.</p></div>
     </div>

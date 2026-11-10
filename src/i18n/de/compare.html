@@ -10,7 +10,6 @@ description: Die GUI-Bibliothek JFLib im Vergleich mit egui, gpui und Tauri: Pla
       <span><i class="mk y" aria-hidden="true"></i>Eingebaut</span>
       <span><i class="mk p" aria-hidden="true"></i>Teilweise oder über ein anderes Crate</span>
       <span><i class="mk n" aria-hidden="true"></i>Nicht vorhanden</span>
-      <span><i class="mk s" aria-hidden="true"></i>Kommt sehr bald</span>
     </div>
   </div>
 </section>
@@ -39,8 +38,8 @@ description: Die GUI-Bibliothek JFLib im Vergleich mit egui, gpui und Tauri: Pla
           <tr><th scope="row">Linux</th><td class="y me">Wayland und X11, mit eigenem Protokollcode</td><td class="y">Wayland und X11</td><td class="y">Wayland und X11</td><td class="y">Über WebKitGTK</td></tr>
           <tr><th scope="row">Android</th><td class="y me">Natives APK</td><td class="y">Ja</td><td class="n">Nur ein Community-Crate</td><td class="y">Ja</td></tr>
           <tr><th scope="row">Browser</th><td class="y me">WebAssembly: skalar, SIMD und Threads</td><td class="y">Ja</td><td class="p">Experimentell</td><td class="n">Nein</td></tr>
-          <tr><th scope="row">macOS</th><td class="s me">Kommt sehr bald. Heute über den Browser</td><td class="y">Ja</td><td class="y">Ja</td><td class="y">Ja</td></tr>
-          <tr><th scope="row">iOS</th><td class="s me">Kommt sehr bald. Heute über den Browser</td><td class="n">Nicht aufgeführt</td><td class="p">Ein Crate existiert, Stand offen</td><td class="y">Ja, reift noch</td></tr>
+          <tr><th scope="row">macOS</th><td class="y me">Nativ, Apple Silicon (macOS 13+)</td><td class="y">Ja</td><td class="y">Ja</td><td class="y">Ja</td></tr>
+          <tr><th scope="row">iOS</th><td class="y me">Nativ (iOS 16+), neu</td><td class="n">Nicht aufgeführt</td><td class="p">Ein Crate existiert, Stand offen</td><td class="y">Ja, reift noch</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Zeichnen</th></tr>
           <tr><th scope="row">Wer zeichnet</th><td class="y me">Eigener Renderer, überall pixelgleich. Vulkan für Ausgabe, Ebenen und Bilder</td><td class="y">Eigene Meshes, gezeichnet mit wgpu oder OpenGL</td><td class="y">Eigener GPU-Renderer: Metal, DirectX 11, wgpu</td><td class="p">Die Webview des Systems, je nach Plattform verschieden</td></tr>
@@ -64,7 +63,7 @@ description: Die GUI-Bibliothek JFLib im Vergleich mit egui, gpui und Tauri: Pla
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Text</th></tr>
           <tr><th scope="row">Von rechts nach links</th><td class="y me">Layouts spiegeln sich</td><td class="n">Funktioniert noch nicht</td><td class="p">Textcursor und Auswahl setzen links nach rechts voraus</td><td class="y">Browser-Engine</td></tr>
-          <tr><th scope="row">Rechtschreibprüfung</th><td class="y me">Hunspell oder die Rechtschreibprüfung von Windows</td><td class="n">Nein</td><td class="n">Nein</td><td class="p">Hängt von der Webview ab</td></tr>
+          <tr><th scope="row">Rechtschreibprüfung</th><td class="y me">Hunspell oder die Rechtschreibprüfung von Windows und macOS</td><td class="n">Nein</td><td class="n">Nein</td><td class="p">Hängt von der Webview ab</td></tr>
           <tr><th scope="row">Eingabemethoden</th><td class="y me">Windows, Wayland, X11</td><td class="y">Desktop</td><td class="y">Ja</td><td class="y">Browser-Engine</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Werkzeuge</th></tr>
@@ -74,14 +73,14 @@ description: Die GUI-Bibliothek JFLib im Vergleich mit egui, gpui und Tauri: Pla
           <tr><th scope="row">KI-Agenten</th><td class="y me">JSON-RPC und MCP, standardmäßig aus</td><td class="p">Das Crate egui_mcp</td><td class="n">Nichts eingebaut</td><td class="n">Nichts eingebaut</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Auslieferung</th></tr>
-          <tr><th scope="row">Pakete</th><td class="y me">Setup, MSIX, deb, RPM, AppImage, Flatpak, APK</td><td class="n">Keine dokumentiert</td><td class="n">Keine</td><td class="y">MSI, NSIS, dmg, deb, RPM, AppImage und mehr</td></tr>
+          <tr><th scope="row">Pakete</th><td class="y me">Setup, MSIX, deb, RPM, AppImage, Flatpak, APK, dmg</td><td class="n">Keine dokumentiert</td><td class="n">Keine</td><td class="y">MSI, NSIS, dmg, deb, RPM, AppImage und mehr</td></tr>
           <tr><th scope="row">Signierte Updates</th><td class="y me">Mit Rollback</td><td class="n">Keine dokumentiert</td><td class="n">Keine</td><td class="y">Updater-Plugin</td></tr>
           <tr><th scope="row">Berechtigungen</th><td class="y me">Ein Manifest für Dateien, Programme und URLs, zur Laufzeit durchgesetzt</td><td class="n">Keine</td><td class="n">Keine</td><td class="p">Capabilities begrenzen, was das Web-Frontend aufrufen darf</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Fundament</th></tr>
           <tr><th scope="row"><code>no_std</code></th><td class="y me">Ja. <code>std</code>, wenn du es brauchst</td><td class="n">Nein</td><td class="n">Nein</td><td class="n">Entfällt</td></tr>
           <tr><th scope="row">Was du einbindest</th><td class="y me">Ein Crate, <code>jflib</code>, mit Netzwerk, Codecs, Krypto, Audio und Speicherung darin</td><td class="p">egui plus eframe oder eigener Fenster- und Render-Code</td><td class="p">gpui plus gpui-component</td><td class="p">Ein Web-Frontend und seine Toolchain</td></tr>
-          <tr><th scope="row">Braucht zur Laufzeit</th><td class="y me">Unter Windows nichts. Unter Linux glibc</td><td class="p">Eine GPU oder einen OpenGL-Treiber, X11- oder Wayland-Bibliotheken</td><td class="p">DirectX 11, Metal oder Vulkan</td><td class="p">WebView2 unter Windows, WebKitGTK unter Linux</td></tr>
+          <tr><th scope="row">Braucht zur Laufzeit</th><td class="y me">Unter Windows und macOS nichts. Unter Linux glibc</td><td class="p">Eine GPU oder einen OpenGL-Treiber, X11- oder Wayland-Bibliotheken</td><td class="p">DirectX 11, Metal oder Vulkan</td><td class="p">WebView2 unter Windows, WebKitGTK unter Linux</td></tr>
           <tr><th scope="row">Version</th><td class="p me">0.1, neu auf crates.io</td><td class="p">0.37, Breaking Changes zu erwarten</td><td class="p">0.2.2 auf crates.io, Neueres unveröffentlicht</td><td class="y">2.12, stabil seit 2024</td></tr>
           <tr><th scope="row">Lizenz</th><td class="y me">MIT oder Apache 2.0</td><td class="y">MIT oder Apache 2.0</td><td class="y">Apache 2.0</td><td class="y">Apache 2.0 oder MIT</td></tr>
         </tbody>
@@ -111,7 +110,7 @@ description: Die GUI-Bibliothek JFLib im Vergleich mit egui, gpui und Tauri: Pla
       <p class="prose">Ein ehrlicher Vergleich nennt beide Seiten.</p>
     </div>
     <div class="caps caps-ink">
-      <div class="cap"><h3>Apple-Plattformen</h3><p>egui, gpui und Tauri laufen nativ unter macOS, Tauri auch unter iOS. Native Unterstützung für macOS und iOS kommt bei JFLib sehr bald. Bis dahin erreichen JFLib-Apps diese Systeme über den Browser.</p></div>
+      <div class="cap"><h3>Apple-Plattformen</h3><p>JFLib läuft seit November 2026 nativ auf Macs mit Apple Silicon und auf dem iPhone, aber nicht auf Intel-Macs und bisher ohne VoiceOver und Metal. egui, gpui und Tauri sind schon länger auf macOS, Tauri auch auf iOS.</p></div>
       <div class="cap"><h3>Reife und Community</h3><p>Tauri ist seit 2024 stabil, und egui steckt in vielen Projekten. JFLib ist gerade erst auf crates.io angekommen, mit einer bisher kleineren Community.</p></div>
       <div class="cap"><h3>Das Web-Ökosystem</h3><p>Mit Tauri stehen jede JavaScript-Bibliothek und das Können jedes Webentwicklers zur Verfügung. JFLib-Apps werden ausschließlich in Rust geschrieben.</p></div>
     </div>

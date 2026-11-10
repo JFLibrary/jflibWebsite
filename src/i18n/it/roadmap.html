@@ -1,6 +1,6 @@
 title: Roadmap di JFLib
 nav: roadmap
-description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Linux su ARM, macOS e iOS nativi e un motore 3D.
+description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Linux su ARM e un motore 3D. macOS e iOS nativi sono pronti.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -25,7 +25,7 @@ description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Li
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interfaccia sulla GPU</b><span>Output con vsync, layer e canvas con panoramica e zoom, su Windows, Linux e Android.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>Lo stesso livello su WebGPU, con shader in WGSL.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Motore 3D e CAD</b><span>Il nucleo di un motore 3D e un renderer 2D per il CAD.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Per un port nativo sui sistemi Apple.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Il livello GPU su Mac e iPhone, che fino ad allora disegnano sulla CPU.</span></li>
     </ol>
   </div>
 </section>
@@ -49,13 +49,19 @@ description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Li
 <section class="sec band b-blue" id="macos" aria-labelledby="macos-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Prossimo</span>
-      <h2 id="macos-title">macOS nativo</h2>
-      <p class="prose">Il supporto nativo per macOS è il prossimo passo e arriva molto presto. Una build nativa non c’è ancora: fino ad allora le app JFLib arrivano su macOS tramite il browser. L’obiettivo è una vera app nativa con finestre Cocoa e integrazione nel desktop, e Metal per il livello GPU. In lista c’è anche una versione nativa per iOS.</p>
+      <span class="state">Fatto</span>
+      <h2 id="macos-title">macOS e iOS nativi</h2>
+      <p class="prose">Da novembre 2026 le app JFLib girano in modo nativo sui Mac con Apple silicon e su iPhone, con gli stessi widget Rust e lo stesso renderer. Si compilano su un Mac.</p>
+      <ul class="rm-list soft">
+        <li>macOS 13 e successivi: finestre AppKit, barra dei menu, Dock, notifiche e servizi di sistema</li>
+        <li>Un .dmg firmato e notarizzato, e aggiornamenti dell’intera app</li>
+        <li>iOS 16 e successivi: touch, Apple Pencil, tastiere, sensori, file e appunti</li>
+        <li>Prossimo: Metal per il livello GPU, e VoiceOver</li>
+      </ul>
     </div>
     <figure>
       <img class="shot" src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="La galleria dei widget nello stile macOS di JFLib.">
-      <figcaption class="soft">Lo stile macOS esiste già. Qui gira su Windows.</figcaption>
+      <figcaption class="soft">La galleria dei widget nello stile macOS.</figcaption>
     </figure>
   </div>
 </section>
@@ -86,7 +92,7 @@ description: Cosa arriverà nella libreria GUI JFLib: supporto GPU, Windows e Li
   <div class="wrap">
     <div class="head"><h2 id="more-title">Anche in programma.</h2></div>
     <div class="caps">
-      <div class="cap"><h3>iOS nativo</h3><p>Oggi su iOS, come su macOS, si arriva tramite il browser.</p></div>
+      <div class="cap"><h3>VoiceOver</h3><p>Il supporto allo screen reader su Mac e iPhone, come già su Windows, Linux e Android.</p></div>
       <div class="cap"><h3>Safari nel piano di test</h3><p>Finora i test nel browser coprono Chromium e Firefox.</p></div>
       <div class="cap"><h3>Componenti per i giochi</h3><p>Animazione, mondi estesi, fisica e strumenti, sopra il motore 3D.</p></div>
     </div>

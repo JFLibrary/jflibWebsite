@@ -346,7 +346,7 @@ cargo jflib test</pre>
 <section class="part band b-ink"><div class="wrap"><h2>Fondamenta</h2><p class="soft">Su cosa gira la libreria e come è costruita.</p></div></section>
 <div class="wrap">
   <article class="ch" id="platforms">
-    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Piattaforme</h3><p>Le finestre native, l’host del browser e l’adattatore Android usano gli stessi widget e lo stesso renderer.</p></div></div>
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Piattaforme</h3><p>Le finestre native, l’host del browser e gli host per Android e iPhone usano gli stessi widget e lo stesso renderer.</p></div></div>
     <div class="ch-grid">
       <div class="ch-media"><figure><img src="img/browser-gallery.png" width="1000" height="560" loading="lazy" alt="La galleria in esecuzione in una scheda del browser."><figcaption>La galleria in una scheda del browser, come WebAssembly.</figcaption></figure></div>
       <dl class="fl">
@@ -354,7 +354,8 @@ cargo jflib test</pre>
         <div><dt>Linux</dt><dd>App nativa x86-64, su Wayland o X11, con scelta all’avvio.</dd></div>
         <div><dt>Android</dt><dd>APK nativo per Android 8 e successivi. Per ora tramite la Pocket Gallery, con meno servizi desktop.</dd></div>
         <div><dt>Browser</dt><dd>WebAssembly con build scalari, SIMD e multithread, testato su Chromium e Firefox. Qui i plugin nativi e i servizi di sistema sono più limitati.</dd></div>
-        <div><dt>macOS e iOS</dt><dd>Per ora tramite il browser. Non c’è ancora una build nativa.</dd></div>
+        <div><dt>macOS</dt><dd>App nativa per Apple silicon, da macOS 13: finestre AppKit, barra dei menu, Dock e notifiche. Distribuita come .dmg firmato e notarizzato, con aggiornamenti dell’intera app.</dd></div>
+        <div><dt>iOS</dt><dd>App nativa per iPhone da iOS 16, con touch, Apple Pencil, tastiere, sensori e file. Compilata su un Mac.</dd></div>
       </dl>
     </div>
   </article>

@@ -346,7 +346,7 @@ cargo jflib test</pre>
 <section class="part band b-ink"><div class="wrap"><h2>Fundamentos</h2><p class="soft">Sobre qué funciona la biblioteca y cómo está construida.</p></div></section>
 <div class="wrap">
   <article class="ch" id="platforms">
-    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Plataformas</h3><p>Las ventanas nativas, el host del navegador y el adaptador de Android usan los mismos widgets y el mismo renderizador.</p></div></div>
+    <div class="ch-head"><svg viewBox="0 0 100 100" style="color:var(--ink)" aria-hidden="true"><use href="#square"/></svg><div><h3>Plataformas</h3><p>Las ventanas nativas, el host del navegador y los hosts de Android y iPhone usan los mismos widgets y el mismo renderizador.</p></div></div>
     <div class="ch-grid">
       <div class="ch-media"><figure><img src="img/browser-gallery.png" width="1000" height="560" loading="lazy" alt="La galería ejecutándose en una pestaña del navegador."><figcaption>La galería en una pestaña del navegador, como WebAssembly.</figcaption></figure></div>
       <dl class="fl">
@@ -354,7 +354,8 @@ cargo jflib test</pre>
         <div><dt>Linux</dt><dd>App nativa x86-64, sobre Wayland o X11, que se elige al arrancar.</dd></div>
         <div><dt>Android</dt><dd>APK nativo para Android 8 y posteriores. Por ahora a través de la Pocket Gallery, con menos servicios de escritorio.</dd></div>
         <div><dt>Navegador</dt><dd>WebAssembly con compilaciones escalar, SIMD y con hilos, probado en Chromium y Firefox. Aquí los plugins nativos y los servicios del sistema son más limitados.</dd></div>
-        <div><dt>macOS e iOS</dt><dd>Por ahora a través del navegador. Todavía no hay versión nativa.</dd></div>
+        <div><dt>macOS</dt><dd>App nativa para Apple silicon, desde macOS 13: ventanas AppKit, barra de menús, Dock y notificaciones. Empaquetada como .dmg firmado y notarizado, con actualizaciones de la app completa.</dd></div>
+        <div><dt>iOS</dt><dd>App nativa para iPhone desde iOS 16, con pantalla táctil, Apple Pencil, teclados, sensores y archivos. Compilada en un Mac.</dd></div>
       </dl>
     </div>
   </article>

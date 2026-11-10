@@ -1,6 +1,6 @@
 title: JFLib Roadmap
 nav: roadmap
-description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterstützung, Windows und Linux auf ARM, natives macOS und iOS und eine 3D-Engine.
+description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterstützung, Windows und Linux auf ARM und eine 3D-Engine. Natives macOS und iOS sind fertig.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -25,7 +25,7 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Oberfläche auf der GPU</b><span>Ausgabe mit VSync, Ebenen und Leinwände, die sich verschieben und zoomen lassen, unter Windows, Linux und Android.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>Dieselbe Schicht auf WebGPU, mit Shadern als WGSL.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>3D-Engine und CAD</b><span>Ein Kern für eine 3D-Engine und ein 2D-Renderer für CAD.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Für eine native Portierung auf Apples Systeme.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Die GPU-Schicht auf Mac und iPhone, die bis dahin auf der CPU zeichnen.</span></li>
     </ol>
   </div>
 </section>
@@ -49,13 +49,19 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
 <section class="sec band b-blue" id="macos" aria-labelledby="macos-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Als Nächstes</span>
-      <h2 id="macos-title">Natives macOS</h2>
-      <p class="prose">Natives macOS kommt als Nächstes, schon sehr bald. Einen nativen Build gibt es noch nicht: Bis dahin erreichen JFLib-Apps macOS über den Browser. Das Ziel ist eine echte native App mit Cocoa-Fenstern und Desktop-Integration, und Metal für die GPU-Schicht. Eine native iOS-Version steht ebenfalls auf der Liste.</p>
+      <span class="state">Fertig</span>
+      <h2 id="macos-title">Natives macOS und iOS</h2>
+      <p class="prose">Seit November 2026 laufen JFLib-Apps nativ auf Macs mit Apple Silicon und auf dem iPhone, mit denselben Rust-Widgets und demselben Renderer. Gebaut werden sie auf einem Mac.</p>
+      <ul class="rm-list soft">
+        <li>macOS 13 und neuer: AppKit-Fenster, Menüleiste, Dock, Mitteilungen und Systemdienste</li>
+        <li>Eine signierte und notarisierte .dmg und Updates der ganzen App</li>
+        <li>iOS 16 und neuer: Touch, Apple Pencil, Tastaturen, Sensoren, Dateien und die Zwischenablage</li>
+        <li>Als Nächstes: Metal für die GPU-Schicht und VoiceOver</li>
+      </ul>
     </div>
     <figure>
       <img class="shot" src="img/gallery-macos.png" width="1000" height="700" loading="lazy" alt="Die Widget-Galerie im macOS-Stil von JFLib.">
-      <figcaption class="soft">Den macOS-Stil gibt es schon. Hier läuft er unter Windows.</figcaption>
+      <figcaption class="soft">Die Widget-Galerie im macOS-Stil.</figcaption>
     </figure>
   </div>
 </section>
@@ -86,7 +92,7 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
   <div class="wrap">
     <div class="head"><h2 id="more-title">Außerdem auf der Liste.</h2></div>
     <div class="caps">
-      <div class="cap"><h3>Natives iOS</h3><p>Heute erreicht man iOS wie macOS über den Browser.</p></div>
+      <div class="cap"><h3>VoiceOver</h3><p>Screenreader-Unterstützung auf Mac und iPhone, wie es sie unter Windows, Linux und Android schon gibt.</p></div>
       <div class="cap"><h3>Safari im Testplan</h3><p>Die Browsertests decken bisher Chromium und Firefox ab.</p></div>
       <div class="cap"><h3>Bausteine für Spiele</h3><p>Animation, große Welten, Physik und Werkzeuge, aufbauend auf der 3D-Engine.</p></div>
     </div>
