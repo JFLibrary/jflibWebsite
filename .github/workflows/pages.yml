@@ -52,6 +52,9 @@ jobs:
         if: steps.parts.outputs.cache-hit != 'true'
         working-directory: jflib
         run: |
+          # build_rs.py builds the web gallery in a workspace of its own with --offline: the crates
+          # from crates.io must be in Cargo's cache first
+          cargo fetch --locked
           python3 build_rs.py site --out "$GITHUB_WORKSPACE/_parts/docs"
           python3 build_rs.py app gallery --target web --web-mode scalar
           python3 build_rs.py app gallery --target web --web-mode simd
