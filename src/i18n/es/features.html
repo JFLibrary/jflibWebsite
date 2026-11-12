@@ -353,7 +353,7 @@ cargo jflib test</pre>
         <div><dt>Windows</dt><dd>App nativa x86-64 con integración en el escritorio.</dd></div>
         <div><dt>Linux</dt><dd>App nativa x86-64, sobre Wayland o X11, que se elige al arrancar.</dd></div>
         <div><dt>Android</dt><dd>APK nativo para Android 8 y posteriores. Por ahora a través de la Pocket Gallery, con menos servicios de escritorio.</dd></div>
-        <div><dt>Navegador</dt><dd>WebAssembly con compilaciones escalar, SIMD y con hilos, probado en Chromium y Firefox. Aquí los plugins nativos y los servicios del sistema son más limitados.</dd></div>
+        <div><dt>Navegador</dt><dd>WebAssembly con compilaciones escalar, SIMD y con hilos, probado en Chromium, Firefox y Safari. Aquí los plugins nativos y los servicios del sistema son más limitados.</dd></div>
         <div><dt>macOS</dt><dd>App nativa para Apple silicon, desde macOS 13: ventanas AppKit, barra de menús, Dock y notificaciones. Empaquetada como .dmg firmado y notarizado, con actualizaciones de la app completa.</dd></div>
         <div><dt>iOS</dt><dd>App nativa para iPhone desde iOS 16, con pantalla táctil, Apple Pencil, teclados, sensores y archivos. Compilada en un Mac.</dd></div>
       </dl>
@@ -366,9 +366,9 @@ cargo jflib test</pre>
       <div class="ch-media"><figure><img src="img/gpu-scene.jpg" width="1280" height="800" loading="lazy" alt="Miles de cubos de colores en movimiento, renderizados por la capa de GPU."><figcaption>La escena de prueba de GPU con 200&#8239;000 cubos en movimiento.</figcaption></figure></div>
       <dl class="fl">
         <div><dt>API explícita</dt><dd>Shaders de cómputo, renderizado con prueba de profundidad, dibujado indirecto, marcas de tiempo y swapchains, al estilo de Vulkan y WebGPU.</dd></div>
-        <div><dt>Shaders WGSL</dt><dd>La propia biblioteca los comprueba y los compila a SPIR-V.</dd></div>
-        <div><dt>Disponible hoy</dt><dd>Vulkan en Windows, Linux y Android. Los widgets se siguen rasterizando en la CPU, y la GPU se encarga de la salida, las capas, las imágenes y los lienzos.</dd></div>
-        <div><dt>Previsto</dt><dd>WebGPU en el navegador y, más adelante, Metal.</dd></div>
+        <div><dt>Shaders WGSL</dt><dd>La propia biblioteca los comprueba y los compila a SPIR-V y MSL; el navegador los toma tal cual.</dd></div>
+        <div><dt>Disponible hoy</dt><dd>Vulkan en Windows, Linux y Android, WebGPU en el navegador, Metal en Mac y iPhone (el nivel completo desde A14/M1). Los widgets se siguen rasterizando en la CPU, y la GPU se encarga de la salida, las capas, las imágenes y los lienzos (en Mac y iPhone, una vez activado).</dd></div>
+        <div><dt>Previsto</dt><dd>Un respaldo con Direct3D 12 en Windows, y los widgets dibujados por la GPU.</dd></div>
       </dl>
     </div>
   </article>

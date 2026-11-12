@@ -1,6 +1,6 @@
 title: Hoja de ruta de JFLib
 nav: roadmap
-description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows y Linux en ARM y un motor 3D. macOS e iOS nativos ya están listos.
+description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU con un renderizador 2D para CAD, y Windows y Linux en ARM. macOS e iOS nativos y el motor 3D ya están listos.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -20,12 +20,12 @@ description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows 
     <h2 id="gpu-title">Soporte de GPU</h2>
     <p class="prose" style="margin-top:16px">Una capa de GPU dentro de la biblioteca, para interfaces, CAD 2D y juegos 3D, con una sola API en todas las plataformas. Los widgets se siguen dibujando en la CPU, así que siguen siendo idénticos al píxel. La GPU se encarga de la salida, las capas, las imágenes y los lienzos.</p>
     <ol class="road">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Capa de GPU</b><span>Shaders de cómputo, renderizado con prueba de profundidad y swapchains, con Vulkan en Windows, Linux y Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Compilador de shaders</b><span>De WGSL a SPIR-V, dentro de la biblioteca.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interfaz en la GPU</b><span>Salida con vsync, capas y lienzos con desplazamiento y zoom, en Windows, Linux y Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Navegador</b><span>La misma capa sobre WebGPU, con shaders en WGSL.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Motor 3D y CAD</b><span>Un núcleo de motor 3D y un renderizador 2D para CAD.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>La capa de GPU en Mac y iPhone, que hasta entonces dibujan en la CPU.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Capa de GPU</b><span>Shaders de cómputo, renderizado con prueba de profundidad y swapchains, con su propio compilador de WGSL a SPIR-V y MSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interfaz en la GPU</b><span>Salida con vsync, capas y lienzos con desplazamiento y zoom, en Windows, Linux, Android y en el navegador.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Navegador</b><span>La misma capa sobre WebGPU, con shaders en WGSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Metal</b><span>La capa de GPU en Mac y iPhone, el nivel completo desde A14/M1.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Motor 3D</b><span>Escenas, materiales PBR, luz y sombras, glTF, visibilidad en la GPU.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>2D para CAD</b><span>Líneas, arcos, curvas, rellenos y sombreados, coordenadas grandes; después, bloques y transparencia.</span></li>
     </ol>
   </div>
 </section>
@@ -36,12 +36,12 @@ description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows 
     <h2 id="arm-title">Windows y Linux en ARM</h2>
     <p class="prose" style="margin-top:16px">Cada app que hoy funciona en Windows y Linux funcionará también de forma nativa en ARM de 64 bits: en portátiles Windows con chips ARM y en placas y servidores Linux. Las apps se siguen compilando en un PC x86, y las builds x86-64 quedan exactamente como están. Android ya funciona en ARM.</p>
     <ol class="road light">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Base de compilación</b><span>ARM64 como segundo destino, compilado en el mismo PC x86.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD con NEON</b><span>El código vectorial en ARM, con exactamente los resultados de x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Compilación y SIMD</b><span>ARM64 como segundo destino en el mismo PC x86, el código vectorial con NEON y exactamente los resultados de x86.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Emulación</b><span>Las apps x86-64 de hoy ya funcionan en Windows sobre ARM: pasan 84 de 85 scripts de prueba.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Runtime</b><span>Memoria, hilos, matemáticas y llamadas al sistema en Linux ARM64.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux en ARM</b><span>La capa de plataforma, plugins y módulos como código ARM64 nativo.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows en ARM</b><span>Apps ARM64 nativas para Windows, sin emulación.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Runtime</b><span>Memoria, hilos, matemáticas y llamadas al sistema en Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Linux en ARM</b><span>La capa de plataforma, plugins y módulos como código ARM64 nativo, probados con páginas de 4 y 64 KB.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Windows en ARM</b><span>Apps ARM64 nativas para Windows: coretest, plattest y la galería pasan.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Hardware real</b><span>Atómicos, ventanas y la GPU en máquinas ARM reales, luego paquetes y actualizaciones.</span></li>
     </ol>
   </div>
 </section>
@@ -56,7 +56,8 @@ description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows 
         <li>macOS 13 y posteriores: ventanas AppKit, barra de menús, Dock, notificaciones y servicios del sistema</li>
         <li>Un .dmg firmado y notarizado, y actualizaciones de la app completa</li>
         <li>iOS 16 y posteriores: pantalla táctil, Apple Pencil, teclados, sensores, archivos y portapapeles</li>
-        <li>Lo siguiente: Metal para la capa de GPU, y VoiceOver</li>
+        <li>Metal para la capa de GPU, el nivel completo desde A14/M1</li>
+        <li>Lo siguiente: VoiceOver</li>
       </ul>
     </div>
     <figure>
@@ -72,13 +73,13 @@ description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows 
 <section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Previsto</span>
+      <span class="state">Hecho</span>
       <h2 id="engine-title">Motor 3D</h2>
-      <p class="prose">Un núcleo de motor sobre la capa de GPU, surgido de la escena de prueba que ya funciona hoy.</p>
+      <p class="prose">Un núcleo de motor sobre la capa de GPU, surgido de la escena de prueba, con una vista 3D entre los widgets.</p>
       <ul class="rm-list soft">
-        <li>Escenas, mallas y materiales</li>
+        <li>Escenas, mallas y materiales PBR</li>
         <li>Luz y sombras</li>
-        <li>Visibilidad en la GPU e instanciación</li>
+        <li>Visibilidad en la GPU, niveles de detalle e instanciación</li>
         <li>Importación de glTF</li>
         <li>Más adelante: animación, mundos grandes, física y herramientas</li>
       </ul>
@@ -96,7 +97,7 @@ description: Lo que viene para la biblioteca GUI JFLib: soporte de GPU, Windows 
     <div class="head"><h2 id="more-title">También en la lista.</h2></div>
     <div class="caps">
       <div class="cap"><h3>VoiceOver</h3><p>Soporte del lector de pantalla en Mac y iPhone, como ya tienen Windows, Linux y Android.</p></div>
-      <div class="cap"><h3>Safari en el plan de pruebas</h3><p>Por ahora, las pruebas de navegador cubren Chromium y Firefox.</p></div>
+      <div class="cap"><h3>Respaldo con Direct3D 12</h3><p>Para equipos Windows sin Vulkan: escritorios remotos y máquinas virtuales.</p></div>
       <div class="cap"><h3>Piezas para juegos</h3><p>Animación, mundos grandes, física y herramientas, sobre el motor 3D.</p></div>
     </div>
     <div class="cta rm-more"><a class="btn" href="docs/ROADMAP.html">La lista completa, en alemán</a></div>

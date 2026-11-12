@@ -1,6 +1,6 @@
 title: JFLib Roadmap
 nav: roadmap
-description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterstützung, Windows und Linux auf ARM und eine 3D-Engine. Natives macOS und iOS sind fertig.
+description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterstützung mit einem 2D-Renderer für CAD, und Windows und Linux auf ARM. Natives macOS und iOS und die 3D-Engine sind fertig.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -20,12 +20,12 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
     <h2 id="gpu-title">GPU-Unterstützung</h2>
     <p class="prose" style="margin-top:16px">Eine GPU-Schicht in der Bibliothek, für Oberflächen, 2D-CAD und 3D-Spiele, mit einer API auf jeder Plattform. Die Widgets werden weiter auf der CPU gezeichnet und bleiben so pixelgleich. Die GPU übernimmt Ausgabe, Ebenen, Bilder und Leinwände.</p>
     <ol class="road">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU-Schicht</b><span>Compute-Shader, Rendering mit Tiefentest und Swapchains, mit Vulkan unter Windows, Linux und Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Shader-Compiler</b><span>WGSL nach SPIR-V, in der Bibliothek selbst.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Oberfläche auf der GPU</b><span>Ausgabe mit VSync, Ebenen und Leinwände, die sich verschieben und zoomen lassen, unter Windows, Linux und Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>Dieselbe Schicht auf WebGPU, mit Shadern als WGSL.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>3D-Engine und CAD</b><span>Ein Kern für eine 3D-Engine und ein 2D-Renderer für CAD.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>Die GPU-Schicht auf Mac und iPhone, die bis dahin auf der CPU zeichnen.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU-Schicht</b><span>Compute-Shader, Rendering mit Tiefentest und Swapchains, mit eigenem WGSL-Compiler für SPIR-V und MSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Oberfläche auf der GPU</b><span>Ausgabe mit VSync, Ebenen und Leinwände, die sich verschieben und zoomen lassen, unter Windows, Linux, Android und im Browser.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Browser</b><span>Dieselbe Schicht auf WebGPU, mit Shadern als WGSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Metal</b><span>Die GPU-Schicht auf Mac und iPhone, die volle Stufe ab A14/M1.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>3D-Engine</b><span>Szenen, PBR-Materialien, Licht und Schatten, glTF, Sichtbarkeit auf der GPU.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>2D für CAD</b><span>Linien, Bögen, Kurven, Füllungen und Schraffuren, große Koordinaten; als Nächstes Blöcke und Transparenz.</span></li>
     </ol>
   </div>
 </section>
@@ -36,12 +36,12 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
     <h2 id="arm-title">Windows und Linux auf ARM</h2>
     <p class="prose" style="margin-top:16px">Jede App, die heute unter Windows und Linux läuft, läuft künftig auch nativ auf 64-Bit-ARM: auf Windows-Laptops mit ARM-Chips und auf Linux-Boards und -Servern. Gebaut wird weiter auf einem x86-PC, und die x86-64-Builds bleiben genau so, wie sie sind. Android läuft schon heute auf ARM.</p>
     <ol class="road light">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Build-Grundlage</b><span>ARM64 als zweites Ziel, gebaut auf demselben x86-PC.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD mit NEON</b><span>Der Vektorcode auf ARM, mit genau den Ergebnissen von x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Build und SIMD</b><span>ARM64 als zweites Ziel auf demselben x86-PC, der Vektorcode mit NEON und genau den Ergebnissen von x86.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Emulation</b><span>Die heutigen x86-64-Apps laufen schon unter Windows auf ARM: 84 von 85 Testskripten sind grün.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Laufzeit</b><span>Speicher, Threads, Mathematik und Systemaufrufe auf Linux ARM64.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux auf ARM</b><span>Die Plattformschicht, Plugins und Module als nativer ARM64-Code.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows auf ARM</b><span>Native ARM64-Apps für Windows, ohne Emulation.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Laufzeit</b><span>Speicher, Threads, Mathematik und Systemaufrufe auf Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Linux auf ARM</b><span>Die Plattformschicht, Plugins und Module als nativer ARM64-Code, geprüft mit 4- und 64-KB-Seiten.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Windows auf ARM</b><span>Native ARM64-Apps für Windows: coretest, plattest und die Galerie sind grün.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Echte Hardware</b><span>Atomics, Fenster und die GPU auf echten ARM-Rechnern, danach Pakete und Updates.</span></li>
     </ol>
   </div>
 </section>
@@ -56,7 +56,8 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
         <li>macOS 13 und neuer: AppKit-Fenster, Menüleiste, Dock, Mitteilungen und Systemdienste</li>
         <li>Eine signierte und notarisierte .dmg und Updates der ganzen App</li>
         <li>iOS 16 und neuer: Touch, Apple Pencil, Tastaturen, Sensoren, Dateien und die Zwischenablage</li>
-        <li>Als Nächstes: Metal für die GPU-Schicht und VoiceOver</li>
+        <li>Metal für die GPU-Schicht, die volle Stufe ab A14/M1</li>
+        <li>Als Nächstes: VoiceOver</li>
       </ul>
     </div>
     <figure>
@@ -72,13 +73,13 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
 <section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Geplant</span>
+      <span class="state">Fertig</span>
       <h2 id="engine-title">3D-Engine</h2>
-      <p class="prose">Ein Engine-Kern auf der GPU-Schicht, gewachsen aus der Testszene, die heute schon läuft.</p>
+      <p class="prose">Ein Engine-Kern auf der GPU-Schicht, gewachsen aus der Testszene, mit einer 3D-Ansicht zwischen den Widgets.</p>
       <ul class="rm-list soft">
-        <li>Szenen, Meshes und Materialien</li>
+        <li>Szenen, Meshes und PBR-Materialien</li>
         <li>Licht und Schatten</li>
-        <li>Sichtbarkeit auf der GPU und Instancing</li>
+        <li>Sichtbarkeit auf der GPU, Detailstufen und Instancing</li>
         <li>glTF-Import</li>
         <li>Später: Animation, große Welten, Physik und Werkzeuge</li>
       </ul>
@@ -96,7 +97,7 @@ description: Was als Nächstes für die GUI-Bibliothek JFLib kommt: GPU-Unterst�
     <div class="head"><h2 id="more-title">Außerdem auf der Liste.</h2></div>
     <div class="caps">
       <div class="cap"><h3>VoiceOver</h3><p>Screenreader-Unterstützung auf Mac und iPhone, wie es sie unter Windows, Linux und Android schon gibt.</p></div>
-      <div class="cap"><h3>Safari im Testplan</h3><p>Die Browsertests decken bisher Chromium und Firefox ab.</p></div>
+      <div class="cap"><h3>Direct3D 12 als Rückfall</h3><p>Für Windows-Rechner ohne Vulkan: Remotedesktop und virtuelle Maschinen.</p></div>
       <div class="cap"><h3>Bausteine für Spiele</h3><p>Animation, große Welten, Physik und Werkzeuge, aufbauend auf der 3D-Engine.</p></div>
     </div>
     <div class="cta rm-more"><a class="btn" href="docs/ROADMAP.html">Die vollständige Liste</a></div>

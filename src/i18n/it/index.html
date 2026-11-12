@@ -118,7 +118,7 @@ description: Una libreria GUI completa in Rust, con un renderer proprio, stili i
         <li><b>Windows</b><span>App nativa x86-64 con integrazione nel desktop</span></li>
         <li><b>Linux</b><span>App nativa x86-64, Wayland e X11, con scelta all’avvio</span></li>
         <li><b>Android</b><span>APK nativo per Android 8 e successivi, per ora la Pocket Gallery</span></li>
-        <li><b>Browser</b><span>WebAssembly, testato su Chromium e Firefox</span></li>
+        <li><b>Browser</b><span>WebAssembly, testato su Chromium, Firefox e Safari</span></li>
         <li><b>macOS</b><span>App nativa per Apple silicon (macOS 13+): finestre AppKit, barra dei menu, Dock, notifiche; .dmg firmato e notarizzato con aggiornamenti automatici</span></li>
         <li><b>iOS</b><span>App nativa per iPhone (iOS 16+): touch, Apple Pencil, tastiere, sensori, file</span></li>
       </ul>
@@ -260,8 +260,8 @@ description: Una libreria GUI completa in Rust, con un renderer proprio, stili i
         <li><span>Windows</span><code>Vulkan</code><span class="now">Disponibile</span></li>
         <li><span>Linux</span><code>Vulkan</code><span class="now">Disponibile</span></li>
         <li><span>Android</span><code>Vulkan</code><span class="now">Disponibile</span></li>
-        <li><span>Browser</span><code>WebGPU</code><span class="next">Previsto</span></li>
-        <li><span>Apple</span><code>Metal</code><span class="next">Più avanti</span></li>
+        <li><span>Browser</span><code>WebGPU</code><span class="now">Disponibile</span></li>
+        <li><span>Apple</span><code>Metal</code><span class="now">Disponibile</span></li>
       </ul>
     </div>
     <div>
@@ -271,9 +271,9 @@ description: Una libreria GUI completa in Rust, con un renderer proprio, stili i
       </figure>
       <ol class="pipe">
         <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><div><b>Shader WGSL</b><span>Il sorgente del tuo shader</span></div></li>
-        <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><div><b><code>wgsl</code></b><span>Lo verifica e lo compila in SPIR-V, dentro la libreria</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><div><b><code>wgsl</code></b><span>Lo verifica e lo compila in SPIR-V per Vulkan e in MSL per Metal; il browser usa il WGSL così com’è</span></div></li>
         <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><div><b><code>gpu</code></b><span>Device, queue, pipeline e command buffer, con il back end scelto in fase di build</span></div></li>
-        <li><svg viewBox="0 0 100 100" style="color:var(--on-ink)" aria-hidden="true"><use href="#square"/></svg><div><b>La tua finestra</b><span>I widget vengono ancora rasterizzati sulla CPU. Su Windows, Linux e Android la GPU si occupa di output, layer, immagini e canvas.</span></div></li>
+        <li><svg viewBox="0 0 100 100" style="color:var(--on-ink)" aria-hidden="true"><use href="#square"/></svg><div><b>La tua finestra</b><span>I widget vengono ancora rasterizzati sulla CPU. Su Windows, Linux, Android e nel browser la GPU si occupa di output, layer, immagini e canvas; su Mac e iPhone per ora è disattivato di default.</span></div></li>
       </ol>
     </div>
   </div>

@@ -353,7 +353,7 @@ cargo jflib test</pre>
         <div><dt>Windows</dt><dd>Native x86-64-App mit Desktop-Integration.</dd></div>
         <div><dt>Linux</dt><dd>Native x86-64-App, unter Wayland oder X11, beim Start gewählt.</dd></div>
         <div><dt>Android</dt><dd>Natives APK ab Android 8. Bisher über die Pocket Gallery, mit weniger Desktop-Diensten.</dd></div>
-        <div><dt>Browser</dt><dd>WebAssembly mit skalaren Builds, SIMD-Builds und Builds mit Threads, getestet mit Chromium und Firefox. Native Plugins und Systemdienste sind hier eingeschränkter.</dd></div>
+        <div><dt>Browser</dt><dd>WebAssembly mit skalaren Builds, SIMD-Builds und Builds mit Threads, getestet mit Chromium, Firefox und Safari. Native Plugins und Systemdienste sind hier eingeschränkter.</dd></div>
         <div><dt>macOS</dt><dd>Native App für Apple Silicon, ab macOS 13: AppKit-Fenster, Menüleiste, Dock und Mitteilungen. Verpackt als signierte und notarisierte .dmg, mit Updates der ganzen App.</dd></div>
         <div><dt>iOS</dt><dd>Native iPhone-App ab iOS 16, mit Touch, Apple Pencil, Tastaturen, Sensoren und Dateien. Gebaut auf einem Mac.</dd></div>
       </dl>
@@ -366,9 +366,9 @@ cargo jflib test</pre>
       <div class="ch-media"><figure><img src="img/gpu-scene.jpg" width="1280" height="800" loading="lazy" alt="Tausende bunte Würfel in Bewegung, gerendert von der GPU-Schicht."><figcaption>Die GPU-Testszene mit 200.000 bewegten Würfeln.</figcaption></figure></div>
       <dl class="fl">
         <div><dt>Explizite API</dt><dd>Compute-Shader, Rendering mit Tiefentest, indirekte Draw Calls, Zeitstempel und Swapchains, im Stil von Vulkan und WebGPU.</dd></div>
-        <div><dt>WGSL-Shader</dt><dd>Von der Bibliothek selbst geprüft und nach SPIR-V kompiliert.</dd></div>
-        <div><dt>Heute verfügbar</dt><dd>Vulkan unter Windows, Linux und Android. Die Widgets werden weiter auf der CPU gerastert, und die GPU übernimmt Ausgabe, Ebenen, Bilder und Leinwände.</dd></div>
-        <div><dt>Geplant</dt><dd>WebGPU im Browser und später Metal.</dd></div>
+        <div><dt>WGSL-Shader</dt><dd>Von der Bibliothek selbst geprüft und nach SPIR-V und MSL kompiliert; der Browser nimmt sie, wie sie sind.</dd></div>
+        <div><dt>Heute verfügbar</dt><dd>Vulkan unter Windows, Linux und Android, WebGPU im Browser, Metal auf Mac und iPhone (die volle Stufe ab A14/M1). Die Widgets werden weiter auf der CPU gerastert, und die GPU übernimmt Ausgabe, Ebenen, Bilder und Leinwände (auf Mac und iPhone, wenn eingeschaltet).</dd></div>
+        <div><dt>Geplant</dt><dd>Direct3D 12 als Rückfall unter Windows, und Widgets, die die GPU zeichnet.</dd></div>
       </dl>
     </div>
   </article>

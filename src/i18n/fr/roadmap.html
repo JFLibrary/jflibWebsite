@@ -1,6 +1,6 @@
 title: Feuille de route de JFLib
 nav: roadmap
-description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU, Windows et Linux sur ARM, et un moteur 3D. macOS et iOS natifs sont terminés.
+description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiques JFLib : prise en charge du GPU avec un moteur de rendu 2D pour la CAO, et Windows et Linux sur ARM. macOS et iOS natifs et le moteur 3D sont terminés.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -20,12 +20,12 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
     <h2 id="gpu-title">Prise en charge du GPU</h2>
     <p class="prose" style="margin-top:16px">Une couche GPU dans la bibliothèque, pour les interfaces, la CAO 2D et les jeux 3D, avec une seule API sur chaque plateforme. Les widgets continuent d’être dessinés sur le CPU et restent ainsi identiques au pixel près. Le GPU prend en charge la sortie, les calques, les images et les canevas.</p>
     <ol class="road">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Couche GPU</b><span>Compute shaders, rendu avec test de profondeur et swapchains, avec Vulkan sous Windows, Linux et Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Compilateur de shaders</b><span>De WGSL vers SPIR-V, dans la bibliothèque.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface sur le GPU</b><span>Sortie avec vsync, calques et canevas que l’on peut déplacer et zoomer, sous Windows, Linux et Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Navigateur</b><span>La même couche sur WebGPU, avec des shaders en WGSL.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Moteur 3D et CAO</b><span>Un cœur de moteur 3D et un moteur de rendu 2D pour la CAO.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>La couche GPU sur Mac et iPhone, qui dessinent sur le CPU d’ici là.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Couche GPU</b><span>Compute shaders, rendu avec test de profondeur et swapchains, avec son propre compilateur WGSL vers SPIR-V et MSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface sur le GPU</b><span>Sortie avec vsync, calques et canevas que l’on peut déplacer et zoomer, sous Windows, Linux, Android et dans le navigateur.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Navigateur</b><span>La même couche sur WebGPU, avec des shaders en WGSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Metal</b><span>La couche GPU sur Mac et iPhone, le niveau complet à partir de l’A14/M1.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Moteur 3D</b><span>Scènes, matériaux PBR, lumière et ombres, glTF, visibilité calculée sur le GPU.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>2D pour la CAO</b><span>Lignes, arcs, courbes, remplissages et hachures, grandes coordonnées ; ensuite les blocs et la transparence.</span></li>
     </ol>
   </div>
 </section>
@@ -36,12 +36,12 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
     <h2 id="arm-title">Windows et Linux sur ARM</h2>
     <p class="prose" style="margin-top:16px">Chaque application qui fonctionne aujourd’hui sous Windows et Linux fonctionnera aussi nativement sur ARM 64 bits : sur les portables Windows à puce ARM, et sur les cartes et serveurs Linux. Les applications sont toujours compilées sur un PC x86, et les builds x86-64 restent exactement tels qu’ils sont. Android tourne déjà sur ARM.</p>
     <ol class="road light">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Base de compilation</b><span>ARM64 comme deuxième cible, compilé sur le même PC x86.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD avec NEON</b><span>Le code vectoriel sur ARM, avec exactement les résultats de x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Compilation et SIMD</b><span>ARM64 comme deuxième cible sur le même PC x86, le code vectoriel avec NEON et exactement les résultats de x86.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Émulation</b><span>Les applications x86-64 actuelles tournent déjà sous Windows sur ARM : 84 scripts de test sur 85 passent.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Runtime</b><span>Mémoire, threads, calcul et appels système sur Linux ARM64.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux sur ARM</b><span>La couche plateforme, les plugins et les modules en code ARM64 natif.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows sur ARM</b><span>Des applications ARM64 natives pour Windows, sans émulation.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Runtime</b><span>Mémoire, threads, calcul et appels système sur Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Linux sur ARM</b><span>La couche plateforme, les plugins et les modules en code ARM64 natif, testés avec des pages de 4 et 64 Ko.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Windows sur ARM</b><span>Des applications ARM64 natives pour Windows : coretest, plattest et la galerie passent.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Vrai matériel</b><span>Atomiques, fenêtres et GPU sur de vraies machines ARM, puis paquets et mises à jour.</span></li>
     </ol>
   </div>
 </section>
@@ -56,7 +56,8 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
         <li>macOS 13 et ultérieur : fenêtres AppKit, barre des menus, Dock, notifications et services système</li>
         <li>Un .dmg signé et notarisé, et des mises à jour de l’application entière</li>
         <li>iOS 16 et ultérieur : tactile, Apple Pencil, claviers, capteurs, fichiers et presse-papiers</li>
-        <li>Ensuite : Metal pour la couche GPU, et VoiceOver</li>
+        <li>Metal pour la couche GPU, le niveau complet à partir de l’A14/M1</li>
+        <li>Ensuite : VoiceOver</li>
       </ul>
     </div>
     <figure>
@@ -72,13 +73,13 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
 <section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Prévu</span>
+      <span class="state">Terminé</span>
       <h2 id="engine-title">Moteur 3D</h2>
-      <p class="prose">Un cœur de moteur au-dessus de la couche GPU, issu de la scène de test qui tourne déjà aujourd’hui.</p>
+      <p class="prose">Un cœur de moteur au-dessus de la couche GPU, issu de la scène de test, avec une vue 3D entre les widgets.</p>
       <ul class="rm-list soft">
-        <li>Scènes, maillages et matériaux</li>
+        <li>Scènes, maillages et matériaux PBR</li>
         <li>Lumière et ombres</li>
-        <li>Visibilité calculée sur le GPU, et instanciation</li>
+        <li>Visibilité calculée sur le GPU, niveaux de détail et instanciation</li>
         <li>Import glTF</li>
         <li>Plus tard : animation, grands mondes, physique et outils</li>
       </ul>
@@ -96,7 +97,7 @@ description: Ce qui arrive ensuite pour la bibliothèque d’interfaces graphiqu
     <div class="head"><h2 id="more-title">Aussi sur la liste.</h2></div>
     <div class="caps">
       <div class="cap"><h3>VoiceOver</h3><p>La prise en charge du lecteur d’écran sur Mac et iPhone, comme Windows, Linux et Android l’ont déjà.</p></div>
-      <div class="cap"><h3>Safari dans le plan de test</h3><p>Les tests de navigateur couvrent pour l’instant Chromium et Firefox.</p></div>
+      <div class="cap"><h3>Repli sur Direct3D 12</h3><p>Pour les machines Windows sans Vulkan : bureaux à distance et machines virtuelles.</p></div>
       <div class="cap"><h3>Briques pour les jeux</h3><p>Animation, grands mondes, physique et outils, au-dessus du moteur 3D.</p></div>
     </div>
     <div class="cta rm-more"><a class="btn" href="docs/ROADMAP.html">La liste complète, en allemand</a></div>

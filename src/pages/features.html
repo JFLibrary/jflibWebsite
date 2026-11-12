@@ -353,7 +353,7 @@ cargo jflib test</pre>
         <div><dt>Windows</dt><dd>Native x86-64 app with desktop integration.</dd></div>
         <div><dt>Linux</dt><dd>Native x86-64 app, on Wayland or X11, picked at startup.</dd></div>
         <div><dt>Android</dt><dd>Native APK for Android 8 and later. So far through the Pocket Gallery, with fewer desktop services.</dd></div>
-        <div><dt>Browser</dt><dd>WebAssembly with scalar, SIMD and threaded builds, tested on Chromium and Firefox. Native plugins and system services are more limited here.</dd></div>
+        <div><dt>Browser</dt><dd>WebAssembly with scalar, SIMD and threaded builds, tested on Chromium, Firefox and Safari. Native plugins and system services are more limited here.</dd></div>
         <div><dt>macOS</dt><dd>Native app for Apple silicon, macOS 13 and later: AppKit windows, the menu bar, Dock and notifications. Packed as a signed and notarized .dmg, with updates of the whole app.</dd></div>
         <div><dt>iOS</dt><dd>Native iPhone app for iOS 16 and later, with touch, Apple Pencil, keyboards, sensors and files. Built on a Mac.</dd></div>
       </dl>
@@ -366,9 +366,9 @@ cargo jflib test</pre>
       <div class="ch-media"><figure><img src="img/gpu-scene.jpg" width="1280" height="800" loading="lazy" alt="Thousands of coloured cubes in motion, rendered by the GPU layer."><figcaption>The GPU test scene with 200,000 moving cubes.</figcaption></figure></div>
       <dl class="fl">
         <div><dt>Explicit API</dt><dd>Compute shaders, rendering with a depth test, indirect draws, timestamps and swapchains, in the style of Vulkan and WebGPU.</dd></div>
-        <div><dt>WGSL shaders</dt><dd>Checked and compiled to SPIR-V by the library itself.</dd></div>
-        <div><dt>Available today</dt><dd>Vulkan on Windows, Linux and Android. The widgets still rasterize on the CPU, and the GPU takes over output, layers, images and canvases.</dd></div>
-        <div><dt>Planned</dt><dd>WebGPU in the browser and later Metal.</dd></div>
+        <div><dt>WGSL shaders</dt><dd>Checked and compiled to SPIR-V and MSL by the library itself; the browser takes them as they are.</dd></div>
+        <div><dt>Available today</dt><dd>Vulkan on Windows, Linux and Android, WebGPU in the browser, Metal on Mac and iPhone (the full level from A14/M1). The widgets still rasterize on the CPU, and the GPU takes over output, layers, images and canvases (on Mac and iPhone once switched on).</dd></div>
+        <div><dt>Planned</dt><dd>A Direct3D 12 fallback on Windows, and the widgets drawn on the GPU.</dd></div>
       </dl>
     </div>
   </article>

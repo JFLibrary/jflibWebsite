@@ -1,6 +1,6 @@
 title: JFLib Roadmap
 nav: roadmap
-description: What is coming next for the JFLib GUI library: GPU support, Windows and Linux on ARM and a 3D engine. Native macOS and iOS are done.
+description: What is coming next for the JFLib GUI library: GPU support with a 2D renderer for CAD, and Windows and Linux on ARM. Native macOS and iOS and the 3D engine are done.
 ---
 <section class="page-hero">
   <div class="wrap">
@@ -20,12 +20,12 @@ description: What is coming next for the JFLib GUI library: GPU support, Windows
     <h2 id="gpu-title">GPU support</h2>
     <p class="prose" style="margin-top:16px">A GPU layer inside the library, for interfaces, 2D CAD and 3D games, with one API on every platform. The widgets keep being drawn on the CPU, so they stay pixel-identical. The GPU takes over output, layers, images and canvases.</p>
     <ol class="road">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU layer</b><span>Compute shaders, depth-tested rendering and swapchains, with Vulkan on Windows, Linux and Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Shader compiler</b><span>WGSL to SPIR-V, inside the library.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface on the GPU</b><span>Output with vsync, layers and canvases that pan and zoom, on Windows, Linux and Android.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Browser</b><span>The same layer on WebGPU, with shaders as WGSL.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>3D engine and CAD</b><span>A 3D engine core and a 2D renderer for CAD.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Metal</b><span>The GPU layer on Mac and iPhone, which draw on the CPU until then.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>GPU layer</b><span>Compute shaders, depth-tested rendering and swapchains, with its own WGSL compiler for SPIR-V and MSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Interface on the GPU</b><span>Output with vsync, layers and canvases that pan and zoom, on Windows, Linux, Android and in the browser.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Browser</b><span>The same layer on WebGPU, with shaders as WGSL.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Metal</b><span>The GPU layer on Mac and iPhone, the full level from A14/M1.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>3D engine</b><span>Scenes, PBR materials, light and shadows, glTF, visibility on the GPU.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>2D for CAD</b><span>Lines, arcs, curves, fills and hatches, large coordinates; blocks and transparency next.</span></li>
     </ol>
   </div>
 </section>
@@ -36,12 +36,12 @@ description: What is coming next for the JFLib GUI library: GPU support, Windows
     <h2 id="arm-title">Windows and Linux on ARM</h2>
     <p class="prose" style="margin-top:16px">Every app that runs on Windows and Linux today will also run natively on 64-bit ARM: on Windows laptops with ARM chips, and on Linux boards and servers. Apps are still built on an x86 PC, and the x86-64 builds stay exactly as they are. Android already runs on ARM.</p>
     <ol class="road light">
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Build setup</b><span>ARM64 as a second target, built on the same x86 PC.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>SIMD on NEON</b><span>The vector code on ARM, with exactly the results of x86.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Build and SIMD</b><span>ARM64 as a second target on the same x86 PC, the vector code on NEON with exactly the results of x86.</span></li>
       <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Emulation</b><span>Today’s x86-64 apps already run on Windows on ARM: 84 of 85 test scripts pass.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Runtime</b><span>Memory, threads, maths and system calls on Linux ARM64.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Linux on ARM</b><span>The platform layer, plugins and modules as native ARM64 code.</span></li>
-      <li><svg viewBox="0 0 100 100" style="color:var(--square)" aria-hidden="true"><use href="#square"/></svg><b>Windows on ARM</b><span>Native ARM64 apps for Windows, without emulation.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Runtime</b><span>Memory, threads, maths and system calls on Linux ARM64.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Linux on ARM</b><span>The platform layer, plugins and modules as native ARM64 code, tested with 4 and 64 KB pages.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--circle)" aria-hidden="true"><use href="#circle"/></svg><b>Windows on ARM</b><span>Native ARM64 apps for Windows: coretest, plattest and the gallery pass.</span></li>
+      <li><svg viewBox="0 0 100 100" style="color:var(--star)" aria-hidden="true"><use href="#star"/></svg><b>Real hardware</b><span>Atomics, windows and the GPU on real ARM machines, then packages and updates.</span></li>
     </ol>
   </div>
 </section>
@@ -56,7 +56,8 @@ description: What is coming next for the JFLib GUI library: GPU support, Windows
         <li>macOS 13 and later: AppKit windows, the menu bar, Dock, notifications and system services</li>
         <li>A signed and notarized .dmg, and updates of the whole app</li>
         <li>iOS 16 and later: touch, Apple Pencil, keyboards, sensors, files and the clipboard</li>
-        <li>Next: Metal for the GPU layer, and VoiceOver</li>
+        <li>Metal for the GPU layer, the full level from A14/M1</li>
+        <li>Next: VoiceOver</li>
       </ul>
     </div>
     <figure>
@@ -72,13 +73,13 @@ description: What is coming next for the JFLib GUI library: GPU support, Windows
 <section class="sec band b-orange" id="engine" aria-labelledby="engine-title">
   <div class="wrap rm">
     <div>
-      <span class="state">Planned</span>
+      <span class="state">Done</span>
       <h2 id="engine-title">3D engine</h2>
-      <p class="prose">An engine core on top of the GPU layer, grown from the test scene that already runs today.</p>
+      <p class="prose">An engine core on top of the GPU layer, grown from the test scene, with a 3D view between the widgets.</p>
       <ul class="rm-list soft">
-        <li>Scenes, meshes and materials</li>
+        <li>Scenes, meshes and PBR materials</li>
         <li>Light and shadows</li>
-        <li>Visibility on the GPU, and instancing</li>
+        <li>Visibility on the GPU, detail levels and instancing</li>
         <li>glTF import</li>
         <li>Later: animation, large worlds, physics and tools</li>
       </ul>
@@ -96,7 +97,7 @@ description: What is coming next for the JFLib GUI library: GPU support, Windows
     <div class="head"><h2 id="more-title">Also on the list.</h2></div>
     <div class="caps">
       <div class="cap"><h3>VoiceOver</h3><p>Screen reader support on Mac and iPhone, as Windows, Linux and Android already have it.</p></div>
-      <div class="cap"><h3>Safari in the test plan</h3><p>The browser tests cover Chromium and Firefox so far.</p></div>
+      <div class="cap"><h3>Direct3D 12 fallback</h3><p>For Windows machines without Vulkan: remote desktops and virtual machines.</p></div>
       <div class="cap"><h3>Game building blocks</h3><p>Animation, large worlds, physics and tools, on top of the 3D engine.</p></div>
     </div>
     <div class="cta rm-more"><a class="btn" href="docs/ROADMAP.html">The complete list, in German</a></div>

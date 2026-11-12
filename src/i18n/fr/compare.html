@@ -42,7 +42,7 @@ description: Comment la bibliothèque d’interfaces graphiques JFLib se compare
           <tr><th scope="row">iOS</th><td class="y me">Natif (iOS 16+), nouveau</td><td class="n">Non mentionné</td><td class="p">Une crate existe, statut incertain</td><td class="y">Oui, encore en cours de maturation</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Dessin</th></tr>
-          <tr><th scope="row">Qui dessine</th><td class="y me">Son propre moteur de rendu, identique au pixel près partout. Vulkan pour la sortie, les calques et les images</td><td class="y">Ses propres maillages, peints avec wgpu ou OpenGL</td><td class="y">Son propre moteur de rendu GPU : Metal, DirectX 11, wgpu</td><td class="p">La webview du système, différente selon la plateforme</td></tr>
+          <tr><th scope="row">Qui dessine</th><td class="y me">Son propre moteur de rendu, identique au pixel près partout. Vulkan, Metal ou WebGPU pour la sortie, les calques et les images</td><td class="y">Ses propres maillages, peints avec wgpu ou OpenGL</td><td class="y">Son propre moteur de rendu GPU : Metal, DirectX 11, wgpu</td><td class="p">La webview du système, différente selon la plateforme</td></tr>
           <tr><th scope="row">Fonctionne sans GPU</th><td class="y me">Oui. Le GPU est utilisé s’il est présent</td><td class="p">Nécessite un GPU ou un pilote OpenGL</td><td class="n">Nécessite un GPU</td><td class="p">Dépend de la webview</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Accessibilité</th></tr>
@@ -110,7 +110,7 @@ description: Comment la bibliothèque d’interfaces graphiques JFLib se compare
       <p class="prose">Une comparaison honnête montre les deux côtés.</p>
     </div>
     <div class="caps caps-ink">
-      <div class="cap"><h3>Plateformes Apple</h3><p>Depuis novembre 2026, JFLib tourne nativement sur les Mac à puce Apple et sur l’iPhone, mais pas sur les Mac Intel, et pour l’instant sans VoiceOver ni Metal. egui, gpui et Tauri sont sur macOS depuis plus longtemps, et Tauri aussi sur iOS.</p></div>
+      <div class="cap"><h3>Plateformes Apple</h3><p>Depuis novembre 2026, JFLib tourne nativement sur les Mac à puce Apple et sur l’iPhone, mais pas sur les Mac Intel, et pour l’instant sans VoiceOver. egui, gpui et Tauri sont sur macOS depuis plus longtemps, et Tauri aussi sur iOS.</p></div>
       <div class="cap"><h3>Maturité et communauté</h3><p>Tauri est stable depuis 2024, et egui est utilisé dans de nombreux projets. JFLib vient d’arriver sur crates.io, avec pour l’instant une communauté plus petite.</p></div>
       <div class="cap"><h3>L’écosystème web</h3><p>Avec Tauri, toutes les bibliothèques JavaScript et les compétences de n’importe quel développeur web sont à disposition. Les applications JFLib s’écrivent uniquement en Rust.</p></div>
     </div>
