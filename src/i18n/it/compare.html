@@ -46,7 +46,7 @@ description: Come si confronta la libreria GUI JFLib con egui, gpui e Tauri: pia
           <tr><th scope="row">Funziona senza GPU</th><td class="y me">Sì. La GPU viene usata quando c’è</td><td class="p">Richiede una GPU o un driver OpenGL</td><td class="n">Richiede una GPU</td><td class="p">Dipende dalla webview</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Accessibilità</th></tr>
-          <tr><th scope="row">Lettori di schermo</th><td class="y me">UI Automation, AT-SPI2, ARIA nel browser, nodi Android</td><td class="y">AccessKit su Windows e macOS. Linux probabile, non documentato</td><td class="p">AccessKit sul branch main, non nella release su crates.io</td><td class="p">Dalla webview e dal tuo HTML</td></tr>
+          <tr><th scope="row">Lettori di schermo</th><td class="y me">UI Automation, AT-SPI2, VoiceOver su macOS e iOS, ARIA nel browser, nodi Android</td><td class="y">AccessKit su Windows e macOS. Linux probabile, non documentato</td><td class="p">AccessKit sul branch main, non nella release su crates.io</td><td class="p">Dalla webview e dal tuo HTML</td></tr>
           <tr><th scope="row">Contrasto elevato</th><td class="y me">Un tema a contrasto elevato che segue il sistema</td><td class="n">Nessuna modalità integrata</td><td class="n">Nessuna modalità integrata</td><td class="p">Dipende dal tuo CSS</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Widget pronti all’uso</th></tr>
@@ -95,7 +95,7 @@ description: Come si confronta la libreria GUI JFLib con egui, gpui e Tauri: pia
     <div class="caps">
       <div class="cap"><h3>Tutto dalle stesse mani</h3><p>Finestre, widget, testo, immagini, rete, pacchetti e aggiornamenti arrivano da un’unica libreria, testata nel suo insieme. Nessun secondo loop delle finestre, nessuno stack web.</p></div>
       <div class="cap"><h3>Gli stessi pixel ovunque</h3><p>Ogni widget è disegnato dal renderer di JFLib, così un’app ha lo stesso aspetto su ogni piattaforma e in ogni test. È questo che rende possibili test esatti al pixel.</p></div>
-      <div class="cap"><h3>Accessibile di default</h3><p>Lettori di schermo su quattro piattaforme, contrasto elevato, una scala del testo separata, uso completo da tastiera e layout da destra a sinistra, senza crate aggiuntivi.</p></div>
+      <div class="cap"><h3>Accessibile di default</h3><p>Lettori di schermo su sei piattaforme, contrasto elevato, una scala del testo separata, uso completo da tastiera e layout da destra a sinistra, senza crate aggiuntivi.</p></div>
       <div class="cap"><h3>Vere app desktop</h3><p>Docking, ribbon, testo formattato, un editor di codice, griglie di dati, tipi di file, icone nella tray e jump list fanno parte della libreria.</p></div>
       <div class="cap"><h3>Strumenti in ogni app</h3><p>L’<a href="inspector.html">inspector dal vivo</a>, gli <a href="testing.html">script di test</a>, l’hot reload e un’interfaccia per agenti sono in ogni build, e quando sono spenti non costano nulla.</p></div>
       <div class="cap"><h3>Pronta da distribuire</h3><p><code>cargo jflib package</code> crea installer e pacchetti per Windows e Linux, con firma e aggiornamenti firmati.</p></div>
@@ -110,7 +110,7 @@ description: Come si confronta la libreria GUI JFLib con egui, gpui e Tauri: pia
       <p class="prose">Un confronto onesto mostra entrambi i lati.</p>
     </div>
     <div class="caps caps-ink">
-      <div class="cap"><h3>Piattaforme Apple</h3><p>Da novembre 2026 JFLib gira in modo nativo sui Mac con Apple silicon e su iPhone, ma non sui Mac Intel, e per ora senza VoiceOver. egui, gpui e Tauri sono su macOS da più tempo, e Tauri anche su iOS.</p></div>
+      <div class="cap"><h3>Piattaforme Apple</h3><p>Da novembre 2026 JFLib gira in modo nativo sui Mac con Apple silicon e su iPhone, ma non sui Mac Intel. egui, gpui e Tauri sono su macOS da più tempo, e Tauri anche su iOS.</p></div>
       <div class="cap"><h3>Maturità e community</h3><p>Tauri è stabile dal 2024, ed egui è usata in molti progetti. JFLib è appena arrivata su crates.io, e per ora ha una community più piccola.</p></div>
       <div class="cap"><h3>L’ecosistema web</h3><p>Con Tauri hai a disposizione ogni libreria JavaScript e le competenze di ogni sviluppatore web. Le app JFLib si scrivono solo in Rust.</p></div>
     </div>

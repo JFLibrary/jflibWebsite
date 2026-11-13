@@ -46,7 +46,7 @@ description: Comment la bibliothèque d’interfaces graphiques JFLib se compare
           <tr><th scope="row">Fonctionne sans GPU</th><td class="y me">Oui. Le GPU est utilisé s’il est présent</td><td class="p">Nécessite un GPU ou un pilote OpenGL</td><td class="n">Nécessite un GPU</td><td class="p">Dépend de la webview</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Accessibilité</th></tr>
-          <tr><th scope="row">Lecteurs d’écran</th><td class="y me">UI Automation, AT-SPI2, ARIA dans le navigateur, nœuds Android</td><td class="y">AccessKit sous Windows et macOS. Linux probablement, non documenté</td><td class="p">AccessKit sur la branche principale, pas dans la version de crates.io</td><td class="p">Via la webview et votre HTML</td></tr>
+          <tr><th scope="row">Lecteurs d’écran</th><td class="y me">UI Automation, AT-SPI2, VoiceOver sous macOS et iOS, ARIA dans le navigateur, nœuds Android</td><td class="y">AccessKit sous Windows et macOS. Linux probablement, non documenté</td><td class="p">AccessKit sur la branche principale, pas dans la version de crates.io</td><td class="p">Via la webview et votre HTML</td></tr>
           <tr><th scope="row">Contraste élevé</th><td class="y me">Un thème à contraste élevé qui suit le système</td><td class="n">Pas de mode intégré</td><td class="n">Pas de mode intégré</td><td class="p">Dépend de votre CSS</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Widgets prêts à l’emploi</th></tr>
@@ -95,7 +95,7 @@ description: Comment la bibliothèque d’interfaces graphiques JFLib se compare
     <div class="caps">
       <div class="cap"><h3>Tout d’un seul tenant</h3><p>Fenêtres, widgets, texte, images, réseau, paquets et mises à jour viennent d’une seule bibliothèque, testée comme un tout. Pas de deuxième boucle de fenêtre, pas de pile web.</p></div>
       <div class="cap"><h3>Les mêmes pixels partout</h3><p>Chaque widget est dessiné par le moteur de rendu de JFLib : une application a le même aspect sur toutes les plateformes et dans chaque test. C’est ce qui rend possibles des tests au pixel près.</p></div>
-      <div class="cap"><h3>Accessible par défaut</h3><p>Lecteurs d’écran sur quatre plateformes, contraste élevé, échelle de texte distincte, utilisation complète au clavier et mises en page de droite à gauche, sans crate supplémentaire.</p></div>
+      <div class="cap"><h3>Accessible par défaut</h3><p>Lecteurs d’écran sur six plateformes, contraste élevé, échelle de texte distincte, utilisation complète au clavier et mises en page de droite à gauche, sans crate supplémentaire.</p></div>
       <div class="cap"><h3>De vraies applications de bureau</h3><p>Ancrage, rubans, texte enrichi, éditeur de code, grilles de données, types de fichiers, icônes de notification et listes de raccourcis font partie de la bibliothèque.</p></div>
       <div class="cap"><h3>Des outils dans chaque application</h3><p>L’<a href="inspector.html">inspecteur en direct</a>, les <a href="testing.html">scripts de test</a>, le rechargement à chaud et une interface pour agents sont livrés avec chaque build, et ne coûtent rien quand ils sont désactivés.</p></div>
       <div class="cap"><h3>Prête pour la distribution</h3><p><code>cargo jflib package</code> construit des installeurs et des paquets pour Windows et Linux, avec signature et mises à jour signées.</p></div>
@@ -110,7 +110,7 @@ description: Comment la bibliothèque d’interfaces graphiques JFLib se compare
       <p class="prose">Une comparaison honnête montre les deux côtés.</p>
     </div>
     <div class="caps caps-ink">
-      <div class="cap"><h3>Plateformes Apple</h3><p>Depuis novembre 2026, JFLib tourne nativement sur les Mac à puce Apple et sur l’iPhone, mais pas sur les Mac Intel, et pour l’instant sans VoiceOver. egui, gpui et Tauri sont sur macOS depuis plus longtemps, et Tauri aussi sur iOS.</p></div>
+      <div class="cap"><h3>Plateformes Apple</h3><p>Depuis novembre 2026, JFLib tourne nativement sur les Mac à puce Apple et sur l’iPhone, mais pas sur les Mac Intel. egui, gpui et Tauri sont sur macOS depuis plus longtemps, et Tauri aussi sur iOS.</p></div>
       <div class="cap"><h3>Maturité et communauté</h3><p>Tauri est stable depuis 2024, et egui est utilisé dans de nombreux projets. JFLib vient d’arriver sur crates.io, avec pour l’instant une communauté plus petite.</p></div>
       <div class="cap"><h3>L’écosystème web</h3><p>Avec Tauri, toutes les bibliothèques JavaScript et les compétences de n’importe quel développeur web sont à disposition. Les applications JFLib s’écrivent uniquement en Rust.</p></div>
     </div>

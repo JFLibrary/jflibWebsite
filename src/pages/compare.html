@@ -46,7 +46,7 @@ description: How the JFLib GUI library compares with egui, gpui and Tauri: platf
           <tr><th scope="row">Runs without a GPU</th><td class="y me">Yes. The GPU is used when it is there</td><td class="p">Needs a GPU or an OpenGL driver</td><td class="n">Needs a GPU</td><td class="p">Up to the webview</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Accessibility</th></tr>
-          <tr><th scope="row">Screen readers</th><td class="y me">UI Automation, AT-SPI2, ARIA in the browser, Android nodes</td><td class="y">AccessKit on Windows and macOS. Linux likely, not documented</td><td class="p">AccessKit on the main branch, not in the crates.io release</td><td class="p">From the webview and your HTML</td></tr>
+          <tr><th scope="row">Screen readers</th><td class="y me">UI Automation, AT-SPI2, VoiceOver on macOS and iOS, ARIA in the browser, Android nodes</td><td class="y">AccessKit on Windows and macOS. Linux likely, not documented</td><td class="p">AccessKit on the main branch, not in the crates.io release</td><td class="p">From the webview and your HTML</td></tr>
           <tr><th scope="row">High contrast</th><td class="y me">A high contrast theme that follows the system</td><td class="n">No built-in mode</td><td class="n">No built-in mode</td><td class="p">Up to your CSS</td></tr>
 
           <tr class="grp"><th scope="rowgroup" colspan="5">Widgets out of the box</th></tr>
@@ -95,7 +95,7 @@ description: How the JFLib GUI library compares with egui, gpui and Tauri: platf
     <div class="caps">
       <div class="cap"><h3>Everything from one hand</h3><p>Windows, widgets, text, images, network, packages and updates come from one library that is tested as a whole. No second window loop, no web stack.</p></div>
       <div class="cap"><h3>The same pixels everywhere</h3><p>Every widget is drawn by JFLib's own renderer, so an app looks the same on every platform and in every test. That is what makes pixel-exact tests possible.</p></div>
-      <div class="cap"><h3>Accessible by default</h3><p>Screen readers on four platforms, high contrast, a separate text scale, full keyboard operation and right-to-left layouts, without extra crates.</p></div>
+      <div class="cap"><h3>Accessible by default</h3><p>Screen readers on six platforms, high contrast, a separate text scale, full keyboard operation and right-to-left layouts, without extra crates.</p></div>
       <div class="cap"><h3>Real desktop apps</h3><p>Docking, ribbons, rich text, a code editor, data grids, file types, tray icons and jump lists are part of the library.</p></div>
       <div class="cap"><h3>Tools in every app</h3><p>The <a href="inspector.html">live inspector</a>, <a href="testing.html">test scripts</a>, hot reload and an agent interface come with every build, and cost nothing when they are off.</p></div>
       <div class="cap"><h3>Ready to ship</h3><p><code>cargo jflib package</code> builds installers and packages for Windows and Linux, with signing and signed updates.</p></div>
@@ -110,7 +110,7 @@ description: How the JFLib GUI library compares with egui, gpui and Tauri: platf
       <p class="prose">An honest comparison names both sides.</p>
     </div>
     <div class="caps caps-ink">
-      <div class="cap"><h3>Apple platforms</h3><p>JFLib runs natively on Macs with Apple silicon and on the iPhone since November 2026, but not on Intel Macs, and without VoiceOver so far. egui, gpui and Tauri have been on macOS for longer, and Tauri on iOS too.</p></div>
+      <div class="cap"><h3>Apple platforms</h3><p>JFLib runs natively on Macs with Apple silicon and on the iPhone since November 2026, but not on Intel Macs. egui, gpui and Tauri have been on macOS for longer, and Tauri on iOS too.</p></div>
       <div class="cap"><h3>Maturity and community</h3><p>Tauri has been stable since 2024, and egui is used in many projects. JFLib has just arrived on crates.io, with a smaller community so far.</p></div>
       <div class="cap"><h3>The web ecosystem</h3><p>With Tauri, every JavaScript library and every web developer's skills are available. JFLib apps are written in Rust only.</p></div>
     </div>
