@@ -1,5 +1,7 @@
 # jflibWebsite
 
+**[jflib.org](https://jflib.org)** · [Discord](https://discord.gg/cX3jUxVvTm) · [JFLib](https://github.com/JFLibrary/JFLib)
+
 The source of [jflib.org](https://jflib.org), the website of the [JFLib](https://github.com/JFLibrary/JFLib) GUI library.
 
 ```sh
